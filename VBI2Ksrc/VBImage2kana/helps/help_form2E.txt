@@ -1,0 +1,13 @@
+(Form2E)
+Displaying document image file
+
+"Extract":
+  Extracted text from Japanese document.
+  This action expends a little bit time.
+  Extracted text is show to another form.
+
+"EN":
+  Extract from English document.
+  More precize extraction for english document.
+
+2017/04/29

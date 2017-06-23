@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PublishUrlHistory>W:\msvs2010Projects\Release\VBI2K\|D:\mydoc\hpb\ybb\VBI2K\|ftp://ftp.geocities.jp/sakachin2/VBI2K/|ftp://ftp.geocities.jp/sakachin2/|ftp://ftp.geocities.jp/</PublishUrlHistory>
+    <InstallUrlHistory>http://localhost/VBImage2kana/|http://www.geocities.jp/sakachin2/|\\Style\W\msvs2010Projects\Release\VBi2K\|\\Style\W\msvs2010Projects\Release_Install\VBI2K\|\\Style\W\msvs2010Projects\Release_Install\VBi2K\</InstallUrlHistory>
+    <SupportUrlHistory />
+    <UpdateUrlHistory>http://localhost/VBImage2kana/</UpdateUrlHistory>
+    <BootstrapperUrlHistory />
+    <ErrorReportUrlHistory />
+    <FallbackCulture>ja-JP</FallbackCulture>
+    <VerifyUploadedFiles>false</VerifyUploadedFiles>
+    <ProjectView>ShowAllFiles</ProjectView>
+  </PropertyGroup>
+  <PropertyGroup>
+    <EnableSecurityDebugging>false</EnableSecurityDebugging>
+  </PropertyGroup>
+</Project>

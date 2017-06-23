@@ -1,0 +1,52 @@
+(Form6E)
+Symbol Input Dialog
+  Input Quotation, Parenthesis, ... not by IME.
+
+  One dialog for both ExtractedText and KanaText form.
+  When both Form is opened, use "Open Symbol dialog" key(Default:F6)
+  to switch Form to be received.
+
+  Push "Send" button after a line selected.
+  Ctrl+1～Ctrl+0 sends a string from top 10.
+
+  "Add" inserts line before currently selected line.
+  "Default" button restores default values.
+******************************************************************************
+  To set Braille Character, append lines to WinBES99 configuration file "special.def". 
+  You can find "special.def" in WinBES99 install folder, C:\Program Files\WIN-BES
+  or C:\Program Files (x86)\WIN-BES.
+
+  Folloing string in the default set 
+
+    "~ﾟ["  : Single Quotation(‘) _
+    "~ﾟ],  : Single Quotation(’)
+    "~ﾟ||" : Double poem line splitter(／／)", _
+    "~ﾟﾏﾙ" : Censored word:○
+    "~ﾟｻﾝｶ": Censored word:△
+    "~ﾟｼｶｸ": Censored word:□
+    "~ﾟｶｹ" : Censored word:×
+    "~ﾟｿﾉﾀ": Other Censored word
+
+  is on the assumption that following lines are assed to special.def.
+
+    "~ﾟ[",    CT_J5, CT_E5, 0x20, 0x26, 0x00
+    "~ﾟ]",    CT_J6, CT_E6, 0x34, 0x04, 0x00
+    "~ﾟ||",   CT_J2, CT_E2, 0x38, 0x38, 0x00
+    "~ﾟﾏﾙ",   CT_J7, CT_E7, 0x10, 0x35, 0x00
+    "~ﾟｻﾝｶ",  CT_J7, CT_E7, 0x10, 0x37, 0x00
+    "~ﾟｼｶｸ",  CT_J7, CT_E7, 0x10, 0x3d, 0x00
+    "~ﾟｶｹ",   CT_J7, CT_E7, 0x10, 0x3f, 0x00
+    "~ﾟｿﾉﾀ",  CT_J7, CT_E7, 0x10, 0x3e, 0x00
+
+  By no documentaion about special.def format, this issue is based on my supposition.
+     Column 1:this, up to 5 chars, string is translated to Braille string on sinse 4th column.
+       Starting string "~ﾟ" (UpperLine+Hankaku Katakana Handakuon) is never occurs in Japanese text.
+       DoublwWidth Char first column is not work.
+    Column 2,3:J means Japanese, E Means English, but digit meaning is unknown.
+      It may be indicate "insert space before/after" or "opening/closing of someting".
+      CT_J2,CT_E2 inserts space before and after, CT_J7,CT_E7 inserts no space.
+    Column 4-->:null terminationg Braille string.
+      Pin point 1, 2, 3, 4, 5 and 6 respond to 0x01, 0x02, 0x04, 0x08, 0x10, 0x20.
+      Eg. 0x38 is 0x10+0x20+0x08, then  pin 4,5, and 6 are ON.
+
+2017/06/10

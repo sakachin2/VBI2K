@@ -1,0 +1,72 @@
+(Form1E)
+By "TextExtraction function" + "Kana translation function",
+generate Japanese Kana file for WinBES99 extracting text from document file
+created by scanner device.
+English Document can be extracted, and "Kana translation" do nothing paticularly.
+
+Kana is a collection of Japanese Letter excludes Kanji.
+WinBES99 is a text translation tool into Braille.
+Windows app "Windows Fax and Scan" can be used to create image file. 
+
+Requirement：To extranct text from image file,
+      This app requires "Microsoft Office Document Imaging"(MODI) installed.
+      See (Note) bellow.
+
+Starting by Menu:"File" --> "Open Image file",
+"Extract" on ImageFile Form-->
+"Kana" on TextFile Form-->
+, then Kana Text will be displayed on this Main Form.
+
+Long line is folded.
+"⏎" is CRLF sign.
+Lines are concatinated by deleting CRLF sign.
+
+SingleWidth Katakana(a group of Japanese letter Kana) is translated to 
+Hiragana(another group of Japanese letter Kana) by "Kana" button on extracted text Form. 
+SingleWidth Katakana input by keboard is translated to DoubleWidth letter
+by "Katakana" / "Hiragana" button on Kana Form(Main Form).
+
+Adjust Kana text file, save then open by WinBES99 or paste into WinBES99.
+
+Start by Menu:"Open Kanji text file" if you heve Kanji-Kana-Mixed text file.
+Start by Menu:"Open Kana text file" if you heve Kana-Only text file.
+
+("Microsoft Office Document Imaging" or "MicrosoftOffice Document Scanning"
+also enable to scan documents and save to image file, and send extracted text string to "Microsoft Word".)
+"Microsoft OneNote"(Free) also supports extracting text from document file.
+
+Click MouseRight button to popup context menu.
+It enables CutAndPaste, open Find/Replace dialog and open Symbol Input dialog.
+Following shortcut key is available
+Ctrl+F   :open Find/Replace
+F3   F   :find next
+Shift+F3 :find next backward
+
+Cursor is not shown when lost focus by opening child Form,
+touch titlebar to check current cursor position.
+
+Settings:setup followings.
+  Font(Screen and Print)
+  Function key to Kana conversion between Small and Large letter
+  Function key to open SimbolInput dialog
+  English Document
+
+*************************************************************************************
+(Note)How to install MODI.
+    See this site(https://support.microsoft.com/ja-jp/help/982760/install-modi-for-use-with-microsoft-office-2010).
+    (1)install "MDI to TIFF File Converter"(http://www.microsoft.com/en-us/download/details.aspx?id=30328)
+    or 
+    (2)install "SharePoint Designer 2007"
+       (http://www.microsoft.com/ja-jp/download/details.aspx?id=21581)
+          Install MODI ony to avoid other version of Office("Install Now" skips installing of MODI).
+            By "Custom Install",set all(SharepointDesigner,Office Common,Office Tool) to "No install".
+            Then set "Microsoft Office Document Imaging" of Office tool to "execute all from My Computer".
+       .rtf ファイルはWord Document.
+       SharePointDesigner2007 is supported until 2017/10/10.
+       SP3+LanguagePack-Japanese(sharepointdesigner2007sp3-kb2526089-fullfile-ja-jp.exe) is also required to install.
+       (http://www.microsoft.com/ja-jp/download/details.aspx?id=27815)
+
+    MODI is not required if you have Text Extracting such as OneNote.
+    Windows10 preinstalls OneNote, OneNote's quality may be poor.
+
+2017/05/14 バージョン 1.0 (This VB-APP is tested on Windows10:MSVS2010-64bit)

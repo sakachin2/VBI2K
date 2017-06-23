@@ -1,0 +1,35 @@
+(Form5E)
+Print Font/Screen Font:
+  Setup Font
+  Open FontDialog when IconButton pushed.
+  Choose Standard/Bold/Italic/Bold Italic only for FontStyle.
+
+Japanese Small/Large Letter Trans. Key:
+  Set PFKey Number(F1<-->F12) for translation of Small and large Japanese Letter like as
+    あ<-->ぁ、ア<-->ァ、ｱ<-->ｧ.
+  By the key with Shift modifier kety,following translation will be done.
+    は<-->わ、へ<-->え、う<-->ー
+
+Open Symbol Character Input Dialog Key:
+  Set PFKey to open "Symbol Character Input" Dialog
+  The dialog will be opened from Context Menu shown by Mouse Right Button Click
+
+Consideration for translation into Braille:
+  Following consideration is done when translation of Japanese Kanji text to Kana text.
+    .Put space before kanji string.
+        For easy space-wording at WinBES99.
+    .Put space between Katakana and Hiragana string.
+    .Put 2 space after following Letter.
+        Japanese Period(End of Statement):(。）
+    .Put 1 space after following Letter.
+      Japanese Comma(、)、Seperator(・)、Question Mark(？)、Exclamation Mark(！)
+    .Change following Japanese repeating sign to the previous letter.
+      々 ゝ ゞ ヽ ヾ
+English Document:
+  Specify image document is english text for better extraction.
+
+Language(Label,Message):
+    You can select language diffrent from environment.	
+    Default means Japanese on ja-JP env else English(en-GB).
+
+2017/06/13
