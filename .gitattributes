@@ -1,0 +1,4 @@
+staff/LargeFiles/SharePointDesigner.exe filter=lfs diff=lfs merge=lfs -text
+staff/LargeFiles/sharepointdesigner2007sp3-kb2526089-fullfile-en-us.exe filter=lfs diff=lfs merge=lfs -text
+staff/LargeFiles/sharepointdesigner2007sp3-kb2526089-fullfile-ja-jp.exe filter=lfs diff=lfs merge=lfs -text
+staff/LargeFiles/Microsoft_Sharepoint_Designer_2007_-_japanese.rtf filter=lfs diff=lfs merge=lfs -text
