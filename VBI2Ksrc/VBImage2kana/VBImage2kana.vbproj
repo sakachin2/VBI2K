@@ -130,6 +130,24 @@
       <DependentUpon>Form1.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form10.Designer.vb">
+      <DependentUpon>Form10.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form10.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form11.Designer.vb">
+      <DependentUpon>Form11.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form11.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form12.Designer.vb">
+      <DependentUpon>Form12.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form12.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form2.Designer.vb">
       <DependentUpon>Form2.vb</DependentUpon>
     </Compile>
@@ -172,6 +190,12 @@
     <Compile Include="Form8.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form9.Designer.vb">
+      <DependentUpon>Form9.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form9.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -197,6 +221,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form10.en-GB.resx">
+      <DependentUpon>Form10.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form10.resx">
+      <DependentUpon>Form10.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form11.en-GB.resx">
+      <DependentUpon>Form11.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form11.resx">
+      <DependentUpon>Form11.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form12.en-GB.resx">
+      <DependentUpon>Form12.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form12.resx">
+      <DependentUpon>Form12.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form2.en-GB.resx">
       <DependentUpon>Form2.vb</DependentUpon>
@@ -241,11 +283,17 @@
       <DependentUpon>Form8.vb</DependentUpon>
     </EmbeddedResource>
     <None Include="My Project\Resources.en-GB.resx" />
+    <EmbeddedResource Include="Form9.en-GB.resx">
+      <DependentUpon>Form9.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form9.resx">
+      <DependentUpon>Form9.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -326,6 +374,14 @@
     <None Include="helps\help_form5E.txt" />
     <None Include="helps\help_form1E.txt" />
     <None Include="helps\help_form2E.txt" />
+    <None Include="helps\help_form9.txt" />
+    <None Include="helps\help_form9E.txt" />
+    <None Include="helps\help_form10.txt" />
+    <None Include="helps\help_form10E.txt" />
+    <None Include="helps\help_form11.txt" />
+    <None Include="helps\help_form11E.txt" />
+    <None Include="helps\help_form12.txt" />
+    <None Include="helps\help_form12E.txt" />
     <Content Include="Icon-i2k.ico" />
     <None Include="icons\Icon-i2k.ico" />
     <None Include="icons\Icon-i2k.png" />

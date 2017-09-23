@@ -1,0 +1,5 @@
+(Form10E) 
+Dictionary Add Dialog
+  Add Kanji-Kana mixed string and its translation to Kana string
+
+2017/09/12

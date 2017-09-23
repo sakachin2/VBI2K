@@ -381,12 +381,12 @@ Namespace My
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
-        Public Property CFGF5_PrecedingSpace() As Boolean
+        Public Property CFGF12_swBES99() As Boolean
             Get
-                Return CType(Me("CFGF5_PrecedingSpace"),Boolean)
+                Return CType(Me("CFGF12_swBES99"),Boolean)
             End Get
             Set
-                Me("CFGF5_PrecedingSpace") = value
+                Me("CFGF12_swBES99") = value
             End Set
         End Property
         
@@ -399,6 +399,66 @@ Namespace My
             End Get
             Set
                 Me("CFGF5_LangID") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CFGF12_swKatakanaDoc() As Boolean
+            Get
+                Return CType(Me("CFGF12_swKatakanaDoc"),Boolean)
+            End Get
+            Set
+                Me("CFGF12_swKatakanaDoc") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property CFGF9_Dictionary() As String
+            Get
+                Return CType(Me("CFGF9_Dictionary"),String)
+            End Get
+            Set
+                Me("CFGF9_Dictionary") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property CfgMRUDictionary() As String
+            Get
+                Return CType(Me("CfgMRUDictionary"),String)
+            End Get
+            Set
+                Me("CfgMRUDictionary") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CFGF12_swEnglishDoc() As Boolean
+            Get
+                Return CType(Me("CFGF12_swEnglishDoc"),Boolean)
+            End Get
+            Set
+                Me("CFGF12_swEnglishDoc") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("4")>  _
+        Public Property CFGF5_KeySmallQ() As Integer
+            Get
+                Return CType(Me("CFGF5_KeySmallQ"),Integer)
+            End Get
+            Set
+                Me("CFGF5_KeySmallQ") = value
             End Set
         End Property
     End Class

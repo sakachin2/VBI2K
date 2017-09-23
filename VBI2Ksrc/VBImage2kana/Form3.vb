@@ -1,7 +1,20 @@
-﻿'CID:''+dateR~:#72                             update#=  290;         ''~7619R~
+﻿'CID:''+v037R~:#72                             update#=  333;         ''~v037R~
+'************************************************************************************''~v006I~
+'v037 2017/09/22 assign F4 as query of replacing char                  ''~v037I~
+'                Forecolor have to be InactiveCaptureText to get effective for switching Text by language''~v037I~
+'v035 2017/09/21 additional to v017 when discard old=yes               ''~v035I~
+'v034 2017/09/21 utilize status bar at bottom for result of F5 on Form5''~v034I~
+'v032 2017/09/21 English document, i2e was not used                    ''~v032I~
+'v030 2017/09/21 new option dialog for each document                   ''~v030I~
+'v017 2017/09/17 Image2kanji issues already processed msg when saved even updated,it dose not allow re-i2k''~v017I~
+'v015 2017/09/17 saveed evenif not updated                             ''~v015I~
+'v008 2017/09/12 dictionary support                                    ''~v008I~
+'v007 2017/09/12 duplicated confirm discard msg                        ''~v007I~
+'v006 2017/09/12 katakana okurigana is optional                        ''~v006I~
+'************************************************************************************''~v006I~
 'Imports System.Runtime.InteropServices                                 ''~7411I~''~7610R~
 Public Class Form3
-'**image 2 kanji by MODI                                               ''~7619I~
+    '**image 2 kanji by MODI                                               ''~7619I~
     'localized                                                             ''~7617I~
     '*** kanji text file                                                   ''~7612I~
     Private Const FONTSIZE_INCREASE = 1                                          ''~7411R~''~7412R~''~7429M~''~7614R~
@@ -18,7 +31,11 @@ Public Class Form3
     Private swNewText As Boolean = False                                 ''~7612I~
     Private swRead As Boolean = False                                    ''~7612I~
     Public undoRedo As ClassUndoRedo                                  ''~7430R~''~7515R~
+    Public Shared swEnglishDoc As Boolean = False                         ''~v032R~
     Private Shared nestCtr As Integer = 0                                 ''~7619I~
+    '   Public Shared swKatakanaOkurigana As Boolean = False                 ''~v006R~''~v030R~
+    Public swSaved As Boolean = False                                  ''~v015I~
+    Private pendingStatusMsg As String = Nothing                              ''~v034I~
 
     Private Sub Form3_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load ''~7412I~''~7514R~
         ToolStripButtonUndo.enabled = False                              ''~7429I~
@@ -28,6 +45,7 @@ Public Class Form3
         title = Me.text    'save before update by lang                 ''~7614R~
         setLocale(False)   'change title for extracted                 ''~7614R~
         updateTitle(title)                                             ''~7614I~
+        DocOptions.initByCFG()  ' load English doc option etc          ''~v032I~
     End Sub                                                            ''~7412I~
     Private Sub Form3_Shown(sender As System.Object, e As System.EventArgs) Handles Me.Shown ''~7412I~''~7514R~
         Me.Width = formWidth                                           ''~7619I~
@@ -37,14 +55,21 @@ Public Class Form3
         '        TextBox1.DeSelectAll()                                         ''~7514I~''~7519R~
     End Sub                                                            ''~7514I~
     Private Sub TextBox_Changed(sender As System.Object, e As System.EventArgs) Handles TextBox1.TextChanged ''~7429I~
+        showStatus("")      'clear                                     ''~v034I~
         TBChanged()                                                  ''~7429I~
+        If pendingStatusMsg IsNot Nothing Then                             ''~v034I~
+            showStatus(pendingStatusMsg)                               ''~v034I~
+            pendingStatusMsg = Nothing                                   ''~v034I~
+        End If                                                         ''~v034I~
     End Sub                                                            ''~7429I~
     Private Sub Form3_Closing(sender As System.Object, e As System.ComponentModel.CancelEventArgs) Handles MyBase.Closing ''~7429I~
         chkDiscard(e)                                                  ''~7508I~
     End Sub                                                            ''~7429I~
-    Private Sub ContextMenu_Opening(sender As System.Object, e As System.ComponentModel.CancelEventArgs) Handles ContextMenuStrip1.Opening ''~7614I~
+    Private Sub ContextMenu_Opening(sender As System.Object, e As System.ComponentModel.CancelEventArgs) Handles ContextMenuStrip1.Opening, ContextMenuStrip1.Opening ''~7614I~
+        '       swKatakanaOkurigana = My.Settings.CFGF3_KatakanaOkurigana      ''~v006I~''~v030R~
         Dim menu As ContextMenuStrip = CType(sender, ContextMenuStrip) ''~7614I~
         FormOptions.setLangContextMenu(menu, GetType(Form3))           ''~7614I~
+        '       Me.ToolStripMenuItem_DocOptions.Checked = swKatakanaOkurigana ''~v006R~''~v030R~
     End Sub                                                            ''~7614I~
     Public Function chkDiscard(e As System.ComponentModel.CancelEventArgs) As Boolean ''~7508R~
         ' rc:true=continue process                                     ''~7508I~
@@ -58,20 +83,55 @@ Public Class Form3
         End If
         Return rc ''~7508I~
     End Function                                                       ''~7508I~
+    Public Function chkDiscard2(ByRef PswDoI2K As Boolean) As Boolean  ''~v017R~
+        '** from form2                                                 ''~v017R~
+        '** rc:true=continue process                                   ''~v017I~
+        '*** if not updated chk once saved                                 ''~v017I~
+        Form1.closeForm(Form1.dlgFind3)                                ''~v017I~
+        Dim rc As Boolean = True                                       ''~v017I~
+        PswDoI2K = False                                                 ''~v017I~
+        If IsNothing(undoRedo) Then      'fine not found or read err   ''~v017I~
+            Return True                                                ''~v017I~
+        End If                                                         ''~v017I~
+        If undoRedo.isUpdated() Then                                   ''~v017I~
+            rc = Form1.confirmDiscard(Nothing, Me.Text)                      ''~v017I~
+            If rc Then   'discard:Yes                                  ''~v035I~
+                PswDoI2K = True                                        ''~v035I~
+            End If                                                     ''~v035I~
+        Else                                                           ''~v017I~
+            If swSaved Then                                                 ''~v017I~
+                rc = True                                                ''~v017I~
+                PswDoI2K = True                                          ''~v017I~
+            End If                                                     ''~v017I~
+        End If                                                         ''~v017I~
+        Return rc                                                      ''~v017I~
+    End Function                                                       ''~v017I~
+    Public Function isUpdated() As Boolean                             ''~v015I~
+        If IsNothing(undoRedo) Then      'fine not found or read err   ''~v015I~
+            Return False                                               ''~v015I~
+        End If                                                         ''~v015I~
+        Return undoRedo.isUpdated()                                    ''~v015I~
+    End Function                                                       ''~v015I~
     Public Function chkDiscard()                                       ''~7508I~
         ' rc:true:continue process                                     ''~7508I~
         Return chkDiscard(Nothing)                                     ''~7508I~
     End Function                                                       ''~7508I~
     Function setImage(Pfnm As String, PenglishDoc As Boolean) As Boolean                                       ''~7411R~''~7619R~
-        If PenglishDoc Then                                                ''~7619I~
-            imageTextFilename = Form1.changeExt(Pfnm, Form1.FILTER_DEFAULT_ENGLISHTEXT) ''~7619I~
-        Else                                                           ''~7619I~
-            imageTextFilename = Form1.changeExt(Pfnm, Form1.FILTER_DEFAULT_KANJITEXT) ''~7513R~''~7619R~
-        End If                                                         ''~7619I~
+        swEnglishDoc = PenglishDoc                                       ''~v032I~
+        '       If PenglishDoc Then                                                ''~7619I~''~v032R~
+        '           imageTextFilename = Form1.changeExt(Pfnm, Form1.FILTER_DEFAULT_ENGLISHTEXT) ''~7619I~''~v032R~
+        '       Else                                                           ''~7619I~''~v032R~
+        imageTextFilename = Form1.changeExt(Pfnm, Form1.FILTER_DEFAULT_KANJITEXT) ''~7513R~''~7619R~
+        '       End If                                                         ''~7619I~''~v032R~
         saveFilename = imageTextFilename                                 ''~7607I~
         '       Me.Text = "イメージ読取り:" & imageTextFilename                ''~7513R~''~7614R~
-        Me.Text = Rstr.FORM3_TITLE_RECEIVED & Form1.TITLE_SEP & imageTextFilename     ''~7614R~''~7617R~''~7619R~
+        If swEnglishDoc Then                                                 ''~v032I~
+            Me.Text = Rstr.getStr("STR_ENGLISH_DOC_EXTRACTED") & Form1.TITLE_SEP & imageTextFilename ''~v032I~
+        Else                                                             ''~v032I~
+            Me.Text = Rstr.FORM3_TITLE_RECEIVED & Form1.TITLE_SEP & imageTextFilename     ''~7614R~''~7617R~''~7619R~
+        End If                                                           ''~v032I~
         swSource = 1                                                     ''~7411I~
+        swSaved = False                                                  ''~v017I~
         swRead = False                                                   ''~7612I~
         imageFilename = Pfnm                                             ''~7411I~
         Return readImage(Pfnm, PenglishDoc)                                            ''~7411R~''~7609R~''~7619R~
@@ -79,11 +139,13 @@ Public Class Form3
         '       Me.Height = formHeight                                     ''~7411R~''~7609R~''~7619R~
     End Function                                                       ''~7619R~
     Sub setText(Pfnm As String)                                    ''~7411I~
+        swEnglishDoc = False                                             ''~v032I~
         swSource = 2                                                     ''~7411I~''~7612M~
+        swSaved = False                                                  ''~v017I~
         swRead = False                                                   ''~7612I~
         '       Dim prefix As String = TITLE_READ                               ''~7614I~''~7617R~
         Dim prefix As String = Rstr.FORM3_TITLE                        ''~7617I~
-        If Pfnm.compareTo("") = 0 Then                                        ''~7612I~
+        If Pfnm.CompareTo("") = 0 Then                                        ''~7612I~
             Dim fnm As String = Form1.changeExt(Rstr.MENU_NEWTEXT_FILE, Form1.FILTER_DEFAULT_KANJITEXT) ''~7612I~
             Me.Text = prefix & Form1.TITLE_SEP & fnm                        ''~7612R~''~7614R~''~7619R~
             swNewText = True                                             ''~7612I~
@@ -104,7 +166,7 @@ Public Class Form3
         saveFilename = textFilename                                      ''~7607I~
         TextBox1.Font = createFont()                                   ''~7411I~''~7612M~
         If swNewText Then                                                   ''~7612I~
-            text = vbCrlf                                                ''~7612I~
+            text = vbCrLf                                                ''~7612I~
         Else                                                           ''~7612I~
             If (Not (System.IO.File.Exists(textFilename))) Then            ''~7410I~''~7612R~
                 Form1.NotFound(Pfnm)                                       ''~7428R~''~7612R~
@@ -138,15 +200,26 @@ Public Class Form3
     End Sub                                                            ''~7429I~
     Private Sub ToolStripButtonSave_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles ToolStripButtonSave.Click ''~7410I~
         If swSource = 1 Then    'from imagefile                             ''~7513I~
+            If swSaved AndAlso Not isUpdated() Then                    ''~v015I~
+                Form1.FileNotSaved()                                   ''~v015I~
+                Exit Sub                                               ''~v015I~
+            End If                                                     ''~v015I~
             If Not Form1.confirmReceivedSave(imageTextFilename) Then        ''~7513I~
                 Exit Sub                                               ''~7513I~
             End If                                                     ''~7513I~
-        End If                                                         ''~7513I~
-        If Not swRead Then                                                  ''~7612I~
-            If Not Form1.confirmNewText(textFilename) Then                  ''~7612I~
-                Exit Sub                                               ''~7612I~
-            End If                                                     ''~7612I~
-        End If                                                         ''~7612I~
+            '       End If                                                         ''~7513I~''~v015R~
+        Else                                                           ''~v015I~
+            If Not swRead Then                                                  ''~7612I~
+                If Not Form1.confirmNewText(textFilename) Then                  ''~7612I~
+                    Exit Sub                                               ''~7612I~
+                End If                                                     ''~7612I~
+            Else                                                           ''~v015I~
+                If Not isUpdated() Then                                         ''~v015I~
+                    Form1.FileNotSaved()                                   ''~v015I~
+                    Exit Sub                                               ''~v015I~
+                End If                                                     ''~v015I~
+            End If                                                         ''~7612I~
+        End If                                                         ''~v015I~
         saveFile(saveFilename)                                         ''~7410I~''~7607R~
     End Sub                                                            ''~7410I~
     ''~7411I~
@@ -160,13 +233,14 @@ Public Class Form3
     ''~7411R~
     Private Sub saveFile(Pfnm As String)                               ''~7410I~
         Dim txt As String                                              ''~7429R~
-        txt = undoredo.getTextToSave()                                   ''~7430I~
+        txt = undoRedo.getTextToSave()                                   ''~7430I~
         Try                                                            ''~7410I~
             System.IO.File.WriteAllText(Pfnm, txt, System.Text.Encoding.Default) ''~7410I~''~7429R~
             Form1.MainForm.insertMRUList(2, Pfnm)                                ''~7429I~''~7521R~
-            undoredo.saved()                                           ''~7430I~
+            undoRedo.saved()                                           ''~7430I~
             '           MessageBox.Show(Pfnm & " を保存しました")                  ''~7513I~''~7617R~
             MessageBox.Show(Pfnm, Rstr.MSG_INFO_SAVED)                       ''~7617I~
+            swSaved = True                                             ''~v015I~
         Catch ex As Exception                                          ''~7410I~
             Form1.WriteError(Pfnm, ex)                                  ''~7428I~
         End Try                                                        ''~7410I~
@@ -193,9 +267,9 @@ Public Class Form3
             Form1.MainForm.formkanaText = New ClassKanaText()          ''~7522I~
 #End If                                                                ''~7522I~
         Else                                                           ''~7508I~
-            If Not Form1.MainForm.formkanaText.chkDiscard(e) Then         ''~7508I~''~7521R~
-                Exit Sub                                               ''~7508I~
-            End If                                                     ''~7508I~
+            '           If Not Form1.MainForm.formkanaText.chkDiscard(e) Then         ''~7508I~''~7521R~''~v007R~
+            '               Exit Sub                                               ''~7508I~''~v007R~
+            '           End If                                                     ''~7508I~''~v007R~
         End If                                                         ''~7411I~
         Try                                                            ''~7411I~
             Dim fnm                                                    ''~7411I~
@@ -204,6 +278,7 @@ Public Class Form3
             Else                                                       ''~7411I~
                 fnm = Form1.changeExt(textFilename, Form1.FILTER_DEFAULT_KANATEXT) ''~7513I~
             End If                                                      ''~7411I~
+            '           swKatakanaOkurigana = My.Settings.CFGF3_KatakanaOkurigana  ''~v006I~''~v030R~
             Form1.MainForm.formkanaText.setText(TextBox1.Text, swSource, fnm)     ''~7411R~''~7521R~
         Catch ex As Exception                                          ''~7411I~
             '           MessageBox.Show("かな変換に失敗:" & ex.Message)    ''~7411I~''~7428R~''~7617R~
@@ -214,9 +289,9 @@ Public Class Form3
     Private Function readImage(Pfnm As String, PenglishDoc As Boolean) As Boolean                                      ''~7411R~''~7428R~''~7619R~
         'VB(A)では Microsoft Office Document Imaging 11.0 Type Library を参照設定''~7411I~
         nestCtr += 1                               '@@@@test           ''~7619M~
-        Trace.W("MODI before nestctr=" & nestCtr & ",english=" & PenglishDoc)          '@@@@test''~7619I~
+        '       Trace.W("MODI before nestctr=" & nestCtr & ",english=" & PenglishDoc)          '@@@@test''~7619I~''~v017R~
         If nestCtr > 1 Then                                                   ''~7619I~
-            nestCtr-=1                                                 ''~7619I~
+            nestCtr -= 1                                                 ''~7619I~
             Return False                                               ''~7619I~
         End If                                                         ''~7619I~
         Dim oImage ' As MODI.Image                                     ''~7411I~
@@ -241,22 +316,23 @@ Public Class Form3
             oDocument.Close()                                              ''~7411I~''~7609I~
             oDocument = Nothing                                            ''~7411I~''~7609I~
             '           MessageBox.Show("イメージファイル（" & imageFilename & "）読取りました") ''~7514I~''~7609M~''~7617R~
-            MessageBox.Show(imageFilename, Rstr.MSG_INFO_EXTRACTED)     ''~7617I~
+            '           MessageBox.Show(imageFilename, Rstr.MSG_INFO_EXTRACTED)     ''~7617I~''~v034R~
+            showStatus(True, Rstr.MSG_INFO_EXTRACTED)                   ''~v034I~
         Catch ex As Exception                                          ''~7609I~
             '           MessageBox.Show("イメージファイル（" & Pfnm & "）のテキスト読み取り失敗:" & ex.Message & "Stack:" & ex.StackTrace) ''~7609R~''~7617R~
             MessageBox.Show(Pfnm & " : " & ex.Message, Rstr.MSG_ERR_EXTRACT) ''~7617R~
             txt = Rstr.MSG_ERR_EXTRACT                                   ''~7617R~
         End Try                                                        ''~7609I~
         nestCtr -= 1                               '@@@@test             ''~7619I~
-        Trace.W("MODI after nestctr=" & nestCtr)          '@@@@test    ''~7619I~
+        '       Trace.W("MODI after nestctr=" & nestCtr)          '@@@@test    ''~7619I~''~v017R~
         TextBox1.Font = createFont()                                   ''~7411M~''~7609I~
         showText(txt)                                                  ''~7429I~
-        Trace.W("after showtext =" & nestCtr)          '@@@@test       ''~7619I~
+        '       Trace.W("after showtext =" & nestCtr)          '@@@@test       ''~7619I~''~v017R~
         ''~7411I~
         Return True                                                    ''~7619I~
     End Function                                                            ''~7411M~
     Private Function splitLineI2K(Playout As MODI.Layout, PenglishDoc As Boolean) As String    ''~7428R~''~7619R~
-        '** split by RegionID                                          ''+7619R~
+        '** split by RegionID                                          ''~7619R~
         Dim word As MODI.Word                                       ''~7411I~''~7428I~
         Dim len, id, idold As Integer                        ''~7428R~  ''~7429R~
         Dim sbOut As System.Text.StringBuilder
@@ -266,9 +342,9 @@ Public Class Form3
         For ii As Integer = 0 To Playout.Words.Count - 1               ''~7411I~''~7428I~
             word = Playout.Words.Item(ii)                              ''~7428I~
             '           id= word.RegionId                                     ''~7428R~''~7429R~
-            Trace.W("lindid=" & word.LineId & ",word=" & word.Text & ",regionID=" & word.RegionID & ",ID=" & word.ID)''~7619I~
-'           id = word.LineId                                            ''~7429I~''+7619R~
-            id = word.RegionID                                         ''+7619I~
+            '           Trace.W("lindid=" & word.LineId & ",word=" & word.Text & ",regionID=" & word.RegionId & ",ID=" & word.Id) ''~7619I~''~v017R~
+            '           id = word.LineId                                            ''~7429I~''~7619R~
+            id = word.RegionId                                         ''~7619I~
             If id <> idold Then                                   ''~7428R~''~7429R~
                 If idold <> -1 Then                                ''~7428R~''~7429R~
                     sbOut.AppendLine()                                 ''~7428R~
@@ -351,11 +427,24 @@ Public Class Form3
     Public Sub showFindDialog()                                        ''~7516I~
         Form1.MainForm.showForForm3(Me)                                 ''~7516I~''~7519R~''~7521R~
     End Sub                                                            ''~7516I~
-    Private Sub ToolStripMenuItemFind_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripMenuItemFind.Click ''~7516I~
-        showFindDialog()                                               ''~7516I~
-    End Sub                                                            ''~7516I~
+    Private Sub ToolStripMenuItemDocOptions_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripMenuItem_DocOptions.Click ''~v030R~
+        showDocOptionsDialog()                                         ''~v030I~
+    End Sub                                                            ''~v030I~
+    Public Sub showDocOptionsDialog()                                  ''~v030I~
+        DocOptions.showDlg(Me)                                         ''~v030I~
+    End Sub                                                            ''~v030I~
+    '    Private Sub ToolStripMenuItemkatakanaOkurigana_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripMenuItem_DocOptions.Click ''~7516I~''~v006R~''~v030R~
+    '        swapKatakanaOkurigana()                                               ''~7516I~''~v006R~''~v030R~
+    '    End Sub                                                            ''~7516I~''~v030R~
+    Private Sub ToolStripMenuItemDictionary_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripMenuItemDictionary.Click ''~v007I~''~v008I~
+        '       Form1.MainForm.dlgDictionary.showDlg()                         ''~v008R~
+        Form11.sharedShowDlg()                                         ''~v008R~
+    End Sub                                                            ''~v008I~
+    Private Sub ToolStripMenuItemFind_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripMenuItemFind.Click ''~v006I~
+        showFindDialog()                                               ''~v006I~
+    End Sub                                                            ''~v006I~
     Public Sub findNext(PswUp)       ''~7519I~                         ''~7521I~
-        Form1.MainForm.FindNext(Me, PswUp)                             ''~7521R~
+        Form1.MainForm.findNext(Me, PswUp)                             ''~7521R~
     End Sub                                                            ''~7521I~
     Public Sub setLocale(Prefresh As Boolean)                          ''~7614R~
         Dim title As String = Me.Text                                    ''~7614I~
@@ -386,4 +475,40 @@ Public Class Form3
         End If                                                         ''~7618I~
         Return Nothing                                                 ''~7618I~
     End Function                                                            ''~7618I~
+    '    Private Sub swapKatakanaOkurigana()                                ''~v006I~''~v030R~
+    '        Dim onof As String                                             ''~v006I~''~v030R~
+    '        swKatakanaOkurigana = Not swKatakanaOkurigana                    ''~v006I~''~v030R~
+    '        My.Settings.CFGF3_KatakanaOkurigana = swKatakanaOkurigana        ''~v006I~''~v030R~
+    '        If swKatakanaOkurigana Then                                         ''~v006I~''~v030R~
+    '            onof = ":ON"                                                 ''~v006I~''~v030R~
+    '        Else                                                           ''~v006I~''~v030R~
+    '            onof = ":OFF"                                                ''~v006I~''~v030R~
+    '        End If                                                          ''~v006I~''~v030R~
+    '        MessageBox.Show(onof, Rstr.getStr("STR_MSG_KATAKANAOKURIGANA")) ''~v006I~''~v030R~
+    '    End Sub                                                            ''~v006I~''~v030R~
+    Public Sub showStatus(Pmsg As String)                              ''~v034I~
+        ToolStripStatusLabel1.Text = Pmsg                                ''~v034I~
+    End Sub                                                       ''~v034I~
+    Public Sub showStatus(PswLater As Boolean, Pmsg As String)          ''~v034I~
+        If (PswLater) Then                                                  ''~v034I~
+            pendingStatusMsg = Pmsg                                    ''~v034I~
+        Else                                                           ''~v034I~
+            showStatus(Pmsg)                                           ''~v034I~
+        End If                                                         ''~v034I~
+    End Sub                                                            ''~v034I~
+    Public Sub showStatus(Pch As Char, Pchcv As Char, PtypeSrc As Integer, PtypeTgt As Integer) ''~v034I~
+        Dim msg, strSrc, strTgt As String                            ''~v034R~
+        strSrc = FormatBES.getCharType(PtypeSrc)                         ''~v034I~
+        strTgt = FormatBES.getCharType(PtypeTgt)                         ''~v034I~
+        msg = Rstr.getStr("STR_MSG_CHANGELETTERWRAP")           ''~v034R~
+        pendingStatusMsg = String.Format(msg, strSrc, Pch, strTgt, Pchcv) ''~v034R~
+    End Sub                                                       ''~v034I~
+    Public Sub showStatus(Pch As Char, PtypeSrc As Integer)            ''~v037I~
+        '** from class1 * F4(queryKey) target info                         ''~v037I~
+        Dim msg, strSrc As String                            ''~v037I~
+        strSrc = FormatBES.getCharType(PtypeSrc)                       ''~v037I~
+        msg = Rstr.getStr("STR_MSG_CHANGELETTERWRAP_QUERY")            ''~v037I~
+        msg = String.Format(msg, strSrc, Pch)                          ''+v037R~
+        showStatus(msg)     'imediately put msg                        ''+v037I~
+    End Sub                                                            ''~v037I~
 End Class

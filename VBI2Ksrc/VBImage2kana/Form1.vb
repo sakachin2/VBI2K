@@ -1,4 +1,12 @@
-﻿'CID:''+dateR~:#72                             update#=  638;         ''~7617R~
+﻿'CID:''+v032R~:#72                             update#=  655;         ''+v032R~
+'************************************************************************************''~v002I~
+'v032 2017/09/21 English document, i2e was not used                    ''~v032I~
+'v015 2017/09/17 saveed evenif not updated                             ''~v015I~
+'v012 2017/09/15 Load/Save/SaveAs from/to disctionary file             ''~v012I~
+'v011 2017/09/15 (Bug) Exit menu have to chk discard                   ''~v011I~
+'v008 2017/09/12 dictionary support                                    ''~v008I~
+'v002 2017/09/11 have to confirm when received text remaining          ''~v002I~''~v008R~
+'************************************************************************************''~v002I~
 Imports System.Globalization                                           ''~7613I~
 Public Class Form1
     'localize completed                                                    ''~7617R~
@@ -9,7 +17,7 @@ Public Class Form1
     Public Const TITLE_SEP = " : "                                      ''~7615I~
     Const INITIAL_SWKATAKANA = False                                     ''~7519I~
     Public Const FILTER_DEFAULT_KANJITEXT = "i2t"                             ''~7412R~''~7513R~''~7521R~
-    Public Const FILTER_DEFAULT_ENGLISHTEXT = "i2e"                    ''~7619R~
+'   Public Const FILTER_DEFAULT_ENGLISHTEXT = "i2e"                    ''~7619R~''~v032R~
     Public Const FILTER_DEFAULT_KANATEXT = "txt"                       ''~7513I~
     Private Const ERR_CHAR_OUTOFLINE = 1                                ''~7509I~
     Private Const ERR_CRLF_OUTOFLINE = 2                                ''~7509I~
@@ -49,7 +57,8 @@ Public Class Form1
     Private formHeight As Integer = My.Settings.CfgFormSizeHMain           ''~7411I~''~7421R~
     Private Debug As Boolean = True                                ''~7421R~
     Private MRUList As New List(Of String)                         ''~7421R~''~7522I~
-    Private MRU As New ClassMRU()                                  ''~7522I~
+'   Private MRU As New ClassMRU()                                  ''~7522I~''~v012R~
+    Public  MRU As New ClassMRU()                                      ''~v012I~
     Private imageFilename As String = ""                           ''~7421R~
     Private kanjiFilename As String = ""                           ''~7421R~
     Private kanaFilename As String = ""                            ''~7421R~
@@ -74,6 +83,7 @@ Public Class Form1
     Private printPageFrom, printpageTo, printPage As Integer             ''~7429I~
     Public dlgOptions As FormOptions                                  ''~7430I~''~7501R~
     Public dlgSpecialKey As Form6                                      ''~7515I~
+    Public dlgDictionary As Form9                                      ''~v008R~
     Public dlgFind1 As Form8                                            ''~7516I~''~7519R~
     Public dlgFind3 As Form8                                           ''~7519I~
     Public undoRedo As ClassUndoRedo                                  ''~7501I~''~7515R~
@@ -91,14 +101,15 @@ Public Class Form1
     End Sub                                                            ''~7412I~
     Private Sub Form1_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         MainForm = Me                                                    ''~7521I~
-'       Me.Width = formWidth    move to shown event                    ''~7411I~''~7619R~
-'       Me.Height = formHeight                                         ''~7411I~''~7619R~
+        '       Me.Width = formWidth    move to shown event                    ''~7411I~''~7619R~
+        '       Me.Height = formHeight                                         ''~7411I~''~7619R~
         strResMgr = New Rstr() 'initialize localized resource string getString method''~7615R~
         setupTitlebarIcon(Me)                                          ''~7612I~
         dlgOptions = New FormOptions()                                 ''~7430I~''~7506M~''~7613M~
         setLocale()                                                    ''~7613M~
         loadMRUList()                                                  ''~7522R~
         dlgSpecialKey = New Form6()                                    ''~7515R~
+        dlgDictionary = New Form9()     'deprecated to foerm11         ''~v008R~
         fmtBES = New FormatBES()                                         ''~7421I~
         '        swViewKatakana = dlgOptions.swKatakana                            ''~7501I~
         '        setkatakanaBtn()                                               ''~7501I~
@@ -121,8 +132,10 @@ Public Class Form1
         Me.Height = formHeight                                         ''~7619I~
     End Sub                                                            ''~7521I~
     Private Sub Form1_Closing(sender As System.Object, e As System.ComponentModel.CancelEventArgs) Handles MyBase.Closing ''~7501I~
+        if Not chkDiscard(e, Me.Text)                                          ''~7508R~''~v011R~
+        	exit sub                                                   ''~v011I~
+        end if                                                         ''~v011I~
         closeForm(dlgFind1)                                            ''~7521I~
-        chkDiscard(e, Me.Text)                                          ''~7508R~
         Trace.fsClose()                                                ''~7619I~
     End Sub                                                            ''~7501I~
     Private Sub TBBES_TextChanged(sender As System.Object, e As System.EventArgs) Handles TBBES.TextChanged ''~7501I~
@@ -255,25 +268,30 @@ Public Class Form1
         TBBES.Text = initialText                                         ''~7519I~
         swViewKatakana = INITIAL_SWKATAKANA                            ''~7519I~
         undoRedo.resetForm1()                                          ''~7519R~
+        swReceive = False                                                ''~v002I~
     End Sub                                                            ''~7519I~
     Private Sub SaveToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles SaveToolStripMenuItem.Click
         If TBBES.Enabled Then                                               ''~7522I~
             formkanaText.save()                                        ''~7522I~
+            swReceive = False                                            ''~v002I~
         End If                                                         ''~7522I~
     End Sub
     Private Sub SaveAsToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles SaveAsToolStripMenuItem.Click
         If TBBES.Enabled Then                                               ''~7522I~
             formkanaText.SaveAs()                                      ''~7522R~
+            swReceive = False                                            ''~v002I~
         End If                                                         ''~7522I~
     End Sub
     Private Sub ToolStripMenuItemSave_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripMenuItemSave.Click ''~7608R~
         If TBBES.Enabled Then                                          ''~7608I~
             formkanaText.save()                                        ''~7608I~
+            swReceive = False                                            ''~v002I~
         End If                                                         ''~7608I~
     End Sub                                                            ''~7608I~
     Private Sub ToolStripMenuItemSaveAs_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripMenuItemSaveAs.Click ''~7608I~
         If TBBES.Enabled Then                                          ''~7608I~
             formkanaText.SaveAs()                                      ''~7608I~
+            swReceive = False                                            ''~v002I~
         End If                                                         ''~7608I~
     End Sub                                                            ''~7608I~
 
@@ -282,6 +300,9 @@ Public Class Form1
     End Sub                                                            ''~7412I~
     ''~7412I~
     Private Sub ExitToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ExitXToolStripMenuItem.Click
+        if Not chkDiscard(Me.Text) 'replyed NO                         ''~v011R~
+            Exit Sub                                                   ''~v011I~
+        End If                                                         ''~v011I~
         Application.Exit()
     End Sub
     Private Sub HelpToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripMenuItemHelp.Click ''~7430I~
@@ -462,7 +483,8 @@ Public Class Form1
     '*************************************************************
     Private Sub openKanaTextBox(Pfnm As String)
         If formkanaText Is Nothing Then                                     ''~7522I~
-            formkanaText = New ClassKanaText                           ''~7522I~
+'           formkanaText = New ClassKanaText                           ''~7522I~''~v032R~
+            formkanaText = New ClassKanaText()                         ''~v032I~
         Else                                                           ''~7508I~
             If Not formkanaText.chkDiscard() Then                           ''~7508R~
                 Exit Sub                                               ''~7508I~
@@ -529,14 +551,40 @@ Public Class Form1
     Public Shared Sub FileSaved(Pfnm As String)                        ''~7617I~
         MessageBox.Show(Pfnm, Rstr.MSG_INFO_SAVED)                     ''~7617I~
     End Sub                                                            ''~7617I~
+    Public Shared Sub FileNotSaved()                                   ''~v015I~
+        MessageBox.Show(Rstr.GetStr("STR_MSG_INFO_NOT_SAVED_BY_NOUPDATE"))''~v015R~
+    End Sub                                                            ''~v015I~
+    Public Function chkDiscard(Ptitle As String) As Boolean            ''~v011I~
+        ' rc:true=continue process                                     ''~v011I~
+        Dim rc As Boolean = True                                       ''~v011I~
+        If Not IsNothing(undoRedo) AndAlso undoRedo.isUpdated() Then   ''~v011I~
+            rc = confirmDiscard(Ptitle)                                ''~v011I~
+        Else                                                           ''~v011I~
+            If swReceive Then                                          ''~v011I~
+                rc = confirmDiscard(Ptitle)                            ''~v011I~
+            End If                                                     ''~v011I~
+        End If                                                         ''~v011I~
+        Return rc                                                      ''~v011I~
+    End Function                                                       ''~v011I~
     Public Function chkDiscard(e As System.ComponentModel.CancelEventArgs, Ptitle As String) As Boolean ''~7508R~
         ' rc:true=continue process                                     ''~7508I~
         Dim rc As Boolean = True                                         ''~7508I~
         If Not IsNothing(undoRedo) AndAlso undoRedo.isUpdated() Then                                   ''~7508I~''~7521R~
             rc = confirmDiscard(e, Ptitle)                                ''~7508R~
+        Else                                                           ''~v002I~
+            If swReceive Then                                               ''~v002I~
+                rc = confirmDiscard(e, Ptitle)                         ''~v002I~
+            End If                                                     ''~v002I~
         End If                                                         ''~7508I~
         Return rc                                                      ''~7508I~
     End Function                                                       ''~7508I~
+    Public Shared Function confirmDiscard(Ptitle As String) As Boolean ''~v011I~
+        ' rc:true=continue close                                       ''~v011I~
+        If MessageBox.Show(Ptitle, Rstr.MSG_DISCARD_UPDATE, MessageBoxButtons.YesNo) = DialogResult.No Then''~v011I~
+            Return False                                               ''~v011I~
+        End If                                                         ''~v011I~
+        Return True                                                    ''~v011I~
+    End Function                                                       ''~v011I~
     Public Shared Function confirmDiscard(e As System.ComponentModel.CancelEventArgs, Ptitle As String) As Boolean ''~7429I~''~7508R~''~7521R~
         ' rc:true=continue close                                           ''~7429I~
         '       If MessageBox.Show(Ptitle, "ファイルの変更を破棄しますか？", MessageBoxButtons.YesNo) = DialogResult.No Then ''~7429I~''~7508R~''~7615R~
@@ -652,8 +700,8 @@ Public Class Form1
         Else                                                           ''~7613I~
             txt = My.Resources.help_form1U8                                  ''~7430I~''~7501R~''~7613R~
         End If                                                         ''~7613I~
-'       MessageBox.Show(txt, initialTitle)                                      ''~7430I~''~7613R~''~7615R~''+7621R~
-        MsgBox.ShowMsg(txt, initialTitle)                              ''+7621I~
+        '       MessageBox.Show(txt, initialTitle)                                      ''~7430I~''~7613R~''~7615R~''~7621R~
+        MsgBox.ShowMsg(txt, initialTitle)                              ''~7621I~
     End Sub                                                            ''~7430I~
 
     Private Sub MenuStrip1_ItemClicked(sender As System.Object, e As System.Windows.Forms.ToolStripItemClickedEventArgs) Handles MenuStrip1.ItemClicked

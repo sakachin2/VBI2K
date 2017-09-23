@@ -1,6 +1,11 @@
-﻿'CID:''+dateR~:#72                          update#=  194;            ''~7612R~
+﻿'CID:''+v037R~:#72                          update#=  196;            ''+v037R~
+'************************************************************************************''~v026I~
+'v037 2017/09/22 assign F4 as query of replacing char                  ''+v037I~
+'                Forecolor have to be InactiveCaptureText to get effective for switching Text by language''+v037I~
+'v026 2017/09/19 By F5,"り"(hiragana)<-->"リ"(katakana),"工"(kanji)-->"エ"(katakana)-->"ェ"(katakana-small)-->"工" (wrap),"力"(kanji)-->"カ"(katakana)-->"ヵ"(katakana)-->"力"(Wrap)''~v026I~
+'************************************************************************************''~v026I~
 Public Class ClassUndoRedo                                             ''~7429R~
-'localization not required                                             ''+7618I~
+    'localization not required                                             ''~7618I~
     Public Const OPT_BESTEXT = 0                                        ''~7501I~''~7506M~
     Public Const OPT_KANJITEXT = 1                                       ''~7501I~''~7506R~
     Public Const OPT_KANATEXT = 2                                      ''~7506I~
@@ -26,7 +31,7 @@ Public Class ClassUndoRedo                                             ''~7429R~
     Private posCut As Integer                                          ''~7514I~
     Private swCut As Boolean                                           ''~7514I~
     Private swForm1 As Boolean                                         ''~7515I~
-    private cposRepAll As Rectangle                                    ''~7612I~
+    Private cposRepAll As Rectangle                                    ''~7612I~
     Sub New(Popt As Integer, Ptb As TextBox, PbtnUndo As ToolStripButton, PbtnRedo As ToolStripButton) ''~7429R~''~7501R~
         swForm1 = False                                                  ''~7515I~
         btnType = True                                                   ''~7513M~''~7515M~
@@ -83,7 +88,7 @@ Public Class ClassUndoRedo                                             ''~7429R~
         End If                                                         ''~7508I~
     End Sub                                                            ''~7429M~
     Public Sub setTBTextRepAllStart()                                  ''~7612R~
-'       cposRepAll=getCaretPosLen()        'pos before TB.Text         ''~7612R~
+        '       cposRepAll=getCaretPosLen()        'pos before TB.Text         ''~7612R~
     End Sub                                                            ''~7612I~
     Private Sub setTBTextRepAll(Ptext As String)                       ''~7612R~
         swSetText = True                                               ''~7612I~
@@ -93,10 +98,10 @@ Public Class ClassUndoRedo                                             ''~7429R~
     End Sub                                                            ''~7612I~
     Private Sub setTBTextRepAllAfterAll(Ptext As String)               ''~7612R~
         Dim cpos As Rectangle                                          ''~7612I~
-        cpos=getCaretPosLen()        'pos after last rep               ''~7612I~
+        cpos = getCaretPosLen()        'pos after last rep               ''~7612I~
         prepareUndo(cpos)                                              ''~7612I~
     End Sub                                                            ''~7612I~
-    Private Sub setTBTextRepAll(Ptext As String, PcaseRepAll As Integer)''~7612R~
+    Private Sub setTBTextRepAll(Ptext As String, PcaseRepAll As Integer) ''~7612R~
         If PcaseRepAll = 1 Then  'first of repall                             ''~7612I~
             setTBTextRepAllStart()                                     ''~7612R~
             Exit Sub                                                   ''~7612I~
@@ -416,6 +421,8 @@ Public Class ClassUndoRedo                                             ''~7429R~
         key = e.KeyCode                                                  ''~7525I~
         Select Case key                                                     ''~7525R~
             Case Keys.None                                             ''~7521I~
+            Case FormOptions.keySmallKeyQ                              ''+v037I~
+                fmtBES.queryLetterSmallLarge(ch, swForm1)               ''+v037I~
             Case FormOptions.keySmallKey                               ''~7525I~
                 If (e.Modifiers And Keys.Shift) = Keys.Shift Then 'with shift key''~7525I~''~7608R~
 #If False Then                                                              ''~7608I~
@@ -426,7 +433,8 @@ Public Class ClassUndoRedo                                             ''~7429R~
                     fmtBES.changeLetterOther(ch, cvch)                 ''~7608I~
 #End If                                                                ''~7608I~
                 Else                                                   ''~7525I~
-                    fmtBES.changeLetterSmallLarge(ch, cvch)                ''~7515I~''~7525R~
+                    '                   fmtBES.changeLetterSmallLarge(ch, cvch)                ''~7515I~''~7525R~''~v026R~
+                    fmtBES.changeLetterSmallLarge(ch, cvch, swForm1)    ''~v026I~
                 End If                                                 ''~7525I~
             Case FormOptions.keySpecialCharKey                         ''~7525I~
                 showDialogSpecialKey(cvch)                             ''~7515I~
@@ -514,10 +522,10 @@ Public Class ClassUndoRedo                                             ''~7429R~
             If PkeyBS Then                                                  ''~7525I~
                 If ch = FormatBES.CHAR_LF Then   'del by backspace     ''~7525I~
                     TB.SelectionStart = pos - 1 'pos of CHAR_CR        ''~7525R~
-                    TB.SelectionLength = vbCrlf.Length                 ''~7525I~
+                    TB.SelectionLength = vbCrLf.Length                 ''~7525I~
                     rc = True                                          ''~7525R~
                 ElseIf ch = FormatBES.CHAR_CR Then   'del by backspace ''~7525I~
-                    TB.SelectionLength = vbCrlf.Length                 ''~7525R~
+                    TB.SelectionLength = vbCrLf.Length                 ''~7525R~
                     rc = True                                          ''~7525R~
                 End If                                                 ''~7525R~
             End If                                                     ''~7525I~

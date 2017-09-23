@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<root>
+<root> 
   <!-- 
     Microsoft ResX Schema 
     
@@ -126,11 +126,20 @@
   <data name="STR_FILTER_KANJITEXT" xml:space="preserve">
     <value>ExtractedTextFile(*.i2t;*.i2e)|*.i2t;*.i2e|Text(*.txt;*.text)|*.txt;*.text|All(*.*)|*.*</value>
   </data>
+  <data name="STR_FILTER_DICTIONARY" xml:space="preserve">
+    <value>Dictionary File(*.dct)|*.dct|All(*.*)|*.*</value>
+  </data>
   <data name="STR_FORM1_INITIAL_TEXT" xml:space="preserve">
     <value>Open file at first</value>
   </data>
   <data name="STR_FORM1_TITLE_KANA_FILE" xml:space="preserve">
     <value>Kana Text</value>
+  </data>
+  <data name="STR_ENGLISH_DOC" xml:space="preserve">
+    <value>English Text</value>
+  </data>
+  <data name="STR_ENGLISH_DOC_EXTRACTED" xml:space="preserve">
+    <value>Extracted English Text</value>
   </data>
   <data name="STR_FORM1_TITLE_KANJI2KANA_FILE" xml:space="preserve">
     <value>Kanji2Kana</value>
@@ -262,15 +271,69 @@
     <value>Search word was not found at all</value>
   </data>
   <data name="STR_MSG_ERR_SMALL_LARGE" xml:space="preserve">
-    <value>This char is not target of Small/Large letter conversion</value>
+    <value>This char ({0}) is not a target of replacement(Without Shift key). See Help of Settings.</value>
+  </data>
+  <data name="STR_MSG_INFO_SMALL_LARGE_TARGET" xml:space="preserve">
+    <value>This char({0}) is a target of Small/Large Letter replacement. </value>
   </data>
   <data name="STR_MSG_ERR_SMALL_LARGE_OTHER" xml:space="preserve">
-    <value>This char is not target of translation</value>
+    <value>This char({0}) is not a target of replacement(With Shift key). </value>
   </data>
   <data name="STR_MSG_ERR_FAILED_KANJI2KANA_CONV" xml:space="preserve">
     <value>Failed to transration Kanji text to Kana text</value>
   </data>
   <data name="STR_MSG_ERR_ALREADY_EXTRACTED" xml:space="preserve">
     <value>This file was alread extracted</value>
+  </data>
+  <data name="STR_MSG_KATAKANAOKURIGANA" xml:space="preserve">
+    <value>Changed KatakanaOkurigana option</value>
+  </data>
+  <data name="STR_MSG_ERR_ADDDICTIONARY" xml:space="preserve">
+    <value>Null String Error</value>
+  </data>
+  <data name="STR_ERR_MSG_DICTIONARY_ROW_IGNORED" xml:space="preserve">
+    <value>Row {0} contains error, Total {1} error lines</value>
+  </data>
+  <data name="STR_ERR_MSG_DICTIONARY_ERRVALUE" xml:space="preserve">
+    <value>";" is not available({0})</value>
+  </data>
+  <data name="STR_MSG_CONFIRM_DISCARD_DICTIONARY_UPDATE" xml:space="preserve">
+    <value>Discard update ?</value>
+  </data>
+  <data name="STR_ERR_MSG_DICTIONARY_FILE_LINE_FORMAT" xml:space="preserve">
+    <value>Dictionary File LineNo = {0} contains error</value>
+  </data>
+  <data name="STR_ERR_MSG_DICTIONARY_FILE_NO_SAVE_FILE" xml:space="preserve">
+    <value>This Dictionary is not loaded from a file, use SaveAS button</value>
+  </data>
+  <data name="STR_INFO_MSG_DICTIONARY_LOADED" xml:space="preserve">
+    <value>Dictionary file was loaded.</value>
+  </data>
+  <data name="STR_MSG_INFO_NOT_SAVED_BY_NOUPDATE" xml:space="preserve">
+    <value>No update, not saved.</value>
+  </data>
+  <data name="STR_CHAR_TYPE_HIRAGANA" xml:space="preserve">
+    <value>Hiragana</value>
+  </data>
+  <data name="STR_CHAR_TYPE_KANJI" xml:space="preserve">
+    <value>Kanji</value>
+  </data>
+  <data name="STR_CHAR_TYPE_KATAKANA" xml:space="preserve">
+    <value>Katakana</value>
+  </data>
+  <data name="STR_CHAR_TYPE_KATAKANA_SMALL" xml:space="preserve">
+    <value>Katakana-Small</value>
+  </data>
+  <data name="STR_CHAR_TYPE_KIGO" xml:space="preserve">
+    <value>Symbol</value>
+  </data>
+  <data name="STR_CHAR_TYPE_UNKNOWN" xml:space="preserve">
+    <value>Unknown CharType</value>
+  </data>
+  <data name="STR_MSG_CHANGELETTERWRAP" xml:space="preserve">
+    <value>{0} : {1} --&gt; {2} : {3}</value>
+  </data>
+  <data name="STR_MSG_CHANGELETTERWRAP_QUERY" xml:space="preserve">
+    <value>{0} : {1} </value>
   </data>
 </root>

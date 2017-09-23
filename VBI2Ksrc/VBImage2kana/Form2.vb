@@ -1,4 +1,9 @@
-﻿'CID:''+dateR~:#72                             update#=  146;         ''+7619R~
+﻿'CID:''+v032R~:#72                             update#=  158;         ''+v032R~
+'************************************************************************************''~v017I~
+'v032 2017/09/21 English document, i2e was not used                    ''~v032I~
+'v018 2017/09/17 requires activate to move ImageView to top of z-order when next image open''~v018I~
+'v017 2017/09/17 Image2kanji issues already processed msg when saved even updated,it dose not allow re-i2k''~v017I~
+'************************************************************************************''~v017I~
 Public Class Form2
     'localize done                                                         ''~7617I~
     Const SCROLLBAR_MARGIN = 0                                            ''~7408R~
@@ -34,6 +39,7 @@ Public Class Form2
     Private Sub Form2_Shown(sender As System.Object, e As System.EventArgs) Handles Me.Shown''~7619I~
         Me.Width = formWidth                                           ''~7619I~
         Me.Height = formHeight                                         ''~7619I~
+        Me.Visible=true                                                ''~v017I~
     End Sub                                                            ''~7619I~
     Private Sub Form1_Disposed(sender As System.Object, e As System.EventArgs) Handles Me.Disposed ''~7428I~
         If Not isNothing(image) Then                                        ''~7428I~
@@ -197,6 +203,7 @@ Public Class Form2
             MessageBox.Show(ex.Message, Rstr.MSG_ERR_ZOOM)              ''~7617I~
             rc = False                                                 ''~7409M~
         End Try                                                        ''~7409M~
+        Me.Activate()                                                  ''~v018R~
         Return rc                                                      ''~7409M~
     End Function                                                       ''~7409M~
     ''~7409I~
@@ -347,33 +354,36 @@ Public Class Form2
     End Sub                                                            ''~7409I~
     '*************************************************************         ''~7410I~
     Private Sub Image2Text(Pfnm As String, PenglishDoc As Boolean)                             ''~7410I~''~7619R~
+    	Dim swDoI2K as boolean=false                                   ''~v017R~
         If Form1.formText Is Nothing OrElse Form1.formText.IsDisposed Then ''~7411R~''~7521R~
             Form1.formText = New Form3()                                          ''~7410I~''~7411R~''~7521R~
         Else                                                           ''~7508I~
-            If Not Form1.formText.chkDiscard(Nothing) Then                   ''~7508I~''~7521R~
+'           If Not Form1.formText.chkDiscard(Nothing) Then                   ''~7508I~''~7521R~''~v017R~
+            If Not Form1.formText.chkDiscard2(swDoI2K) Then            ''~v017R~
                 Exit Sub                                               ''~7508I~
             End If                                                     ''~7508I~
         End If                                                          ''~7411I~
+    if Not swDoI2K                                                     ''~v017R~
         If dupError(Pfnm, PenglishDoc) Then                                              ''~7618I~''~7619R~
             Exit Sub                                                   ''~7618I~
         End If                                                         ''~7618I~
-
+    End If                                                             ''~v017R~
         Dim rc as Boolean=Form1.formText.setImage(Pfnm, PenglishDoc)                                          ''~7410R~''~7411R~''~7521R~''~7619R~
-        Trace.W("Image2Text setImagerc=" & rc)                         ''~7619I~
+'       Trace.W("Image2Text setImagerc=" & rc)                         ''~7619I~''~v018R~
         if rc                                                          ''~7619I~
         	Form1.formText.Show()                                          ''~7410R~''~7411R~''~7521R~''~7619R~
-	        Trace.W("Image2Text after Show")                           ''~7619I~
+'           Trace.W("Image2Text after Show")                           ''~7619I~''~v018R~
         end if                                                         ''~7619I~
     End Sub                                                            ''~7410I~
     Private Function dupError(Pfnm As String, PenglishDoc As Boolean) As Boolean               ''~7618I~''~7619R~
-        If PenglishDoc = extractingEnglishDoc Then               ''~7618I~''~7619R~
+        If PenglishDoc = extractingEnglishDoc Then       'allow English and Japanese for same doc         ''~7618I~''~7619R~
             Dim fnmtxt As String = Form3.getTitleFilename()            ''~7618R~
             Dim fnmimg As String                                       ''~7619R~
-            If PenglishDoc Then                                             ''~7619I~
-                fnmimg = Form1.changeExt(Pfnm, Form1.FILTER_DEFAULT_ENGLISHTEXT) ''~7619I~
-            Else                                                       ''~7619I~
+'           If PenglishDoc Then                                             ''~7619I~''~v032R~
+'               fnmimg = Form1.changeExt(Pfnm, Form1.FILTER_DEFAULT_ENGLISHTEXT) ''~7619I~''~v032R~
+'           Else                                                       ''~7619I~''~v032R~
                 fnmimg = Form1.changeExt(Pfnm, Form1.FILTER_DEFAULT_KANJITEXT) ''~7619I~
-            End If                                                     ''~7619I~
+'           End If                                                     ''~7619I~''~v032R~
             If (Not IsNothing(fnmtxt)) AndAlso (fnmimg.CompareTo(fnmtxt) = 0) Then ''~7618R~
                 MessageBox.Show(Pfnm, Rstr.MSG_ERR_ALREADY_EXTRACTED)   ''~7618I~
                 Return True                                            ''~7618I~

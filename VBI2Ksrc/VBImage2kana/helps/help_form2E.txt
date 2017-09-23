@@ -1,5 +1,6 @@
-(Form2E)
+(Form2E) 
 Displaying document image file
+Push X button on Upper Right corner.
 
 "Extract":
   Extracted text from Japanese document.

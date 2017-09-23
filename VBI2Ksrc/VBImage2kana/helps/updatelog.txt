@@ -1,0 +1,82 @@
+V1.02 : 2017/09/20 released
+'v038 2017/09/22 (Bug)SpecialKey default is also F5 when text cleared
+           form5.vb
+'v037 2017/09/22 assign F4 as query of replacing char
+                 Forecolor have to be InactiveCaptureText to get effective for switching Text by language
+           form5.vb class1.vb class2.vb form3.vb
+'v036 2017/09/22 add for F5 ニ,ハ,ロ,ー,ト
+           class1.vb
+'v035 2017/09/21 additional to v017 when discard old=yes
+           Form3.vb 
+'v034 2017/09/21 utilize status bar at bottom for result of F5 on Form5
+           class1.vb Form3.vb 
+'v033 2017/09/21 insert space before katakana only when prev of katakana is josi or 2 sounds string;
+'                it is difficult,so no space insert berfore after katakana
+           class5.vb
+'v032 2017/09/21 English document, i2e was not used
+           Form2.vb Form1.vb Form3.vb class5.vb
+'v031 2017/09/21 katakana document, put no space before hiragana
+           class5.vb
+'v030 2017/09/21 new option dialog for each document
+           Form12.vb Form5.vb Form3.VB
+'v029 2017/09/18 like v025 send kanji+ツ(tsu)/ッ(tsu-small) to kanjiconvg
+           calss5.vb
+'v028 2017/09/19 He/Be replacement was supported by v026,so do not auto replacement 
+           calss5.vb
+'v027 2017/09/19 when all katakana document, all He/Be treate as katakana
+           calss5.vb
+'v026 2017/09/19 By F5,"り"(hiragana)<-->"リ"(katakana),"工"(kanji)-->"エ"(katakana)-->"ェ"(katakana-small)-->"工" (wrap),"力"(kanji)-->"カ"(katakana)-->"ヵ"(katakana)-->"力"(Wrap)
+           calss2.vb class1.vb
+'v025 2017/09/18 カ(ka)/ケ(ke)+kanji send to kanjiconvg
+           calss5.vb
+'v024 2017/09/18 appendspace have to chk space existing
+           calss5.vb
+'v023 2017/09/18 Not 3人->3hito but 3nin
+           calss5.vb
+'v022 2017/09/18 hirakata-Be,kanji+be allows next type(kanji+BE+kata-->kata,kanji+BE+hira->hira)
+           calss5.vb
+'v021 2017/09/18 conv katakana+kanji(case of indo-jin)
+           calss5.vb
+'v020 2017/09/18 for katakana document,treate katakana same as hiragana
+           calss5.vb
+'v019 2017/09/17 Try space before kanji if length>=3
+           calss5.vb
+'v018 2017/09/17 requires activate to move ImageView to top of z-order when next image open
+           form2.vb
+'v017 2017/09/17 Image2kanji issues already processed msg when saved even updated,it dose not allow re-i2k
+           form2.vb from3.vb
+'v016 2017/09/17 apply v014 for not only kanji conv out but also kana(it may by replaced by dictionary)
+           class5.vb
+'v015 2017/09/17 saveed evenif not updated
+           Form3.vb Form1.vb class5.vb
+'v014 2017/09/16 change "う" to "ー" if after "ゅ" or "ょ" (rule is widely after "う" row or "お" row)
+           calss5.vb
+'v013 2017/09/16 katakana "ー"(815b=u30fc) have to be assumed as hiraganais for BES99
+           calss5.vb
+'v013 2017/09/16 Cut&PAste support for Dictionary
+           Form11.vb
+'v012 2017/09/15 Load/Save/SaveAs from/to disctionary file
+           Form11.vb Form1.vb Class4.vb
+'v011 2017/09/15 (Bug) Exit menu have to chk discard
+           Form1.vb
+'v010 2017/09/15 try another kanji->kana conversion(split by delm char,ignore crlf)
+           Class5.vb
+'v009 2017/09/12 hirgana Ri and katakana Ri is similar looking
+           Class5.vb
+'v008 2017/09/12 dictionary support
+           Form1.vb Form3.vb Form9.vb
+'v007 2017/09/12 duplicated confirm discard msg
+           Form3.vb
+'v006 2017/09/12 katakana okurigana is optional
+           class5.vb Form3.vb Form3.resx forma3.en-GB.resx
+           help_form3.txt help_form3E.txt
+'v005 2017/09/12 u30fc(ー) is katakana
+           class5.vb
+'v004 2017/09/12 hirgana He/Be and katakana He/Be are similar looking
+           class5.vb
+'v003 2017/09/11 dumplicated confirm save override msg for receive text
+           class5.vb
+'v002 2017/09/11 have to confirm when received text remaining
+           Form1.vb
+'v001 2017/09/11 consider continuing word over EOL
+           class5.vb

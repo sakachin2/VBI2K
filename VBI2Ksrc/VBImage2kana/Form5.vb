@@ -1,4 +1,9 @@
-﻿'*CID:''+dateR~:#72                          update#=  160;           ''~7614R~
+﻿'*CID:''+v038R~:#72                          update#=  166;           ''+v038R~
+'************************************************************************************''~v030I~
+'v038 2017/09/22 (Bug)SpecialKey default is also F5 when text cleared  ''~v038I~
+'v037 2017/09/22 assign F4 as query of replacing char                  ''~v037I~
+'v030 2017/09/21 new option dialog for each document                   ''~v030I~
+'************************************************************************************''~v030I~
 Imports System.Globalization                                            ''~7613I~
 Imports System.ComponentModel                                           ''~7613I~
 Imports System.Threading                                               ''~7613I~
@@ -6,6 +11,7 @@ Public Class FormOptions
     'locale done                                                           ''~7618I~
 
     Public Shared keySmallKey As Keys                                          ''~7502I~''~7525M~
+    Public Shared keySmallKeyQ As Keys                                 ''~v037R~
     Public Shared keySpecialCharKey As Keys                                   ''~7515I~''~7525M~
     Public Shared swWinBES99 As Boolean                               ''~7525I~''~7604R~
     '   Public Shared swEnglishDoc As Boolean                              ''~7618I~''~7619R~
@@ -30,8 +36,10 @@ Public Class FormOptions
     Private fontStyleScr As FontStyle                                  ''~7515I~
     '   Public swKatakana As Boolean = False                               ''~7501R~''~7507R~
     Private Const DEFAULT_KEY_SMALL = 5                                  ''~7502R~''~7525R~
+    Private Const DEFAULT_KEY_SMALLQ = 4                               ''~v037R~
     Private Const DEFAULT_KEY_SPECIALCHAR = 6                          ''~7515I~''~7525R~
     Public keySmall As Integer = DEFAULT_KEY_SMALL                      ''~7502R~
+    Public keySmallQ As Integer = DEFAULT_KEY_SMALLQ                   ''~v037R~
     Public keySpecialChar As Integer = DEFAULT_KEY_SPECIALCHAR         ''~7515I~
     Private samePrintFont As Boolean                                   ''~7515I~
     Private swInit As Boolean = False                                    ''~7614I~
@@ -61,15 +69,20 @@ Public Class FormOptions
         fontSize = My.Settings.CFGF5_FontSize                            ''~7508I~''~7515R~
         fontStyle = My.Settings.CFGF5_FontStyle                          ''~7508I~''~7515R~
         samePrintFont = My.Settings.CFGF5_PrintFontSame                 ''~7515I~
-        swWinBES99 = My.Settings.CFGF5_PrecedingSpace          ''~7525I~''~7604R~
+        '       swWinBES99 = My.Settings.CFGF12_swBES99          ''~7525I~''~7604R~''~v030R~
         '       swEnglishDoc = My.Settings.CFGF5_EnglishDoc                    ''~7618R~''~7619R~
-        cfgLang = My.Settings.CFGF5_LangID                             ''+7619R~
+        cfgLang = My.Settings.CFGF5_LangID                             ''~7619R~
         swLangEN = setlangEN(cfgLang)                                  ''~7614I~
         keySmall = My.Settings.CFGF5_KeySmall                            ''~7508I~''~7515R~
         If keySmall = 0 Then                                                  ''~7508I~
             keySmall = DEFAULT_KEY_SMALL                                ''~7508I~
         End If                                                         ''~7508I~
         keySmallKey = Keys.F1 + keySmall - 1                            ''~7521I~
+        keySmallQ = My.Settings.CFGF5_KeySmallQ                        ''~v037R~
+        If keySmallQ = 0 Then                                          ''~v037R~
+            keySmallQ = DEFAULT_KEY_SMALLQ                             ''~v037R~
+        End If                                                         ''~v037R~
+        keySmallKeyQ = Keys.F1 + keySmallQ - 1                         ''~v037R~
         If keySpecialChar = 0 Then                                           ''~7515I~''~7521R~
             keySpecialChar = DEFAULT_KEY_SPECIALCHAR                         ''~7515I~''~7521R~
         End If                                                         ''~7515I~
@@ -84,11 +97,12 @@ Public Class FormOptions
         My.Settings.CFGF5_FontSize = fontSize                            ''~7508I~''~7515R~
         My.Settings.CFGF5_FontStyle = fontStyle                          ''~7508I~''~7515R~
         My.Settings.CFGF5_KeySmall = keySmall                            ''~7508I~''~7515R~
+        My.Settings.CFGF5_KeySmallQ = keySmallQ                        ''~v037R~
         My.Settings.CFGF5_KeySpecialChar = keySpecialChar              ''~7515I~
         My.Settings.CFGF5_PrintFontSame = samePrintFont                  ''~7515I~
-        My.Settings.CFGF5_PrecedingSpace = swWinBES99             ''~7525I~''~7604R~
+        '       My.Settings.CFGF12_swBES99 = swWinBES99             ''~7525I~''~7604R~''~v030R~
         '       My.Settings.CFGF5_EnglishDoc = swEnglishDoc                    ''~7618R~''~7619R~
-        My.Settings.CFGF5_LangID = cfgLang                             ''~7614I~''+7619R~
+        My.Settings.CFGF5_LangID = cfgLang                             ''~7614I~''~7619R~
     End Sub                                                            ''~7508I~
     Private Sub FormOptions_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         Me.ActiveControl = Me.ButtonOK    'set focus at Load time
@@ -158,10 +172,11 @@ Public Class FormOptions
         TextBoxScrFontName.Text = createFontnameScr()                   ''~7508I~''~7515R~
         TextBoxPrintFontName.Text = createFontname()                   ''~7515R~
         CheckBoxPrintFont.Checked = samePrintFont                      ''~7515M~
-        CheckBoxWinBES99.Checked = swWinBES99              ''~7525I~   ''~7604R~
+        '       CheckBoxWinBES99.Checked = swWinBES99              ''~7525I~   ''~7604R~''~v030R~
         '       CheckBoxEnglishDoc.Checked = swEnglishDoc                      ''~7618I~''~7619R~
         setRGLang(cfgLang)                                             ''~7614I~
         TextBoxKeySmallKana.Text = "F" & keySmall                      ''~7508I~
+        TextBoxKeySmallKanaQ.Text = "F" & keySmallQ                    ''~v037R~
         TextBoxKeySpecialChar.Text = "F" & keySpecialChar              ''~7515I~
     End Sub 'resize
     Private Function getOptions() As Boolean
@@ -175,16 +190,26 @@ Public Class FormOptions
             Return False
         End If
         samePrintFont = CheckBoxPrintFont.Checked                        ''~7515I~
-        swWinBES99 = CheckBoxWinBES99.Checked                ''~7525I~ ''~7604R~
+        '       swWinBES99 = CheckBoxWinBES99.Checked                ''~7525I~ ''~7604R~''~v030R~
         '       swEnglishDoc = CheckBoxEnglishDoc.Checked                      ''~7618I~''~7619R~
-        Dim keyval As Integer = getKeyValue(TextBoxlabelSmallKey.Text, TextBoxKeySmallKana.Text)                ''~7502R~''~7515R~
+'       Dim keyval As Integer = getKeyValue(TextBoxlabelSmallKey.Text, TextBoxKeySmallKana.Text)                ''~7502R~''~7515R~''~v038R~
+        Dim keyval As Integer                                          ''~v038I~
+        keyval = getKeyValue(TextBoxlabelSmallKey.Text, TextBoxKeySmallKana.Text,DEFAULT_KEY_SMALL)''~v038I~
         If keyval < 0 Then                                                    ''~7502I~
             Return False                                               ''~7502I~
         End If                                                         ''~7502I~
         keySmall = keyval                                                ''~7502I~
         keySmallKey = Keys.F1 + keySmall - 1                           ''~7502I~
+'       keyval = getKeyValue(TextBoxlabelQueryKey.Text, TextBoxKeySmallKanaQ.Text)''~v037R~''~v038R~
+        keyval = getKeyValue(TextBoxlabelQueryKey.Text, TextBoxKeySmallKanaQ.Text,DEFAULT_KEY_SMALLQ)''~v038I~
+        If keyval < 0 Then                                             ''~v037R~
+            Return False                                               ''~v037R~
+        End If                                                         ''~v037R~
+        keySmallQ = keyval                                             ''~v037R~
+        keySmallKeyQ = Keys.F1 + keySmallQ - 1                         ''~v037R~
         ''~7515I~
-        keyval = getKeyValue(TextBoxLabelSpecialChar.Text, TextBoxKeySpecialChar.Text) ''~7515I~
+'       keyval = getKeyValue(TextBoxLabelSpecialChar.Text, TextBoxKeySpecialChar.Text) ''~7515I~''~v038R~
+        keyval = getKeyValue(TextBoxLabelSpecialChar.Text, TextBoxKeySpecialChar.Text,DEFAULT_KEY_SPECIALCHAR)''~v038I~
         If keyval < 0 Then                                             ''~7515I~
             Return False                                               ''~7515I~
         End If                                                         ''~7515I~
@@ -195,7 +220,8 @@ Public Class FormOptions
         swFontChangedScr = False     'notified                           ''~7515I~
         Return True
     End Function
-    Private Function getKeyValue(Plabel As String, Pstr As String) As Integer ''~7502R~''~7515R~
+'   Private Function getKeyValue(Plabel As String, Pstr As String) As Integer ''~7502R~''~7515R~''~v038R~
+    Private Function getKeyValue(Plabel As String, Pstr As String,Pdefault as Integer) As Integer''~v038I~
         Dim val As Integer                                             ''~7501I~
         Dim str As String = Pstr                                         ''~7502I~
         If str.Length > 1 Then                                         ''~7502R~
@@ -205,7 +231,8 @@ Public Class FormOptions
             End If                                                     ''~7502I~
         End If                                                         ''~7502I~
         If Pstr.Length < 1 Then                                              ''~7501I~''~7502R~
-            Return DEFAULT_KEY_SMALL                                  ''~7502R~
+'           Return DEFAULT_KEY_SMALL                                  ''~7502R~''~v038R~
+            Return Pdefault                                            ''~v038I~
         End If                                                          ''~7501I~
         If Not getNum(str, val) OrElse val < 1 OrElse val > CONST_MAX_FKEY Then                   ''~7501I~''~7502R~
             '           MessageBox.Show("""" & Plabel & """ には 機能キーFn の番号:1～" & CONST_MAX_FKEY & " の数字を指定してください") ''~7502R~''~7515R~''~7618R~
@@ -477,5 +504,9 @@ Public Class FormOptions
         Dim lang As String = getLangStr()                                ''~7614I~
         Thread.CurrentThread.CurrentUICulture = New CultureInfo(lang)   ''~7614I~
     End Sub                                                            ''~7614I~
+
+    Private Sub SplitContainer3_Panel1_Paint(sender As System.Object, e As System.Windows.Forms.PaintEventArgs) Handles SplitContainer3.Panel1.Paint
+
+    End Sub
 
 End Class

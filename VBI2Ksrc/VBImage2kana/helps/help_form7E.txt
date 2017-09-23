@@ -1,4 +1,4 @@
-(Form7E)
+(Form7E) 
 Symbol Add Dialog
   You can set any string.
   Comment column may be null.

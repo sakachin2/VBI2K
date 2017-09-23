@@ -83,11 +83,26 @@
     <Setting Name="CfgTestOption" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="CFGF5_PrecedingSpace" Type="System.Boolean" Scope="User">
+    <Setting Name="CFGF12_swBES99" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="CFGF5_LangID" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="CFGF12_swKatakanaDoc" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="CFGF9_Dictionary" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="CfgMRUDictionary" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="CFGF12_swEnglishDoc" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="CFGF5_KeySmallQ" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">4</Value>
     </Setting>
   </Settings>
 </SettingsFile>

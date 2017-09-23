@@ -44,11 +44,18 @@ Partial Class Form3
         Me.CMSelectAll = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemSpecialChar = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemFind = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem_DocOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemDictionary = New System.Windows.Forms.ToolStripMenuItem()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.FontDialog1 = New System.Windows.Forms.FontDialog()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
+        Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
+        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
+        Me.ToolStripStatusLabelCharType = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStrip1.SuspendLayout()
         Me.ContextMenuStrip1.SuspendLayout()
+        Me.StatusStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'ToolStrip1
@@ -130,7 +137,7 @@ Partial Class Form3
         '
         'ContextMenuStrip1
         '
-        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CMCut, Me.CMCopy, Me.CMPaste, Me.CMSelectAll, Me.ToolStripMenuItemSpecialChar, Me.ToolStripMenuItemFind})
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CMCut, Me.CMCopy, Me.CMPaste, Me.CMSelectAll, Me.ToolStripMenuItemSpecialChar, Me.ToolStripMenuItemFind, Me.ToolStripMenuItem_DocOptions, Me.ToolStripMenuItemDictionary})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
         resources.ApplyResources(Me.ContextMenuStrip1, "ContextMenuStrip1")
         '
@@ -164,21 +171,50 @@ Partial Class Form3
         Me.ToolStripMenuItemFind.Name = "ToolStripMenuItemFind"
         resources.ApplyResources(Me.ToolStripMenuItemFind, "ToolStripMenuItemFind")
         '
+        'ToolStripMenuItem_DocOptions
+        '
+        Me.ToolStripMenuItem_DocOptions.Name = "ToolStripMenuItem_DocOptions"
+        resources.ApplyResources(Me.ToolStripMenuItem_DocOptions, "ToolStripMenuItem_DocOptions")
+        '
+        'ToolStripMenuItemDictionary
+        '
+        Me.ToolStripMenuItemDictionary.Name = "ToolStripMenuItemDictionary"
+        resources.ApplyResources(Me.ToolStripMenuItemDictionary, "ToolStripMenuItemDictionary")
+        '
         'ToolStripSeparator4
         '
         Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
         resources.ApplyResources(Me.ToolStripSeparator4, "ToolStripSeparator4")
         '
+        'StatusStrip1
+        '
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabelCharType, Me.ToolStripStatusLabel1})
+        resources.ApplyResources(Me.StatusStrip1, "StatusStrip1")
+        Me.StatusStrip1.Name = "StatusStrip1"
+        '
+        'ToolStripStatusLabelCharType
+        '
+        Me.ToolStripStatusLabelCharType.Name = "ToolStripStatusLabelCharType"
+        resources.ApplyResources(Me.ToolStripStatusLabelCharType, "ToolStripStatusLabelCharType")
+        '
+        'ToolStripStatusLabel1
+        '
+        Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
+        resources.ApplyResources(Me.ToolStripStatusLabel1, "ToolStripStatusLabel1")
+        '
         'Form3
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.ToolStrip1)
         Me.Name = "Form3"
         Me.ToolStrip1.ResumeLayout(False)
         Me.ToolStrip1.PerformLayout()
         Me.ContextMenuStrip1.ResumeLayout(False)
+        Me.StatusStrip1.ResumeLayout(False)
+        Me.StatusStrip1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -206,4 +242,10 @@ Partial Class Form3
     Friend WithEvents CMSelectAll As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripMenuItemSpecialChar As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripMenuItemFind As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem_DocOptions As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItemDictionary As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
+    Friend WithEvents StatusStrip1 As System.Windows.Forms.StatusStrip
+    Friend WithEvents ToolStripStatusLabelCharType As System.Windows.Forms.ToolStripStatusLabel
+    Friend WithEvents ToolStripStatusLabel1 As System.Windows.Forms.ToolStripStatusLabel
 End Class

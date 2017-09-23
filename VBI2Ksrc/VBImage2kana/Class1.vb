@@ -1,6 +1,13 @@
-﻿'CID:''+dateR~:#72                          update#=  238;            ''~7608R~
+﻿'CID:''+v037R~:#72                          update#=  253;            ''~v037R~
+'************************************************************************************''~v026I~
+'v037 2017/09/22 assign F4 as query of replacing char                  ''~v037I~
+'                Forecolor have to be InactiveCaptureText to get effective for switching Text by language''~v037I~
+'v036 2017/09/22 add for F5 ニ,ハ,ロ,ー,ト                             ''~v036I~
+'v034 2017/09/21 utilize status bar at bottom for result of F5 on Form5''~v034I~
+'v026 2017/09/19 By F5,"り"(hiragana)<-->"リ"(katakana),"工"(kanji)-->"エ"(katakana)-->"ェ"(katakana-small)-->"工" (wrap),"力"(kanji)-->"カ"(katakana)-->"ヵ"(katakana)-->"力"(Wrap)''~v026I~
+'************************************************************************************''~v026I~
 Public Class FormatBES                                                 ''~7421I~
-'localization done                                                     ''+7618I~
+    'localization done                                                     ''~7618I~
 
     '   Private Const SIGN_DIGIT = ChrW(&H2460) 'maru-1 "数"c     '&H6570                    ChrW(&H2460)        'maru-1''~7422R~''~7427R~''~7501R~
     Private Const SIGN_DIGIT = "数"c                                           ''~7427I~''~7501R~
@@ -44,6 +51,33 @@ Public Class FormatBES                                                 ''~7421I~
     Public Const CHAR_EXCLAMATION_ASCII = "!"                          ''~7605I~
     Public Const CHAR_QUESTION = "？"                                      ''~7430I~''~7501R~''~7605R~
     Public Const CHAR_QUESTION_ASCII = "?"                            ''~7605I~
+    ''~v026I~
+    Public Const CHAR_KANJI_KOU = "工"c                                ''~v026I~
+    Public Const CHAR_KATAKANA_E = "エ"c                               ''~v026I~
+    Public Const CHAR_KATAKANA_E_SMALL = "ェ"c                         ''~v026I~
+    Public Const CHAR_KANJI_RIKI = "力"c                                ''~v026I~
+    Public Const CHAR_KATAKANA_KA = "カ"c                              ''~v026I~
+    Public Const CHAR_KATAKANA_KA_SMALL = "ヵ"c                        ''~v026I~
+    Public Const CHAR_KATAKANA_RI = "リ"c                              ''~v026I~
+    Public Const CHAR_HIRAGANA_RI = "り"c                              ''~v026I~
+    Public Const CHAR_KATAKANA_HE = "ヘ"c                              ''~v026I~
+    Public Const CHAR_HIRAGANA_HE = "へ"c                              ''~v026I~
+    Public Const CHAR_KATAKANA_BE = "ベ"c                              ''~v026I~
+    Public Const CHAR_HIRAGANA_BE = "べ"c                              ''~v026I~
+    Public Const CHAR_KANJI_TA = "夕"c                              ''~v026I~
+    Public Const CHAR_KATAKANA_TA = "タ"c                              ''~v026I~
+    Public Const CHAR_KANJI_NI = "二"c                                 ''~v034I~
+    Public Const CHAR_KATAKANA_NI = "ニ"c                              ''~v034I~
+    Public Const CHAR_KANJI_HACHI = "八"c                              ''~v034I~
+    Public Const CHAR_KATAKANA_HA = "ハ"c                              ''~v034I~
+    Public Const CHAR_KANJI_KUCHI = "口"c                              ''~v034I~
+    Public Const CHAR_KATAKANA_RO = "ロ"c                              ''~v034I~
+    Public Const CHAR_KANJI_ICHI = "一"c                               ''~v034I~
+    Public Const CHAR_KATAKANA_CHOON = "ー"c                           ''~v034I~
+    Public Const CHAR_KIGO_HBAR = "─"c                                ''~v034I~
+    Public Const CHAR_KATAKANA_TO = "ト"c                           ''~v036I~
+    Public Const CHAR_KANJI_BOKU = "卜"c                               ''~v036I~
+    ''~v026I~
     '   Private Const CHAR_CONCAT1 = ChrW(&H28C0)  '1st tsunagi                  ''~7423I~''~7426R~''~7501R~
     Private Const UC_ASCII_START = &H20   'space                       ''~7501I~
     Private Const UC_ASCII_END = &H7E   '~                           ''~7501I~
@@ -125,6 +159,12 @@ Public Class FormatBES                                                 ''~7421I~
     Private posInTheConcatLine As Integer = -1                           ''~7508R~
     Private posHirakataIn As Integer = -1                                ''~7508I~
     Private posHirakataOut As Integer = -1                               ''~7508I~
+    Private typeSrc, typeTgt As Integer                                 ''~v034I~
+    Private Const TYPE_KANJI = 1                                         ''~v034R~
+    Private Const TYPE_HIRA = 2                                          ''~v034R~
+    Private Const TYPE_KATA = 4                                          ''~v034R~
+    Private Const TYPE_KATA_SMALL = 3                                    ''~v034R~
+    Private Const TYPE_KIGO = 5                                          ''~v036R~
     '*******************************************************               ''~7413I~''~7421M~
     '*******************************************************               ''~7413I~''~7421M~
     Private sbOut, sbSave As System.Text.StringBuilder                             ''~7413I~''~7421R~''~7426R~
@@ -1041,26 +1081,233 @@ Public Class FormatBES                                                 ''~7421I~
         If idx < 0 Then                                                       ''~7501I~
             Return False                                               ''~7501I~
         End If                                                         ''~7501I~
-        Ppcvch = STR_SMALL_LETTER.Chars(idx)                           ''~7501R~
+            Ppcvch = STR_SMALL_LETTER.Chars(idx)                           ''~7501R~
         Return True                                                    ''~7501I~
     End Function                                                       ''~7501I~
+    Public Function isLargeLetter(Pch As Char) As Boolean              ''~v037I~
+        Dim idx As Integer = STR_LARGE_LETTER.IndexOf(Pch)             ''~v037I~
+        If idx < 0 Then                                                ''~v037I~
+            Return False                                               ''~v037I~
+        End If                                                         ''~v037I~
+        Return True                                                    ''~v037I~
+    End Function                                                       ''~v037I~
     Public Function isSmallLetter(Pch As Char, ByRef Ppcvch As Char) As Boolean ''~7501R~''~7502R~
         Ppcvch = SIGN_CHAR_NOTHING                                       ''~7501I~
         Dim idx As Integer = STR_SMALL_LETTER.IndexOf(Pch)             ''~7501R~
         If idx < 0 Then                                                       ''~7501I~
             Return False                                               ''~7501I~
         End If                                                         ''~7501I~
-        Ppcvch = STR_LARGE_LETTER.Chars(idx)                           ''~7501R~
+            Ppcvch = STR_LARGE_LETTER.Chars(idx)                           ''~7501R~
         Return True                                                    ''~7501I~
     End Function                                                       ''~7501I~
-    Public Function changeLetterSmallLarge(Pch As Char, ByRef Ppcvch As Char) As Boolean ''~7502I~
+    Public Function isSmallLetter(Pch As Char) As Boolean              ''~v037I~
+        Dim idx As Integer = STR_SMALL_LETTER.IndexOf(Pch)             ''~v037I~
+        If idx < 0 Then                                                ''~v037I~
+            Return False                                               ''~v037I~
+        End If                                                         ''~v037I~
+        Return True                                                    ''~v037I~
+    End Function                                                       ''~v037I~
+    '   Public Function changeLetterSmallLarge(Pch As Char, ByRef Ppcvch As Char) As Boolean ''~7502I~''~v026R~
+    Public Function queryLetterSmallLarge(Pch As Char, PswForm1 As Boolean) As Boolean ''~v037I~
+    	Dim cvch as Char                                               ''+v037I~
+        If changeLetterWrap(Pch, cvch, PswForm1) Then                  ''+v037R~
+            If Not PswForm1 Then 'form3                                ''~v037I~
+                Form1.formText.showStatus(Pch, typeSrc) 'Form3         ''~v037I~
+            End If                                                     ''~v037I~
+            Return True                                                ''~v037I~
+        End If                                                         ''~v037I~
+        If isLargeLetter(Pch) OrElse isSmallLetter(Pch) Then           ''+v037R~
+            Form1.formText.showStatus(String.Format(Rstr.getStr("STR_MSG_INFO_SMALL_LARGE_TARGET"), Pch)) ''~v037I~
+            Return True                                                ''~v037I~
+        End If                                                         ''~v037I~
+        Form1.formText.showStatus(String.Format(Rstr.MSG_ERR_SMALL_LARGE, Pch)) ''~v037I~
+        Return False                                                   ''~v037I~
+    End Function                                                       ''~v037I~
+    Public Function changeLetterSmallLarge(Pch As Char, ByRef Ppcvch As Char, PswForm1 As Boolean) As Boolean ''~v026I~
+        If changeLetterWrap(Pch, Ppcvch, PswForm1) Then                      ''~v026I~
+            If Not PswForm1 Then 'form3                                     ''~v034I~
+                Form1.formText.showStatus(Pch, Ppcvch, typeSrc, typeTgt) 'Form3''~v034I~
+            End If                                                     ''~v034I~
+            Return True                                                ''~v026I~
+        End If                                                         ''~v026I~
         If isLargeLetter(Pch, Ppcvch) OrElse isSmallLetter(Pch, Ppcvch) Then  ''~7502I~
             Return True                                                ''~7502I~
         End If                                                         ''~7502I~
         '       MessageBox.Show("""" & Pch & """ は大文字小文字 変換対象ではありません") ''~7502I~''~7618R~
-        MessageBox.Show(Pch, Rstr.MSG_ERR_SMALL_LARGE)                  ''~7618I~
+        '       MessageBox.Show(Pch, Rstr.MSG_ERR_SMALL_LARGE)                  ''~7618I~''~v034R~
+        Form1.formText.showStatus(String.Format(Rstr.MSG_ERR_SMALL_LARGE, Pch)) ''~v034R~
         Return False
     End Function                                                       ''~7502I~
+    Public Function changeLetterWrap(Pch As Char, ByRef Ppcvch As Char, PswForm1 As Boolean) As Boolean ''~v026I~
+        Dim ch As Char                                                 ''~v026I~
+        Select Case Pch                                                ''~v026I~
+            Case CHAR_KANJI_KOU                                        ''~v026I~
+                typeSrc = TYPE_KANJI                                     ''~v034I~
+                If PswForm1 Then                                            ''~v026I~
+                    Return False                                       ''~v026I~
+                End If                                                 ''~v026I~
+                ch = CHAR_KATAKANA_E                                     ''~v026I~
+                typeTgt = TYPE_KATA                                      ''~v034I~
+            Case CHAR_KATAKANA_E                                       ''~v026I~
+                typeSrc = TYPE_KATA                                      ''~v034I~
+                ch = CHAR_KATAKANA_E_SMALL                               ''~v026I~
+                typeTgt = TYPE_KATA_SMALL                                ''~v034I~
+            Case CHAR_KATAKANA_E_SMALL                                 ''~v026I~
+                typeSrc = TYPE_KATA_SMALL                                ''~v034I~
+                If PswForm1 Then                                            ''~v026I~
+                    ch = CHAR_KATAKANA_E                                 ''~v026I~
+                    typeTgt = TYPE_KATA                                  ''~v034I~
+                Else                                                   ''~v026I~
+                    ch = CHAR_KANJI_KOU                                  ''~v026I~
+                    typeTgt = TYPE_KANJI                                 ''~v034I~
+                End If                                                  ''~v026I~
+            Case CHAR_KANJI_RIKI                                       ''~v026I~
+                typeSrc = TYPE_KANJI                                     ''~v034I~
+                If PswForm1 Then                                            ''~v026I~
+                    Return False                                       ''~v026I~
+                End If                                                 ''~v026I~
+                ch = CHAR_KATAKANA_KA                                    ''~v026I~
+                typeTgt = TYPE_KATA                                      ''~v034I~
+            Case CHAR_KATAKANA_KA                                      ''~v026I~
+                typeSrc = TYPE_KATA                                      ''~v034I~
+                ch = CHAR_KATAKANA_KA_SMALL                              ''~v026I~
+                typeTgt = TYPE_KATA_SMALL                                ''~v034I~
+            Case CHAR_KATAKANA_KA_SMALL                                ''~v026I~
+                typeSrc = TYPE_KATA_SMALL                                ''~v034I~
+                If PswForm1 Then                                            ''~v026I~
+                    ch = CHAR_KATAKANA_KA                                ''~v026I~
+                    typeTgt = TYPE_KATA                                  ''~v034I~
+                Else                                                   ''~v026I~
+                    ch = CHAR_KANJI_RIKI                                 ''~v026I~
+                    typeTgt = TYPE_KANJI                                 ''~v034I~
+                End If                                                 ''~v026I~
+            Case CHAR_KATAKANA_RI                                ''~v026I~
+                typeSrc = TYPE_KATA                                      ''~v034I~
+                ch = CHAR_HIRAGANA_RI                                    ''~v026I~
+                typeTgt = TYPE_HIRA                                      ''~v034I~
+            Case CHAR_HIRAGANA_RI                                ''~v026I~
+                typeSrc = TYPE_HIRA                                      ''~v034I~
+                ch = CHAR_KATAKANA_RI                                    ''~v026I~
+                typeTgt = TYPE_KATA                                      ''~v034I~
+            Case CHAR_KATAKANA_HE                                      ''~v026I~
+                typeSrc = TYPE_KATA                                      ''~v034I~
+                ch = CHAR_HIRAGANA_HE                                  ''~v026I~
+                typeTgt = TYPE_HIRA                                      ''~v034I~
+            Case CHAR_HIRAGANA_HE                                      ''~v026I~
+                typeSrc = TYPE_HIRA                                      ''~v034I~
+                ch = CHAR_KATAKANA_HE                                  ''~v026I~
+                typeTgt = TYPE_KATA                                      ''~v034I~
+            Case CHAR_KATAKANA_BE                                      ''~v026I~
+                typeSrc = TYPE_KATA                                      ''~v034I~
+                ch = CHAR_HIRAGANA_BE                                  ''~v026I~
+                typeTgt = TYPE_HIRA                                      ''~v034I~
+            Case CHAR_HIRAGANA_BE                                      ''~v026R~
+                typeSrc = TYPE_HIRA                                      ''~v034I~
+                ch = CHAR_KATAKANA_BE                                  ''~v026I~
+                typeTgt = TYPE_KATA                                      ''~v034I~
+            Case CHAR_KANJI_TA                                         ''~v026I~
+                typeSrc = TYPE_KANJI                                     ''~v034I~
+                If PswForm1 Then                                       ''~v026I~
+                    Return False                                       ''~v026I~
+                End If                                                 ''~v026I~
+                ch = CHAR_KATAKANA_TA                                  ''~v026I~
+                typeTgt = TYPE_KATA                                      ''~v034I~
+            Case CHAR_KATAKANA_TA                                      ''~v026I~
+                typeSrc = TYPE_KATA                                      ''~v034I~
+                If PswForm1 Then                                       ''~v026I~
+                    Return False                                       ''~v026I~
+                End If                                                 ''~v026I~
+                ch = CHAR_KANJI_TA                                     ''~v026I~
+                typeTgt = TYPE_KANJI                                     ''~v034I~
+            Case CHAR_KANJI_NI                                         ''~v036R~
+                typeSrc = TYPE_KANJI                                   ''~v036R~
+                If PswForm1 Then                                       ''~v036R~
+                    Return False                                       ''~v036R~
+                End If                                                 ''~v036R~
+                ch = CHAR_KATAKANA_NI                                  ''~v036R~
+                typeTgt = TYPE_KATA                                    ''~v036R~
+            Case CHAR_KATAKANA_NI                                      ''~v036R~
+                typeSrc = TYPE_KATA                                    ''~v036R~
+                If PswForm1 Then                                       ''~v036R~
+                    Return False                                       ''~v036R~
+                End If                                                 ''~v036R~
+                ch = CHAR_KANJI_NI                                     ''~v036R~
+                typeTgt = TYPE_KANJI                                   ''~v036R~
+            Case CHAR_KANJI_HACHI                                      ''~v036R~
+                typeSrc = TYPE_KANJI                                   ''~v036R~
+                If PswForm1 Then                                       ''~v036R~
+                    Return False                                       ''~v036R~
+                End If                                                 ''~v036R~
+                ch = CHAR_KATAKANA_HA                                  ''~v036R~
+                typeTgt = TYPE_KATA                                    ''~v036R~
+            Case CHAR_KATAKANA_HA                                      ''~v036R~
+                typeSrc = TYPE_KATA                                    ''~v036R~
+                If PswForm1 Then                                       ''~v036R~
+                    Return False                                       ''~v036R~
+                End If                                                 ''~v036R~
+                ch = CHAR_KANJI_HACHI                                  ''~v036R~
+                typeTgt = TYPE_KANJI                                   ''~v036R~
+            Case CHAR_KANJI_KUCHI                                      ''~v036R~
+                typeSrc = TYPE_KANJI                                   ''~v036R~
+                If PswForm1 Then                                       ''~v036R~
+                    Return False                                       ''~v036R~
+                End If                                                 ''~v036R~
+                ch = CHAR_KATAKANA_RO                                  ''~v036R~
+                typeTgt = TYPE_KATA                                    ''~v036R~
+            Case CHAR_KANJI_BOKU                                       ''~v036I~
+                typeSrc = TYPE_KANJI                                   ''~v036I~
+                If PswForm1 Then                                       ''~v036I~
+                    Return False                                       ''~v036I~
+                End If                                                 ''~v036I~
+                ch = CHAR_KATAKANA_TO                                  ''~v036I~
+                typeTgt = TYPE_KATA                                    ''~v036I~
+            Case CHAR_KATAKANA_TO                                      ''~v036I~
+                typeSrc = TYPE_KATA                                    ''~v036I~
+                If PswForm1 Then                                       ''~v036I~
+                    Return False                                       ''~v036I~
+                End If                                                 ''~v036I~
+                ch = CHAR_KANJI_BOKU                                   ''~v036I~
+                typeTgt = TYPE_KANJI                                   ''~v036I~
+            Case CHAR_KANJI_KUCHI                                      ''~v036I~
+                typeSrc = TYPE_KANJI                                   ''~v036I~
+                If PswForm1 Then                                       ''~v036I~
+                    Return False                                       ''~v036I~
+                End If                                                 ''~v036I~
+                ch = CHAR_KATAKANA_RO                                  ''~v036I~
+                typeTgt = TYPE_KATA                                    ''~v036I~
+            Case CHAR_KATAKANA_RO                                      ''~v036R~
+                typeSrc = TYPE_KATA                                    ''~v036R~
+                If PswForm1 Then                                       ''~v036R~
+                    Return False                                       ''~v036R~
+                End If                                                 ''~v036R~
+                ch = CHAR_KANJI_KUCHI                                  ''~v036R~
+                typeTgt = TYPE_KANJI                                   ''~v036R~
+            Case CHAR_KANJI_ICHI                                       ''~v036R~
+                typeSrc = TYPE_KANJI                                   ''~v036R~
+                If PswForm1 Then                                       ''~v036R~
+                    Return False                                       ''~v036R~
+                End If                                                 ''~v036R~
+                ch = CHAR_KATAKANA_CHOON                               ''~v036R~
+                typeTgt = TYPE_KATA                                    ''~v036R~
+            Case CHAR_KATAKANA_CHOON                                   ''~v036R~
+                typeSrc = TYPE_KATA                                    ''~v036R~
+                ch = CHAR_KIGO_HBAR                                    ''~v036R~
+                typeTgt = TYPE_KIGO                                    ''~v036R~
+            Case CHAR_KIGO_HBAR                                        ''~v036R~
+                typeSrc = TYPE_KIGO                                    ''~v036R~
+                If PswForm1 Then                                       ''~v036R~
+                    ch = CHAR_KATAKANA_CHOON                           ''~v036R~
+                    typeTgt = TYPE_KATA                                ''~v036R~
+                Else                                                   ''~v036R~
+                    ch = CHAR_KANJI_ICHI                               ''~v036R~
+                    typeTgt = TYPE_KANJI                               ''~v036R~
+                End If                                                 ''~v036R~
+            Case Else                                                  ''~v026I~
+                Return False                                           ''~v026I~
+        End Select                                                     ''~v026I~
+        Ppcvch = ch                                                      ''~v026I~
+        Return True                                                    ''~v026I~
+    End Function                                                       ''~v026I~
     Public Function changeLetterOther(Pch As Char, ByRef Ppcvch As Char) As Integer ''~7525I~
         '  Ha<-->Wa , U<-->cho-on etc                                      ''~7525I~
         ' rc=0 err,1:repeat                                               ''~7525I~
@@ -1089,7 +1336,8 @@ Public Class FormatBES                                                 ''~7421I~
 #End If                                                                ''~7608I~
         If rc = 0 Then                                                        ''~7525I~
             '           MessageBox.Show("""" & STR_LARGE_LETTER_OTHER & """" & "<-->" & """" & STR_SMALL_LETTER_OTHER & """ の変換対象外です") ''~7525I~''~7608R~''~7618R~
-            MessageBox.Show(Pch, Rstr.MSG_ERR_SMALL_LARGE_OTHER & "(" & STR_LARGE_LETTER_OTHER & "<-->" & STR_SMALL_LETTER_OTHER & ")") ''~7618I~
+            '           MessageBox.Show(Pch, Rstr.MSG_ERR_SMALL_LARGE_OTHER & "(" & STR_LARGE_LETTER_OTHER & "<-->" & STR_SMALL_LETTER_OTHER & ")") ''~7618I~''~v034R~
+            Form1.formText.showStatus(String.Format(Rstr.MSG_ERR_SMALL_LARGE_OTHER, Pch) & "(" & STR_LARGE_LETTER_OTHER & "<-->" & STR_SMALL_LETTER_OTHER & ")") ''~v034R~
         End If                                                         ''~7525I~
         Return rc                                                      ''~7525I~
     End Function                                                       ''~7525I~
@@ -1170,4 +1418,22 @@ Public Class FormatBES                                                 ''~7421I~
         Return str                                                     ''~7525I~
     End Function                                                       ''~7525I~
 #End If                                                                ''~7608I~
+    Public Shared Function getCharType(Ptype As Integer) As String     ''~v034I~
+        Dim str As String                                              ''~v034I~
+        Select Case Ptype                                                   ''~v034I~
+            Case TYPE_KANJI                                            ''~v034I~
+                str = Rstr.getStr("STR_CHAR_TYPE_KANJI")                 ''~v034I~
+            Case TYPE_HIRA                                             ''~v034I~
+                str = Rstr.getStr("STR_CHAR_TYPE_HIRAGANA")              ''~v034I~
+            Case TYPE_KATA                                             ''~v034I~
+                str = Rstr.getStr("STR_CHAR_TYPE_KATAKANA")              ''~v034I~
+            Case TYPE_KATA_SMALL                                       ''~v034I~
+                str = Rstr.getStr("STR_CHAR_TYPE_KATAKANA_SMALL")        ''~v034I~
+            Case TYPE_KIGO                                             ''~v034I~
+                str = Rstr.getStr("STR_CHAR_TYPE_KIGO")                ''~v034I~
+            Case Else                                                  ''~v034I~
+                str = Rstr.getStr("STR_CHAR_TYPE_UNKNOWN")               ''~v034I~
+        End Select                                                     ''~v034I~
+        Return str                                                     ''~v034I~
+    End Function                                                       ''~v034I~
 End Class

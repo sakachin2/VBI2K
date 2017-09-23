@@ -1,4 +1,4 @@
-(Form6E)
+(Form6E) 
 Symbol Input Dialog
   Input Quotation, Parenthesis, ... not by IME.
 

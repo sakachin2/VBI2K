@@ -61,19 +61,147 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  (Form1E)
-        '''Generate Japanese Kana file for WinBES99 extracting text from Image file
+        '''  (Form10) 
+        '''辞書追加ダイアログ
+        '''  漢字かな混じり文字列とその読み仮名を登録します
+        '''
+        '''2017/09/12
+        ''' に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property help_form10() As String
+            Get
+                Return ResourceManager.GetString("help_form10", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  (Form10E) 
+        '''Dictionary Add Dialog
+        '''  Add Kanji-Kana mixed string and its translation to Kana string
+        '''
+        '''2017/09/12
+        ''' に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property help_form10E() As String
+            Get
+                Return ResourceManager.GetString("help_form10E", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  (Form11) 
+        '''辞書編集ダイアログ
+        '''
+        '''&quot;文字列&quot;とその&quot;読み仮名&quot;を登録してください
+        '''文字列には漢字に限らず登録できます
+        '''文書に何度も出てくる語で変換を誤る場合に登録してください
+        '''コピー&amp;ペーストを使う場合はセル全体ではなく文字列が反転している状態の時に
+        '''マウス右ボタンを押してください
+        '''タイトル下部のカット/コピー/貼り付けボタンは行の複写、移動に使います
+        '''&quot;貼り付け&quot;は選択行の前に挿入されます(削除フラグはコピーされません)
+        '''
+        '''&quot;有効&quot; のチェックがあるものが 変換に使用されます
+        '''辞書登録の文字列が置換されたあとに漢字かな変換がおこなわれます
+        '''置換は表示の順に適用されます、例の&quot;本町&quot;と&quot;町&quot;のように
+        '''読みが違う場合はその順番に注意してください
+        '''分かち書きの必要な頻出語にも利用できます
+        '''
+        '''例)
+        '''空気      |くーき               (&quot;う&quot;を長音(&quot;ー&quot;)にしたい場合
+        '''本町      |ほんまち 
+        '''町        |ちょう
+        '''環境汚染  |かんきょう　おせん   (分かち書き)
+        '''飛び地    |　とびち             (先頭にスペース [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property help_form11() As String
+            Get
+                Return ResourceManager.GetString("help_form11", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  (Form11E) 
+        '''Edit Dictionary Dialog
+        '''
+        '''Register &quot;String&quot; and corresponding Kana translation.
+        '''Straing may contain any characters.
+        '''Register those words repeatedly used in the document, which is not translated correctly.
+        '''Use Mouse Right button for Copy &amp; Paste
+        '''not when cell is highlightened but when string is highlightened.
+        '''Cut/CopyPaste buttons bellow title are used to copy/move row.
+        '''&quot;Paste&quot; inserts row before the selected row(Delete flag is not copied). 
+        '''
+        '''String replacement is applied for only word wi [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property help_form11E() As String
+            Get
+                Return ResourceManager.GetString("help_form11E", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  (Form12) 
+        '''点訳作法を考慮:
+        '''  イメージ読み取りファイルからかな変換ファイルを生成するときに
+        '''  以下の処理を行います
+        '''  完全な対応は難しいのであとはBES99で対応してください
+        '''
+        '''    ・3文字以上漢字が連続する場合前にスペースをいれる
+        '''    ・漢字ー＞かな変換で発生した、&quot;ゅ&quot;と&quot;ょ&quot;のあとの&quot;う&quot;は&quot;ー&quot;(長音)にかえる
+        '''      他にも&quot;う&quot;の代わりに&quot;ー&quot; を使う場合は多いがあとは
+        '''      辞書登録するか、上記の変換キーを使用するか、
+        '''      あとは BES99上で変更してください
+        '''    ・次の文字の後ろに２スペースを入れる
+        '''        句点(。）
+        '''    ・次の文字の後ろに１スペースを入れる
+        '''      読点(、)、中点(・)、疑問符(？)、感嘆符(！)
+        '''    ・次の踊り字は元の文字に置き換える
+        '''      々 ゝ ゞ ヽ ヾ
+        '''
+        '''カタカナ文書:
+        '''  かな変換用のオプションです
+        '''  古い文書で仮名にカタカナを使用している場合にチェックONにしてください
+        '''  ONのとき&quot;点字作法を考慮&quot;オプションは影響しませんが
+        '''  OFF [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property help_form12() As String
+            Get
+                Return ResourceManager.GetString("help_form12", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  (Form12E) 
+        '''
+        '''Consideration for translation into Braille:
+        '''  Following consideration is done when translation of Japanese Kanji text to Kana text.
+        '''  It&apos;s rule is too hard to implement, so correct remainings on BES99.
+        '''    .Put space before continued(&gt;=3) kanji chars.
+        '''    .After Kanji-&gt;kana translation, replace &quot;う&quot; by &quot;ー&quot;(Choon:long sound)
+        '''     if &quot;ー&quot; is next of &quot;ゅ&quot; or &quot;ょ&quot; &quot;.
+        '''     In other case &quot;う&quot; have to be replaced by &quot;ー&quot;, use  Translation key above,
+        '''     register to dictionary or update on BES99.
+        '''  [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property help_form12E() As String
+            Get
+                Return ResourceManager.GetString("help_form12E", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  (Form1E) 
+        '''By &quot;TextExtraction function&quot; + &quot;Kana translation function&quot;,
+        '''generate Japanese Kana file for WinBES99 extracting text from document file
         '''created by scanner device.
+        '''English Document can be extracted, and &quot;Kana translation&quot; do nothing paticularly.
+        '''
         '''Kana is a collection of Japanese Letter excludes Kanji.
         '''WinBES99 is a text translation tool into Braille.
         '''Windows app &quot;Windows Fax and Scan&quot; can be used to create image file. 
         '''
         '''Requirement：To extranct text from image file,
-        '''      This app requires &quot;Microsoft Office Document Imaging&quot;(MODI) installed.
-        '''      See (Note) bellow.
-        '''
-        '''Starting by Menu:&quot;File&quot; --&gt; &quot;Open Image file&quot;,
-        '''&quot;Extract&quot; on Image [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
+        '''      This app require [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
         '''</summary>
         Friend ReadOnly Property help_form1E() As String
             Get
@@ -83,11 +211,13 @@ Namespace My.Resources
         
         '''<summary>
         '''  (Form1)
+        '''文書読み取り機能＋かな変換機能で
         '''スキャナーで読み取ったイメージファイルから漢字かな混じり文を読み取って
         '''WinBES99 のためのかな入力ファイルを作成するツールです
         '''イメージファイルは &quot;Windows Fax と スキャン&quot; で スキャナーからイメージファイルを得ることができます
+        '''英語文書も読み取れますが&quot;かな変換&quot;では特になにもしません
         '''
-        '''要件：画像からテキストを読み取る場合は
+        '''要件：文書読み取り機能を使用する場合は
         '''      &quot;Microsoft Office Document Imaging&quot;(MODI) がインストールされている必要があります
         '''      下記 (注) 参照
         '''
@@ -101,9 +231,7 @@ Namespace My.Resources
         '''削除で行が連結されます
         '''
         '''半角カタカナは
-        '''イメージ読み取りファイルから &quot;かな変換&quot; したときはひらがなに変換されます。
-        '''半角カタカナを手入力した場合は
-        '''&quot;かな表示&quot;、&quot;カナ表示&quot; ボタンで ひらがな、カタ [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
+        '''イメージ読み取りファイルから &quot;かな変換&quot; したときはひらがなに変換さ [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
         '''</summary>
         Friend ReadOnly Property help_form1U8() As String
             Get
@@ -112,11 +240,17 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  (Form2)
+        '''  (Form2) 
         '''イメージファイルが表示されています
-        '''&quot;読み取り&quot; ボタンを押すと
-        '''読み取り結果が別のテキストフォームに表示されます
-        '''読み取りには多少時間がかかります
+        '''閉じるときは 右上角の X ボタンを押してください
+        '''
+        '''&quot;読み取り&quot;:
+        '''  読み取り結果が別のテキストフォームに表示されます
+        '''  読み取りには多少時間がかかります
+        '''
+        '''&quot;英文&quot;:
+        '''  英語のみの文書の読み取りを行います
+        '''  英語文書の読み取り精度がよくなります
         '''
         '''2017/04/29
         ''' に類似しているローカライズされた文字列を検索します。
@@ -128,11 +262,18 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  (Form2E)
+        '''  (Form2E) 
         '''Displaying document image file
-        '''By &quot;Extract&quot; button,
-        '''Extracted text is shown to another Form.
-        '''This action expends a little bit time.
+        '''Push X button on Upper Right corner.
+        '''
+        '''&quot;Extract&quot;:
+        '''  Extracted text from Japanese document.
+        '''  This action expends a little bit time.
+        '''  Extracted text is show to another form.
+        '''
+        '''&quot;EN&quot;:
+        '''  Extract from English document.
+        '''  More precize extraction for english document.
         '''
         '''2017/04/29
         ''' に類似しているローカライズされた文字列を検索します。
@@ -144,14 +285,12 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  (Form3)
+        '''  (Form3) 
         '''イメージファイル読み取りの結果です
         '''読み取りエラーを修正してください
         '''&quot;かな変換&quot; ボタンを押すとメイン画面に
         '''かなテキストファイルが表示されます(多少時間がかかります)
         '''
-        '''空白は読み取られません
-        '''改行は大きなブロックごとに設定されています
         '''長い行は折り返し表示されます
         '''&quot;Enter&quot;キーで行が分割され、改行マーク(⏎)の
         '''削除で行が連結されます
@@ -161,7 +300,7 @@ Namespace My.Resources
         '''検索と置換のショートカットはCtrl+F キーです
         '''次を検索のショートカットは F3(上へ検索：Shift+F3)です
         '''
-        '''2017/04/29
+        '''2017/09/20
         ''' に類似しているローカライズされた文字列を検索します。
         '''</summary>
         Friend ReadOnly Property help_form3() As String
@@ -171,24 +310,23 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  (Form3E)
+        '''  (Form3E) 
         '''Text of Extracted from Document Image file
         '''Adjust line position error in extraction.
         '''&quot;Kana&quot; button translate kanji to Kana 
         '''and show result to main form.
         '''It take a little bit times.
         '''
-        '''Space is ignored.
-        '''Text is aplit to multiple lines roughly by blocks.
-        '''Logn line is show folded.
+        '''Long line is shown folded.
         '''User Enter key to split line,
         '''delete EndOfLine sign(⏎) to concatinate lines.
         '''
         '''Mouse Right Button click popup context menu
         '''to Cut and Paste, Find/Replace dialog and Symbol Input Dialog.
-        '''
         '''Shortcut key:
-        '''  Ctrl+F [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
+        '''  Ctrl+F  :Open Find/Replace dialog
+        '''  F3      :Find Next
+        '''  Shift+F3:Find Next [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
         '''</summary>
         Friend ReadOnly Property help_form3E() As String
             Get
@@ -197,31 +335,27 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  (Form5)
+        '''  (Form5) 
         '''画面フォント/印刷フォント:
         '''  フォントを設定します
         '''  左側のボタンを押すとフォント設定ダイアログが開きます
-        '''  但し、スタイルは 標準、太字、斜体のみ選択できます
+        '''  但し、スタイルは 標準、太字、斜体、太字　斜体 のみ選択できます
         '''  印刷用フォントを特に設定しない場合は
         '''  印刷フォント＝画面フォントにチェックを入れてください
         '''
-        '''かな/カナの大文字/小文字変換キー:
+        '''かな/カナ文字 置換キー:
         '''  あ&lt;--&gt;ぁ、ア&lt;--&gt;ァ、ｱ&lt;--&gt;ｧ のように
-        '''  大文字&lt;--&gt;小文字 変換に使用する機能キー F1〜F12 を指定
-        '''  シフトキーを押した状態でこのキーを押すと次の変換をします
-        '''    は&lt;--&gt;わ、へ&lt;--&gt;え、う&lt;--&gt;ー
+        '''  大文字&lt;--&gt;小文字 置換に使用する機能キー F1〜F12 を指定
         '''
-        '''記号文字入力ダイアログキー:
-        '''  記号文字入力用のダイアログを開く機能キーを設定
-        '''  マウス右ボタンで開くコンテクスメニューの&quot;記号入力&quot;でも
-        '''  記号入力ダイアログを開くことができます
-        '''
-        '''点訳作法を考慮:
-        '''  イメージ読み取りファイルからかな変換ファイルを生成するときに
-        '''  以下の処理を行います
-        '''    ・漢字の開始前にスペースを入れる
-        '''        WinBES99での分かち書きがやりやすくなる
-        '''  [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
+        '''  同じキー操作でイメージ読み取りで間違え易い字の置換も行います
+        '''    リ(カタカナ)&lt;--&gt;り(ひらがな)
+        '''    ヘ(カタカナ)&lt;--&gt;へ(ひらがな)
+        '''    ベ(カタカナ)&lt;--&gt;べ(ひらがな)
+        '''  漢字画面では漢字も交えた置換を行います
+        '''    工(業) --&gt; エ(ネルギー) --&gt;ェ --&gt;工(業) (漢字に戻る)
+        '''    力(士) --&gt; カ(エル) --&gt;ヵ --&gt; 力(士)    (漢字に戻る)
+        '''    夕(焼け) &lt;--&gt; タ(オル)                  
+        '''  かな画面では大文字小 [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
         '''</summary>
         Friend ReadOnly Property help_form5() As String
             Get
@@ -230,21 +364,21 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  (Form5E)
+        '''  (Form5E) 
         '''Print Font/Screen Font:
         '''  Setup Font
         '''  Open FontDialog when IconButton pushed.
-        '''  Choose Standard/Bold/Italic only for FontStyle.
+        '''  Choose Standard/Bold/Italic/Bold Italic only for FontStyle.
         '''
-        '''Japanese Small/Large Letter Trans. Key:
-        '''  Set PFKey Number(F1&lt;--&gt;F12) for translation of Small and large Japanese Letter like as
+        '''Japanese Kana Letter Replacement Key:
+        '''  Set PFKey Number(F1&lt;--&gt;F12) for replacement of Small and large Japanese Letter like as
         '''    あ&lt;--&gt;ぁ、ア&lt;--&gt;ァ、ｱ&lt;--&gt;ｧ.
-        '''  By the key with Shift modifier kety,following translation will be done.
-        '''    は&lt;--&gt;わ、へ&lt;--&gt;え、う&lt;--&gt;ー
         '''
-        '''Open Symbol Character Input Dialog Key:
-        '''  Set PFKey to open &quot;Symbol Character Input&quot; Dialog
-        '''  The dialog [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
+        '''  By the same key, following replacemnt will be down, which sometimes cause mis-reading of image.
+        '''    リ(katakana)&lt;--&gt;り(hiragana)
+        '''    ヘ(katakana)&lt;--&gt;へ(hiragana)
+        '''    ベ(katakana)&lt;--&gt;べ(hiragana)
+        '''  [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
         '''</summary>
         Friend ReadOnly Property help_form5E() As String
             Get
@@ -253,7 +387,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  (Form6)
+        '''  (Form6) 
         '''記号入力ダイアログ
         '''  引用符、括弧など IME変換を介さずに入力する場合に使用します
         '''
@@ -273,7 +407,7 @@ Namespace My.Resources
         '''
         '''  既定の次の文字列は 
         '''
-        '''    &quot;~ﾟ[&quot;  :  [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
+        '''    &quot;~ﾟ[&quot;  : [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
         '''</summary>
         Friend ReadOnly Property help_form6() As String
             Get
@@ -282,7 +416,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  (Form6E)
+        '''  (Form6E) 
         '''Symbol Input Dialog
         '''  Input Quotation, Parenthesis, ... not by IME.
         '''
@@ -295,7 +429,7 @@ Namespace My.Resources
         '''
         '''  &quot;Add&quot; inserts line before currently selected line.
         '''  &quot;Default&quot; button restores default values.
-        '''***************************************************************************** [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
+        '''**************************************************************************** [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
         '''</summary>
         Friend ReadOnly Property help_form6E() As String
             Get
@@ -304,7 +438,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  (Form7)
+        '''  (Form7) 
         '''記号入力追加ダイアログ
         '''  記号入力の追加設定ができます
         '''  文字列には記号文字に限らず任意の文字列を設定できます
@@ -322,7 +456,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  (Form7E)
+        '''  (Form7E) 
         '''Symbol Add Dialog
         '''  You can set any string.
         '''  Comment column may be null.
@@ -334,6 +468,31 @@ Namespace My.Resources
         Friend ReadOnly Property help_form7E() As String
             Get
                 Return ResourceManager.GetString("help_form7E", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  (Form9) 
+        '''辞書編集ダイアログ
+        '''2017/09/12
+        ''' に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property help_form9() As String
+            Get
+                Return ResourceManager.GetString("help_form9", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  (Form6E) 
+        '''Edit Dictionary Dialog
+        '''
+        '''2017/09/12
+        ''' に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property help_form9E() As String
+            Get
+                Return ResourceManager.GetString("help_form9E", resourceCulture)
             End Get
         End Property
         
@@ -359,7 +518,7 @@ Namespace My.Resources
         
         '''<summary>
         '''  &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-        '''&lt;root&gt;
+        '''&lt;root&gt; 
         '''  &lt;!-- 
         '''    Microsoft ResX Schema 
         '''    
@@ -374,11 +533,119 @@ Namespace My.Resources
         '''    
         '''    ... ado.net/XML headers &amp; schema ...
         '''    &lt;resheader name=&quot;resmimetype&quot;&gt;text/microsoft-resx&lt;/resheader&gt;
-        '''    &lt;resheader n [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
+        '''    &lt;resheader  [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
         '''</summary>
         Friend ReadOnly Property Resources_en_GB() As String
             Get
                 Return ResourceManager.GetString("Resources_en_GB", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  ひらがな に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_CHAR_TYPE_HIRAGANA() As String
+            Get
+                Return ResourceManager.GetString("STR_CHAR_TYPE_HIRAGANA", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  漢字 に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_CHAR_TYPE_KANJI() As String
+            Get
+                Return ResourceManager.GetString("STR_CHAR_TYPE_KANJI", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  カタカナ に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_CHAR_TYPE_KATAKANA() As String
+            Get
+                Return ResourceManager.GetString("STR_CHAR_TYPE_KATAKANA", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  小文字 に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_CHAR_TYPE_KATAKANA_SMALL() As String
+            Get
+                Return ResourceManager.GetString("STR_CHAR_TYPE_KATAKANA_SMALL", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  文字種不明 に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_CHAR_TYPE_UNKNOWN() As String
+            Get
+                Return ResourceManager.GetString("STR_CHAR_TYPE_UNKNOWN", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  英文テキスト に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_ENGLISH_DOC() As String
+            Get
+                Return ResourceManager.GetString("STR_ENGLISH_DOC", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  英文読み取りテキスト に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_ENGLISH_DOC_EXTRACTED() As String
+            Get
+                Return ResourceManager.GetString("STR_ENGLISH_DOC_EXTRACTED", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  &quot;;&quot; は使用できません({0}) に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_ERR_MSG_DICTIONARY_ERRVALUE() As String
+            Get
+                Return ResourceManager.GetString("STR_ERR_MSG_DICTIONARY_ERRVALUE", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  辞書ファイルの {0} 行目にエラーがあります に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_ERR_MSG_DICTIONARY_FILE_LINE_FORMAT() As String
+            Get
+                Return ResourceManager.GetString("STR_ERR_MSG_DICTIONARY_FILE_LINE_FORMAT", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  この辞書はファイルからロードしたものでは有りません、名前を付けて保存をしてください に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_ERR_MSG_DICTIONARY_FILE_NO_SAVE_FILE() As String
+            Get
+                Return ResourceManager.GetString("STR_ERR_MSG_DICTIONARY_FILE_NO_SAVE_FILE", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  {0} 行目にエラーがあります、合計 {1} 行のエラー に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_ERR_MSG_DICTIONARY_ROW_IGNORED() As String
+            Get
+                Return ResourceManager.GetString("STR_ERR_MSG_DICTIONARY_ROW_IGNORED", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  辞書ファイル(*.dct)|*.dct|すべてのファイル(*.*)|*.* に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_FILTER_DICTIONARY() As String
+            Get
+                Return ResourceManager.GetString("STR_FILTER_DICTIONARY", resourceCulture)
             End Get
         End Property
         
@@ -401,11 +668,47 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  読み取りテキスト(*.i2t)|*.i2t|テキスト(*.txt;*.text)|*.txt;*.text|すべてのファイル(*.*)|*.* に類似しているローカライズされた文字列を検索します。
+        '''  読み取りテキスト(*.i2t;*.i2e)|*.i2t;*.i2e|テキスト(*.txt;*.text)|*.txt;*.text|すべてのファイル(*.*)|*.* に類似しているローカライズされた文字列を検索します。
         '''</summary>
         Friend ReadOnly Property STR_FILTER_KANJITEXT() As String
             Get
                 Return ResourceManager.GetString("STR_FILTER_KANJITEXT", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  太字 に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_FONT_BOLD() As String
+            Get
+                Return ResourceManager.GetString("STR_FONT_BOLD", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  太字　斜体 に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_FONT_BOLD_ITALIC() As String
+            Get
+                Return ResourceManager.GetString("STR_FONT_BOLD_ITALIC", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  斜体 に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_FONT_ITALIC() As String
+            Get
+                Return ResourceManager.GetString("STR_FONT_ITALIC", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  標準 に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_FONT_STD() As String
+            Get
+                Return ResourceManager.GetString("STR_FONT_STD", resourceCulture)
             End Get
         End Property
         
@@ -428,11 +731,74 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  漢字テキスト に類似しているローカライズされた文字列を検索します。
+        '''  かな変換テキスト に類似しているローカライズされた文字列を検索します。
         '''</summary>
-        Friend ReadOnly Property STR_FORM1_TITLE_KANJI_FILE() As String
+        Friend ReadOnly Property STR_FORM1_TITLE_KANJI2KANA_FILE() As String
             Get
-                Return ResourceManager.GetString("STR_FORM1_TITLE_KANJI_FILE", resourceCulture)
+                Return ResourceManager.GetString("STR_FORM1_TITLE_KANJI2KANA_FILE", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  イメージ文書 に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_FORM2_TITLE() As String
+            Get
+                Return ResourceManager.GetString("STR_FORM2_TITLE", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  テキストファイル に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_FORM3_TITLE() As String
+            Get
+                Return ResourceManager.GetString("STR_FORM3_TITLE", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  読取りテキスト に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_FORM3_TITLE_RECEIVED() As String
+            Get
+                Return ResourceManager.GetString("STR_FORM3_TITLE_RECEIVED", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  辞書ファイルを読み込みました に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_INFO_MSG_DICTIONARY_LOADED() As String
+            Get
+                Return ResourceManager.GetString("STR_INFO_MSG_DICTIONARY_LOADED", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  {0} : {1} --&gt; {2} : {3} に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_MSG_CHANGELETTERWRAP() As String
+            Get
+                Return ResourceManager.GetString("STR_MSG_CHANGELETTERWRAP", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  変更がありました、破棄しますか に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_MSG_CONFIRM_DISCARD_DICTIONARY_UPDATE() As String
+            Get
+                Return ResourceManager.GetString("STR_MSG_CONFIRM_DISCARD_DICTIONARY_UPDATE", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  既定に戻しますか？ に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_MSG_CONFIRM_RESTORE_DEFAULT() As String
+            Get
+                Return ResourceManager.GetString("STR_MSG_CONFIRM_RESTORE_DEFAULT", resourceCulture)
             End Get
         End Property
         
@@ -446,11 +812,137 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  追加する位置（その行の前に追加）を選択してください に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_MSG_ERR_ADD_SELECT_LINE() As String
+            Get
+                Return ResourceManager.GetString("STR_MSG_ERR_ADD_SELECT_LINE", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  文字列が空白です に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_MSG_ERR_ADDDICTIONARY() As String
+            Get
+                Return ResourceManager.GetString("STR_MSG_ERR_ADDDICTIONARY", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  このファイルは処理済です に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_MSG_ERR_ALREADY_EXTRACTED() As String
+            Get
+                Return ResourceManager.GetString("STR_MSG_ERR_ALREADY_EXTRACTED", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  イメージファイルからのテキスト読み取り失敗 に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_MSG_ERR_EXTRACT() As String
+            Get
+                Return ResourceManager.GetString("STR_MSG_ERR_EXTRACT", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  かな/カナ変換に失敗 に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_MSG_ERR_FAILED_KANJI2KANA_CONV() As String
+            Get
+                Return ResourceManager.GetString("STR_MSG_ERR_FAILED_KANJI2KANA_CONV", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  検索文字列は見つかりません ( に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_MSG_ERR_FIND_NOT_FOUND() As String
+            Get
+                Return ResourceManager.GetString("STR_MSG_ERR_FIND_NOT_FOUND", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  検索文字列が未設定です に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_MSG_ERR_FIND_NULL() As String
+            Get
+                Return ResourceManager.GetString("STR_MSG_ERR_FIND_NULL", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  機能キー:Fn (F1～F12)を指定してください に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_MSG_ERR_FUNCKEY() As String
+            Get
+                Return ResourceManager.GetString("STR_MSG_ERR_FUNCKEY", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  かな変換に失敗しました に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_MSG_ERR_KANA_CONV() As String
+            Get
+                Return ResourceManager.GetString("STR_MSG_ERR_KANA_CONV", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  ファイルが見つかりません に類似しているローカライズされた文字列を検索します。
         '''</summary>
         Friend ReadOnly Property STR_MSG_ERR_NOT_FOUND() As String
             Get
                 Return ResourceManager.GetString("STR_MSG_ERR_NOT_FOUND", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  検索文字列はひとつも見つかりません に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_MSG_ERR_NOT_FOUND_ALL() As String
+            Get
+                Return ResourceManager.GetString("STR_MSG_ERR_NOT_FOUND_ALL", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  現在位置:  に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_MSG_ERR_NOT_FOUND_CPOS() As String
+            Get
+                Return ResourceManager.GetString("STR_MSG_ERR_NOT_FOUND_CPOS", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''   行,カラム  に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_MSG_ERR_NOT_FOUND_LINE_COL() As String
+            Get
+                Return ResourceManager.GetString("STR_MSG_ERR_NOT_FOUND_LINE_COL", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  現在位置:不明) に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_MSG_ERR_NOT_FOUND_NO_CPOS() As String
+            Get
+                Return ResourceManager.GetString("STR_MSG_ERR_NOT_FOUND_NO_CPOS", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  印刷フォント名に誤りがあります に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_MSG_ERR_PRINT_FONT() As String
+            Get
+                Return ResourceManager.GetString("STR_MSG_ERR_PRINT_FONT", resourceCulture)
             End Get
         End Property
         
@@ -473,6 +965,69 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  置換文字列が検索文字列と同じです に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_MSG_ERR_REPSTR_SAME() As String
+            Get
+                Return ResourceManager.GetString("STR_MSG_ERR_REPSTR_SAME", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  画面フォント名に誤りがあります に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_MSG_ERR_SCR_FONT() As String
+            Get
+                Return ResourceManager.GetString("STR_MSG_ERR_SCR_FONT", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  行が選択されていません に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_MSG_ERR_SELECT_LINE() As String
+            Get
+                Return ResourceManager.GetString("STR_MSG_ERR_SELECT_LINE", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  置換キー（シフトキーなし）の 対象文字はありません。(設定のヘルプを見てください) に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_MSG_ERR_SMALL_LARGE() As String
+            Get
+                Return ResourceManager.GetString("STR_MSG_ERR_SMALL_LARGE", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  置換キー（＋シフトキー）の 対象文字はありません。(設定定のヘルプを見てください) に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_MSG_ERR_SMALL_LARGE_OTHER() As String
+            Get
+                Return ResourceManager.GetString("STR_MSG_ERR_SMALL_LARGE_OTHER", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  &quot;;&quot; は使用できません に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_MSG_ERR_SPECIAL_KEY() As String
+            Get
+                Return ResourceManager.GetString("STR_MSG_ERR_SPECIAL_KEY", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  文字の指定がありません に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_MSG_ERR_SPECIAL_KEY_NULL() As String
+            Get
+                Return ResourceManager.GetString("STR_MSG_ERR_SPECIAL_KEY_NULL", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  ファイル出力エラー に類似しているローカライズされた文字列を検索します。
         '''</summary>
         Friend ReadOnly Property STR_MSG_ERR_WRITE() As String
@@ -482,11 +1037,92 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  ズーム失敗 に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_MSG_ERR_ZOOM() As String
+            Get
+                Return ResourceManager.GetString("STR_MSG_ERR_ZOOM", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  イメージからテキストを読取りました に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_MSG_INFO_EXTRACTED() As String
+            Get
+                Return ResourceManager.GetString("STR_MSG_INFO_EXTRACTED", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  大小区別 なし、 に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_MSG_INFO_FIND_CASE_INSENSE() As String
+            Get
+                Return ResourceManager.GetString("STR_MSG_INFO_FIND_CASE_INSENSE", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  大小区別 あり、 に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_MSG_INFO_FIND_CASE_SENSITIVE() As String
+            Get
+                Return ResourceManager.GetString("STR_MSG_INFO_FIND_CASE_SENSITIVE", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  下 方向、 に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_MSG_INFO_FIND_DOWN() As String
+            Get
+                Return ResourceManager.GetString("STR_MSG_INFO_FIND_DOWN", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  上 方向、 に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_MSG_INFO_FIND_UP() As String
+            Get
+                Return ResourceManager.GetString("STR_MSG_INFO_FIND_UP", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  変更がないので保存されませんでした に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_MSG_INFO_NOT_SAVED_BY_NOUPDATE() As String
+            Get
+                Return ResourceManager.GetString("STR_MSG_INFO_NOT_SAVED_BY_NOUPDATE", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  保存しました に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_MSG_INFO_SAVED() As String
+            Get
+                Return ResourceManager.GetString("STR_MSG_INFO_SAVED", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  テキストを表示しました に類似しているローカライズされた文字列を検索します。
         '''</summary>
         Friend ReadOnly Property STR_MSG_INFO_SHOW_TEXT() As String
             Get
                 Return ResourceManager.GetString("STR_MSG_INFO_SHOW_TEXT", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  カタカナの送り仮名を認める設定を変更しました に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_MSG_KATAKANAOKURIGANA() As String
+            Get
+                Return ResourceManager.GetString("STR_MSG_KATAKANAOKURIGANA", resourceCulture)
             End Get
         End Property
         

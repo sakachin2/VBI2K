@@ -1,35 +1,47 @@
-(Form5E)
+(Form5E) 
 Print Font/Screen Font:
   Setup Font
   Open FontDialog when IconButton pushed.
   Choose Standard/Bold/Italic/Bold Italic only for FontStyle.
 
-Japanese Small/Large Letter Trans. Key:
-  Set PFKey Number(F1<-->F12) for translation of Small and large Japanese Letter like as
-    あ<-->ぁ、ア<-->ァ、ｱ<-->ｧ.
-  By the key with Shift modifier kety,following translation will be done.
+Japanese Kana Letter Replace Query Key:
+  Set PFKey Number(F4<-->F12) to display type of char at cursor position
+  to confirm that it is target of replacement of "Japanese Kana Letter Replacement Key". 
+  Set Default:F4 when set space.
+
+Japanese Kana Letter Replacement Key:
+  Set PFKey Number(F4<-->F12) for replacement of Small and large Japanese Letter like as
+  Set Default:F5 when set space.
+    "あいうえおやゆよつわかけ" <--> "ぁぃぅぇぉゃゅょっゎゕゖ"     Hiragana
+    "アイウエオヤユヨツワカケ" <--> "ァィゥェォャュョッヮヵヶ"     Katakana(DBCS)
+    "ｱｲｳｴｵﾔﾕﾖﾂ"                <--> "ｧｨｩｪｫｬｭｮｯ"                    Katakana(SBCS)
+
+  By the same key, following replacemnt will be down, which sometimes cause mis-reading of image.
+    リ(katakana)<-->り(hiragana)
+    ヘ(katakana)<-->へ(hiragana)
+    ベ(katakana)<-->べ(hiragana)
+  On Kanji text form, following replacement will be done including kanji char.
+    工(kanji) --> エ(katakana) --> ェ(katakana-small) --> 工(kanji)   (WrapAround)
+    力(kanji) --> カ(katakana) --> ヵ(katakana-small) --> 力(kanji)   (WrapAround)
+    一(kanji) --> ー(katakana) --> ─(HorizontalBar) --> 一(kanji)    (WrapAround)
+    夕(kanji) <--> タ(katakana)                                       
+    二(kanji) <--> ニ(katakana) 
+    八(kanji) <--> ハ(katakana) 
+    口(kanji) <--> ロ(katakana) 
+  On Kana text form, Small/Large replacemet will be occur.
+    エ(katakana) <--> ェ(katakana-small), カ(katakana) <-->ヵ (katakana-small)
+
+  By the key with Shift modifier kety,following replacement will be done.
     は<-->わ、へ<-->え、う<-->ー
 
-Open Symbol Character Input Dialog Key:
-  Set PFKey to open "Symbol Character Input" Dialog
+Symbol Character Input Dialog Open Key:
+  Set PFKey(F4<-->F12) to open "Symbol Character Input" Dialog
   The dialog will be opened from Context Menu shown by Mouse Right Button Click
+  Set Default:F6 when set space.
 
-Consideration for translation into Braille:
-  Following consideration is done when translation of Japanese Kanji text to Kana text.
-    .Put space before kanji string.
-        For easy space-wording at WinBES99.
-    .Put space between Katakana and Hiragana string.
-    .Put 2 space after following Letter.
-        Japanese Period(End of Statement):(。）
-    .Put 1 space after following Letter.
-      Japanese Comma(、)、Seperator(・)、Question Mark(？)、Exclamation Mark(！)
-    .Change following Japanese repeating sign to the previous letter.
-      々 ゝ ゞ ヽ ヾ
-English Document:
-  Specify image document is english text for better extraction.
 
 Language(Label,Message):
     You can select language diffrent from environment.	
     Default means Japanese on ja-JP env else English(en-GB).
 
-2017/06/13
+2017/09/20

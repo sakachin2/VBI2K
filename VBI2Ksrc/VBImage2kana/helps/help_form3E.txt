@@ -1,4 +1,4 @@
-(Form3E)
+(Form3E) 
 Text of Extracted from Document Image file
 Adjust line position error in extraction.
 "Kana" button translate kanji to Kana 
@@ -11,10 +11,9 @@ delete EndOfLine sign(⏎) to concatinate lines.
 
 Mouse Right Button click popup context menu
 to Cut and Paste, Find/Replace dialog and Symbol Input Dialog.
-
 Shortcut key:
   Ctrl+F  :Open Find/Replace dialog
   F3      :Find Next
   Shift+F3:Find Next upward
 
-2017/06/14
+2017/09/20

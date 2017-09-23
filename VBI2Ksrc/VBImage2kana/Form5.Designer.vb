@@ -35,11 +35,12 @@ Partial Class FormOptions
         Me.RBLangJP = New System.Windows.Forms.RadioButton()
         Me.RBLangDefault = New System.Windows.Forms.RadioButton()
         Me.RGLang = New System.Windows.Forms.Panel()
-        Me.CheckBoxWinBES99 = New System.Windows.Forms.CheckBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.TextBoxKeySmallkanaQ = New System.Windows.Forms.TextBox()
         Me.TextBoxKeySpecialChar = New System.Windows.Forms.TextBox()
         Me.TextBoxKeySmallKana = New System.Windows.Forms.TextBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.TextBoxLabelQueryKey = New System.Windows.Forms.TextBox()
         Me.TextBoxLabelSpecialChar = New System.Windows.Forms.TextBox()
         Me.CheckBoxPrintFont = New System.Windows.Forms.CheckBox()
         Me.TextBoxLabelSmallKey = New System.Windows.Forms.TextBox()
@@ -71,10 +72,12 @@ Partial Class FormOptions
         '
         'SplitContainer1.Panel1
         '
+        resources.ApplyResources(Me.SplitContainer1.Panel1, "SplitContainer1.Panel1")
         Me.SplitContainer1.Panel1.Controls.Add(Me.SplitContainer2)
         '
         'SplitContainer1.Panel2
         '
+        resources.ApplyResources(Me.SplitContainer1.Panel2, "SplitContainer1.Panel2")
         Me.SplitContainer1.Panel2.Controls.Add(Me.SplitContainer3)
         '
         'SplitContainer2
@@ -84,11 +87,13 @@ Partial Class FormOptions
         '
         'SplitContainer2.Panel1
         '
+        resources.ApplyResources(Me.SplitContainer2.Panel1, "SplitContainer2.Panel1")
         Me.SplitContainer2.Panel1.Controls.Add(Me.ButtonPrintFont)
         Me.SplitContainer2.Panel1.Controls.Add(Me.ButtonScrFont)
         '
         'SplitContainer2.Panel2
         '
+        resources.ApplyResources(Me.SplitContainer2.Panel2, "SplitContainer2.Panel2")
         Me.SplitContainer2.Panel2.Controls.Add(Me.TextBoxPrintFontname)
         Me.SplitContainer2.Panel2.Controls.Add(Me.TextBoxScrFontName)
         '
@@ -123,23 +128,24 @@ Partial Class FormOptions
         '
         'SplitContainer3.Panel1
         '
+        resources.ApplyResources(Me.SplitContainer3.Panel1, "SplitContainer3.Panel1")
         Me.SplitContainer3.Panel1.Controls.Add(Me.GroupBoxLang)
         Me.SplitContainer3.Panel1.Controls.Add(Me.RGLang)
-        Me.SplitContainer3.Panel1.Controls.Add(Me.CheckBoxWinBES99)
         Me.SplitContainer3.Panel1.Controls.Add(Me.Panel1)
         '
         'SplitContainer3.Panel2
         '
+        resources.ApplyResources(Me.SplitContainer3.Panel2, "SplitContainer3.Panel2")
         Me.SplitContainer3.Panel2.Controls.Add(Me.ButtonHelp)
         Me.SplitContainer3.Panel2.Controls.Add(Me.ButtonCancel)
         Me.SplitContainer3.Panel2.Controls.Add(Me.ButtonOK)
         '
         'GroupBoxLang
         '
+        resources.ApplyResources(Me.GroupBoxLang, "GroupBoxLang")
         Me.GroupBoxLang.Controls.Add(Me.RBLangEN)
         Me.GroupBoxLang.Controls.Add(Me.RBLangJP)
         Me.GroupBoxLang.Controls.Add(Me.RBLangDefault)
-        resources.ApplyResources(Me.GroupBoxLang, "GroupBoxLang")
         Me.GroupBoxLang.Name = "GroupBoxLang"
         Me.GroupBoxLang.TabStop = False
         '
@@ -169,19 +175,19 @@ Partial Class FormOptions
         resources.ApplyResources(Me.RGLang, "RGLang")
         Me.RGLang.Name = "RGLang"
         '
-        'CheckBoxWinBES99
-        '
-        resources.ApplyResources(Me.CheckBoxWinBES99, "CheckBoxWinBES99")
-        Me.CheckBoxWinBES99.Name = "CheckBoxWinBES99"
-        Me.CheckBoxWinBES99.UseVisualStyleBackColor = True
-        '
         'Panel1
         '
+        resources.ApplyResources(Me.Panel1, "Panel1")
+        Me.Panel1.Controls.Add(Me.TextBoxKeySmallkanaQ)
         Me.Panel1.Controls.Add(Me.TextBoxKeySpecialChar)
         Me.Panel1.Controls.Add(Me.TextBoxKeySmallKana)
         Me.Panel1.Controls.Add(Me.Panel2)
-        resources.ApplyResources(Me.Panel1, "Panel1")
         Me.Panel1.Name = "Panel1"
+        '
+        'TextBoxKeySmallkanaQ
+        '
+        resources.ApplyResources(Me.TextBoxKeySmallkanaQ, "TextBoxKeySmallkanaQ")
+        Me.TextBoxKeySmallkanaQ.Name = "TextBoxKeySmallkanaQ"
         '
         'TextBoxKeySpecialChar
         '
@@ -195,18 +201,27 @@ Partial Class FormOptions
         '
         'Panel2
         '
+        resources.ApplyResources(Me.Panel2, "Panel2")
+        Me.Panel2.Controls.Add(Me.TextBoxLabelQueryKey)
         Me.Panel2.Controls.Add(Me.TextBoxLabelSpecialChar)
         Me.Panel2.Controls.Add(Me.CheckBoxPrintFont)
         Me.Panel2.Controls.Add(Me.TextBoxLabelSmallKey)
-        resources.ApplyResources(Me.Panel2, "Panel2")
         Me.Panel2.Name = "Panel2"
+        '
+        'TextBoxLabelQueryKey
+        '
+        resources.ApplyResources(Me.TextBoxLabelQueryKey, "TextBoxLabelQueryKey")
+        Me.TextBoxLabelQueryKey.ForeColor = System.Drawing.SystemColors.InactiveCaptionText
+        Me.TextBoxLabelQueryKey.Name = "TextBoxLabelQueryKey"
+        Me.TextBoxLabelQueryKey.ReadOnly = True
         '
         'TextBoxLabelSpecialChar
         '
+        resources.ApplyResources(Me.TextBoxLabelSpecialChar, "TextBoxLabelSpecialChar")
         Me.TextBoxLabelSpecialChar.BackColor = System.Drawing.SystemColors.Control
         Me.TextBoxLabelSpecialChar.ForeColor = System.Drawing.SystemColors.InactiveCaptionText
-        resources.ApplyResources(Me.TextBoxLabelSpecialChar, "TextBoxLabelSpecialChar")
         Me.TextBoxLabelSpecialChar.Name = "TextBoxLabelSpecialChar"
+        Me.TextBoxLabelSpecialChar.ReadOnly = True
         '
         'CheckBoxPrintFont
         '
@@ -216,8 +231,8 @@ Partial Class FormOptions
         '
         'TextBoxLabelSmallKey
         '
-        Me.TextBoxLabelSmallKey.ForeColor = System.Drawing.SystemColors.InactiveCaptionText
         resources.ApplyResources(Me.TextBoxLabelSmallKey, "TextBoxLabelSmallKey")
+        Me.TextBoxLabelSmallKey.ForeColor = System.Drawing.SystemColors.InactiveCaptionText
         Me.TextBoxLabelSmallKey.Name = "TextBoxLabelSmallKey"
         Me.TextBoxLabelSmallKey.ReadOnly = True
         '
@@ -229,8 +244,8 @@ Partial Class FormOptions
         '
         'ButtonCancel
         '
-        Me.ButtonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
         resources.ApplyResources(Me.ButtonCancel, "ButtonCancel")
+        Me.ButtonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.ButtonCancel.Name = "ButtonCancel"
         Me.ButtonCancel.UseVisualStyleBackColor = True
         '
@@ -258,7 +273,6 @@ Partial Class FormOptions
         CType(Me.SplitContainer2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer2.ResumeLayout(False)
         Me.SplitContainer3.Panel1.ResumeLayout(False)
-        Me.SplitContainer3.Panel1.PerformLayout()
         Me.SplitContainer3.Panel2.ResumeLayout(False)
         CType(Me.SplitContainer3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer3.ResumeLayout(False)
@@ -289,10 +303,11 @@ Partial Class FormOptions
     Friend WithEvents CheckBoxPrintFont As System.Windows.Forms.CheckBox
     Friend WithEvents TextBoxKeySpecialChar As System.Windows.Forms.TextBox
     Friend WithEvents TextBoxLabelSpecialChar As System.Windows.Forms.TextBox
-    Friend WithEvents CheckBoxWinBES99 As System.Windows.Forms.CheckBox
     Friend WithEvents RGLang As System.Windows.Forms.Panel
     Friend WithEvents GroupBoxLang As System.Windows.Forms.GroupBox
     Friend WithEvents RBLangEN As System.Windows.Forms.RadioButton
     Friend WithEvents RBLangJP As System.Windows.Forms.RadioButton
     Friend WithEvents RBLangDefault As System.Windows.Forms.RadioButton
+    Friend WithEvents TextBoxKeySmallkanaQ As System.Windows.Forms.TextBox
+    Friend WithEvents TextBoxLabelQueryKey As System.Windows.Forms.TextBox
 End Class

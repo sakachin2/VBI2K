@@ -46,10 +46,10 @@ Partial Class Form7
         '
         'Panel1
         '
-        resources.ApplyResources(Me.Panel1, "Panel1")
         Me.Panel1.Controls.Add(Me.ButtonHelp)
         Me.Panel1.Controls.Add(Me.ButtonCancel)
         Me.Panel1.Controls.Add(Me.ButtonOK)
+        resources.ApplyResources(Me.Panel1, "Panel1")
         Me.Panel1.Name = "Panel1"
         '
         'ButtonHelp
@@ -60,15 +60,15 @@ Partial Class Form7
         '
         'ButtonCancel
         '
-        resources.ApplyResources(Me.ButtonCancel, "ButtonCancel")
         Me.ButtonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
+        resources.ApplyResources(Me.ButtonCancel, "ButtonCancel")
         Me.ButtonCancel.Name = "ButtonCancel"
         Me.ButtonCancel.UseVisualStyleBackColor = True
         '
         'ButtonOK
         '
-        resources.ApplyResources(Me.ButtonOK, "ButtonOK")
         Me.ButtonOK.DialogResult = System.Windows.Forms.DialogResult.OK
+        resources.ApplyResources(Me.ButtonOK, "ButtonOK")
         Me.ButtonOK.Name = "ButtonOK"
         Me.ButtonOK.UseVisualStyleBackColor = True
         '
