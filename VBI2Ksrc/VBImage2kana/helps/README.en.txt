@@ -1,3 +1,9 @@
+V1.03 : Update                               2017/09/23
+
+・Added some characters resembling in shape for Char-Replacing-Key(F5 as Default), 
+    ソ(katakana:so) <--> ン(katakana:n)
+    十(kanji) <--> ＋(Plus) 
+
 V1.02 : Update                               2017/09/20
 
 ・(Bug)Translating line by line on kanji text caused errornouse output at end of line.

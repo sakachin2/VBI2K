@@ -1,5 +1,6 @@
-﻿'CID:''+v032R~:#72                             update#=  655;         ''+v032R~
+﻿'CID:''+v052R~:#72                             update#=  659;         ''~v052R~
 '************************************************************************************''~v002I~
+'v052 2017/09/21 utilize status bar at bottom also on Form1            ''~v052I~
 'v032 2017/09/21 English document, i2e was not used                    ''~v032I~
 'v015 2017/09/17 saveed evenif not updated                             ''~v015I~
 'v012 2017/09/15 Load/Save/SaveAs from/to disctionary file             ''~v012I~
@@ -93,6 +94,7 @@ Public Class Form1
     Private initialTitle, initialText As String                         ''~7519I~
     Public Shared MainForm As Form1                                    ''~7521R~
     Private strResMgr As Rstr                                          ''~7615I~
+    Private pendingStatusMsg As String = Nothing                       ''~v052I~
 
     Private Sub Form1_Activated(sender As System.Object, e As System.EventArgs) Handles Me.Activated ''~7412I~
         '       If swReceive Then                                                   ''~7412I~''~7516R~
@@ -139,8 +141,13 @@ Public Class Form1
         Trace.fsClose()                                                ''~7619I~
     End Sub                                                            ''~7501I~
     Private Sub TBBES_TextChanged(sender As System.Object, e As System.EventArgs) Handles TBBES.TextChanged ''~7501I~
+        showStatus("")      'clear                                     ''~v052I~
         If TBBES.Enabled Then    'called by Design.vb initial text setting  ''~7508I~
             TBChanged()                                                    ''~7501I~''~7508R~
+        	If pendingStatusMsg IsNot Nothing Then                     ''~v052I~
+            	showStatus(pendingStatusMsg)                           ''~v052I~
+            	pendingStatusMsg = Nothing                             ''~v052I~
+        	End If                                                     ''~v052I~
         End If                                                         ''~7508I~
     End Sub                                                            ''~7501I~
     ''~7416I~
@@ -549,7 +556,8 @@ Public Class Form1
         MessageBox.Show(Pfnm, Rstr.MSG_ERR_NOT_FOUND)                       ''~7615I~
     End Sub                                                            ''~7428I~
     Public Shared Sub FileSaved(Pfnm As String)                        ''~7617I~
-        MessageBox.Show(Pfnm, Rstr.MSG_INFO_SAVED)                     ''~7617I~
+'       MessageBox.Show(Pfnm, Rstr.MSG_INFO_SAVED)                     ''~7617I~''~v052R~
+        Form1.MainForm.showStatus(Rstr.MSG_INFO_SAVED & ":"  & Pfnm)   ''~v052R~
     End Sub                                                            ''~7617I~
     Public Shared Sub FileNotSaved()                                   ''~v015I~
         MessageBox.Show(Rstr.GetStr("STR_MSG_INFO_NOT_SAVED_BY_NOUPDATE"))''~v015R~
@@ -916,4 +924,30 @@ Public Class Form1
     Private Sub OpenFileDialog1_FileOk(sender As System.Object, e As System.ComponentModel.CancelEventArgs) Handles OpenFileDialog1.FileOk
 
     End Sub
+                                                                       ''~v052I~
+    Public Sub showStatus(Pmsg As String)                              ''~v052I~
+        ToolStripStatusLabel1.Text = Pmsg                              ''~v052I~
+    End Sub                                                            ''~v052I~
+    Public Sub showStatus(PswLater As Boolean, Pmsg As String)         ''~v052I~
+        If (PswLater) Then                                             ''~v052I~
+            pendingStatusMsg = Pmsg                                    ''~v052I~
+        Else                                                           ''~v052I~
+            showStatus(Pmsg)                                           ''~v052I~
+        End If                                                         ''~v052I~
+    End Sub                                                            ''~v052I~
+    Public Sub showStatus(Pch As Char, Pchcv As Char, PtypeSrc As Integer, PtypeTgt As Integer)''+v052I~
+        Dim msg, strSrc, strTgt As String                              ''+v052I~
+        strSrc = FormatBES.getCharType(PtypeSrc)                       ''+v052I~
+        strTgt = FormatBES.getCharType(PtypeTgt)                       ''+v052I~
+        msg = Rstr.getStr("STR_MSG_CHANGELETTERWRAP")                  ''+v052I~
+        pendingStatusMsg = String.Format(msg, strSrc, Pch, strTgt, Pchcv)''+v052I~
+    End Sub                                                            ''+v052I~
+    Public Sub showStatus(Pch As Char, PtypeSrc As Integer)            ''~v052I~
+        '** from class1 * F4(queryKey) target info                     ''~v052I~
+        Dim msg, strSrc As String                                      ''~v052I~
+        strSrc = FormatBES.getCharType(PtypeSrc)                       ''~v052I~
+        msg = Rstr.getStr("STR_MSG_CHANGELETTERWRAP_QUERY")            ''~v052I~
+        msg = String.Format(msg, strSrc, Pch)                          ''~v052I~
+        showStatus(msg)     'imediately put msg                        ''~v052I~
+    End Sub                                                            ''~v052I~
 End Class

@@ -1,7 +1,8 @@
-﻿'CID:''+v037R~:#72                          update#=  196;            ''+v037R~
+﻿'CID:''+v053R~:#72                          update#=  197;            ''+v053R~
 '************************************************************************************''~v026I~
-'v037 2017/09/22 assign F4 as query of replacing char                  ''+v037I~
-'                Forecolor have to be InactiveCaptureText to get effective for switching Text by language''+v037I~
+'v053 2017/09/21 crash by F4,S+F5 at Form1 by V1.02                    ''+v053I~
+'v037 2017/09/22 assign F4 as query of replacing char                  ''~v037I~
+'                Forecolor have to be InactiveCaptureText to get effective for switching Text by language''~v037I~
 'v026 2017/09/19 By F5,"り"(hiragana)<-->"リ"(katakana),"工"(kanji)-->"エ"(katakana)-->"ェ"(katakana-small)-->"工" (wrap),"力"(kanji)-->"カ"(katakana)-->"ヵ"(katakana)-->"力"(Wrap)''~v026I~
 '************************************************************************************''~v026I~
 Public Class ClassUndoRedo                                             ''~7429R~
@@ -421,8 +422,8 @@ Public Class ClassUndoRedo                                             ''~7429R~
         key = e.KeyCode                                                  ''~7525I~
         Select Case key                                                     ''~7525R~
             Case Keys.None                                             ''~7521I~
-            Case FormOptions.keySmallKeyQ                              ''+v037I~
-                fmtBES.queryLetterSmallLarge(ch, swForm1)               ''+v037I~
+            Case FormOptions.keySmallKeyQ                              ''~v037I~
+                fmtBES.queryLetterSmallLarge(ch, swForm1)               ''~v037I~
             Case FormOptions.keySmallKey                               ''~7525I~
                 If (e.Modifiers And Keys.Shift) = Keys.Shift Then 'with shift key''~7525I~''~7608R~
 #If False Then                                                              ''~7608I~
@@ -430,7 +431,8 @@ Public Class ClassUndoRedo                                             ''~7429R~
                     	swRepeat=true                                  ''~7525I~
                     end if                                             ''~7525I~
 #Else                                                                  ''~7608I~
-                    fmtBES.changeLetterOther(ch, cvch)                 ''~7608I~
+'                   fmtBES.changeLetterOther(ch, cvch)                 ''~7608I~''+v053R~
+                    fmtBES.changeLetterOther(ch, cvch,swForm1)         ''+v053I~
 #End If                                                                ''~7608I~
                 Else                                                   ''~7525I~
                     '                   fmtBES.changeLetterSmallLarge(ch, cvch)                ''~7515I~''~7525R~''~v026R~

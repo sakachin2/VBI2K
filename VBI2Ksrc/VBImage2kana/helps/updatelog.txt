@@ -1,4 +1,13 @@
-V1.02 : 2017/09/20 released
+V1.03 : 2017/09/23 released *******************************************************
+'v053 2017/09/21 crash by F4,S+F5 at Form1 by V1.02
+           class1.vb class2.vb
+'v052 2017/09/21 utilize status bar at bottom also on Form1
+           Form1.vb class1.vb
+'v051 2017/09/23 add "Å{" and "è\", "É\" and "Éì" to replace char
+           form3.vb
+'v050 2017/09/23 kanji form,saved msg to status bar
+           form3.vb
+V1.02 : 2017/09/23 released *******************************************************
 'v038 2017/09/22 (Bug)SpecialKey default is also F5 when text cleared
            form5.vb
 'v037 2017/09/22 assign F4 as query of replacing char

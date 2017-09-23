@@ -17,9 +17,10 @@ Japanese Kana Letter Replacement Key:
     "ｱｲｳｴｵﾔﾕﾖﾂ"                <--> "ｧｨｩｪｫｬｭｮｯ"                    Katakana(SBCS)
 
   By the same key, following replacemnt will be down, which sometimes cause mis-reading of image.
-    リ(katakana)<-->り(hiragana)
-    ヘ(katakana)<-->へ(hiragana)
-    ベ(katakana)<-->べ(hiragana)
+    リ(katakana)    <--> り(hiragana)
+    ヘ(katakana)    <--> へ(hiragana)
+    ベ(katakana)    <--> べ(hiragana)
+    ソ(katakana:so) <--> ン(katakana:n)
   On Kanji text form, following replacement will be done including kanji char.
     工(kanji) --> エ(katakana) --> ェ(katakana-small) --> 工(kanji)   (WrapAround)
     力(kanji) --> カ(katakana) --> ヵ(katakana-small) --> 力(kanji)   (WrapAround)
@@ -28,6 +29,7 @@ Japanese Kana Letter Replacement Key:
     二(kanji) <--> ニ(katakana) 
     八(kanji) <--> ハ(katakana) 
     口(kanji) <--> ロ(katakana) 
+    十(kanji) <--> ＋(Plus) 
   On Kana text form, Small/Large replacemet will be occur.
     エ(katakana) <--> ェ(katakana-small), カ(katakana) <-->ヵ (katakana-small)
 
@@ -44,4 +46,4 @@ Language(Label,Message):
     You can select language diffrent from environment.	
     Default means Japanese on ja-JP env else English(en-GB).
 
-2017/09/20
+2017/09/23

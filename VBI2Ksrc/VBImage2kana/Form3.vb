@@ -1,5 +1,6 @@
-﻿'CID:''+v037R~:#72                             update#=  333;         ''~v037R~
+﻿'CID:''+v050R~:#72                             update#=  334;         ''+v050R~
 '************************************************************************************''~v006I~
+'v050 2017/09/23 kanji form,saved msg to status bar                    ''+v050I~
 'v037 2017/09/22 assign F4 as query of replacing char                  ''~v037I~
 '                Forecolor have to be InactiveCaptureText to get effective for switching Text by language''~v037I~
 'v035 2017/09/21 additional to v017 when discard old=yes               ''~v035I~
@@ -239,7 +240,8 @@ Public Class Form3
             Form1.MainForm.insertMRUList(2, Pfnm)                                ''~7429I~''~7521R~
             undoRedo.saved()                                           ''~7430I~
             '           MessageBox.Show(Pfnm & " を保存しました")                  ''~7513I~''~7617R~
-            MessageBox.Show(Pfnm, Rstr.MSG_INFO_SAVED)                       ''~7617I~
+'           MessageBox.Show(Pfnm, Rstr.MSG_INFO_SAVED)                       ''~7617I~''+v050R~
+            showStatus(Rstr.MSG_INFO_SAVED & ":"  & Pfnm)              ''+v050I~
             swSaved = True                                             ''~v015I~
         Catch ex As Exception                                          ''~7410I~
             Form1.WriteError(Pfnm, ex)                                  ''~7428I~
@@ -508,7 +510,7 @@ Public Class Form3
         Dim msg, strSrc As String                            ''~v037I~
         strSrc = FormatBES.getCharType(PtypeSrc)                       ''~v037I~
         msg = Rstr.getStr("STR_MSG_CHANGELETTERWRAP_QUERY")            ''~v037I~
-        msg = String.Format(msg, strSrc, Pch)                          ''+v037R~
-        showStatus(msg)     'imediately put msg                        ''+v037I~
+        msg = String.Format(msg, strSrc, Pch)                          ''~v037R~
+        showStatus(msg)     'imediately put msg                        ''~v037I~
     End Sub                                                            ''~v037I~
 End Class

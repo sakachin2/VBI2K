@@ -1,5 +1,7 @@
-﻿'CID:''+v037R~:#72                          update#=  253;            ''~v037R~
+﻿'CID:''+v052R~:#72                          update#=  258;            ''+v052R~
 '************************************************************************************''~v026I~
+'v053 2017/09/21 crash by F4,S+F5 at Form1 by V1.02                    ''~v053I~
+'v052 2017/09/21 utilize status bar at bottom also on Form1            ''+v052I~
 'v037 2017/09/22 assign F4 as query of replacing char                  ''~v037I~
 '                Forecolor have to be InactiveCaptureText to get effective for switching Text by language''~v037I~
 'v036 2017/09/22 add for F5 ニ,ハ,ロ,ー,ト                             ''~v036I~
@@ -77,6 +79,10 @@ Public Class FormatBES                                                 ''~7421I~
     Public Const CHAR_KIGO_HBAR = "─"c                                ''~v034I~
     Public Const CHAR_KATAKANA_TO = "ト"c                           ''~v036I~
     Public Const CHAR_KANJI_BOKU = "卜"c                               ''~v036I~
+    Public Const CHAR_KIGO_PLUS = "＋"c                                ''~v037I~
+    Public Const CHAR_KANJI_JU = "十"c                                 ''~v037I~
+    Public Const CHAR_KATAKANA_N = "ン"c                               ''~v037I~
+    Public Const CHAR_KATAKANA_SO = "ソ"c                              ''~v037I~
     ''~v026I~
     '   Private Const CHAR_CONCAT1 = ChrW(&H28C0)  '1st tsunagi                  ''~7423I~''~7426R~''~7501R~
     Private Const UC_ASCII_START = &H20   'space                       ''~7501I~
@@ -1109,24 +1115,36 @@ Public Class FormatBES                                                 ''~7421I~
     End Function                                                       ''~v037I~
     '   Public Function changeLetterSmallLarge(Pch As Char, ByRef Ppcvch As Char) As Boolean ''~7502I~''~v026R~
     Public Function queryLetterSmallLarge(Pch As Char, PswForm1 As Boolean) As Boolean ''~v037I~
-    	Dim cvch as Char                                               ''+v037I~
-        If changeLetterWrap(Pch, cvch, PswForm1) Then                  ''+v037R~
+    	Dim cvch as Char                                               ''~v037I~
+        If changeLetterWrap(Pch, cvch, PswForm1) Then                  ''~v037R~
             If Not PswForm1 Then 'form3                                ''~v037I~
                 Form1.formText.showStatus(Pch, typeSrc) 'Form3         ''~v037I~
+            else                                                       ''~v037I~
+                Form1.MainForm.showStatus(Pch, typeSrc) 'Form1         ''~v037I~
             End If                                                     ''~v037I~
             Return True                                                ''~v037I~
         End If                                                         ''~v037I~
-        If isLargeLetter(Pch) OrElse isSmallLetter(Pch) Then           ''+v037R~
+        If isLargeLetter(Pch) OrElse isSmallLetter(Pch) Then           ''~v037R~
+          if PswForm1                                                  ''~v037I~
+            Form1.MainForm.showStatus(String.Format(Rstr.getStr("STR_MSG_INFO_SMALL_LARGE_TARGET"), Pch))''~v037I~
+          else                                                         ''~v037I~
             Form1.formText.showStatus(String.Format(Rstr.getStr("STR_MSG_INFO_SMALL_LARGE_TARGET"), Pch)) ''~v037I~
+          end if                                                       ''~v037I~
             Return True                                                ''~v037I~
         End If                                                         ''~v037I~
+      if PswForm1                                                      ''~v037I~
+        Form1.MainForm.showStatus(String.Format(Rstr.MSG_ERR_SMALL_LARGE, Pch))''~v037I~
+      else                                                             ''~v037I~
         Form1.formText.showStatus(String.Format(Rstr.MSG_ERR_SMALL_LARGE, Pch)) ''~v037I~
+      end if                                                           ''~v037I~
         Return False                                                   ''~v037I~
     End Function                                                       ''~v037I~
     Public Function changeLetterSmallLarge(Pch As Char, ByRef Ppcvch As Char, PswForm1 As Boolean) As Boolean ''~v026I~
         If changeLetterWrap(Pch, Ppcvch, PswForm1) Then                      ''~v026I~
             If Not PswForm1 Then 'form3                                     ''~v034I~
                 Form1.formText.showStatus(Pch, Ppcvch, typeSrc, typeTgt) 'Form3''~v034I~
+            else                                                       ''+v052I~
+                Form1.MainForm.showStatus(Pch, Ppcvch, typeSrc, typeTgt) 'Form3''+v052I~
             End If                                                     ''~v034I~
             Return True                                                ''~v026I~
         End If                                                         ''~v026I~
@@ -1135,7 +1153,11 @@ Public Class FormatBES                                                 ''~7421I~
         End If                                                         ''~7502I~
         '       MessageBox.Show("""" & Pch & """ は大文字小文字 変換対象ではありません") ''~7502I~''~7618R~
         '       MessageBox.Show(Pch, Rstr.MSG_ERR_SMALL_LARGE)                  ''~7618I~''~v034R~
+      if PswForm1                                                      ''~v037I~
+        Form1.MainForm.showStatus(String.Format(Rstr.MSG_ERR_SMALL_LARGE, Pch))''~v037I~
+      else                                                             ''~v037I~
         Form1.formText.showStatus(String.Format(Rstr.MSG_ERR_SMALL_LARGE, Pch)) ''~v034R~
+      end if                                                           ''~v037I~
         Return False
     End Function                                                       ''~7502I~
     Public Function changeLetterWrap(Pch As Char, ByRef Ppcvch As Char, PswForm1 As Boolean) As Boolean ''~v026I~
@@ -1302,13 +1324,36 @@ Public Class FormatBES                                                 ''~7421I~
                     ch = CHAR_KANJI_ICHI                               ''~v036R~
                     typeTgt = TYPE_KANJI                               ''~v036R~
                 End If                                                 ''~v036R~
+            Case CHAR_KATAKANA_SO                                      ''~v037I~
+                typeSrc = TYPE_KATA                                    ''~v037I~
+                ch = CHAR_KATAKANA_N                                   ''~v037I~
+                typeTgt = TYPE_KATA                                    ''~v037I~
+            Case CHAR_KATAKANA_N                                       ''~v037R~
+                typeSrc = TYPE_KATA                                    ''~v037R~
+                ch = CHAR_KATAKANA_SO                                  ''~v037I~
+                typeTgt = TYPE_KATA                                    ''~v037I~
+            Case CHAR_KANJI_JU                                         ''~v037I~
+                typeSrc = TYPE_KANJI                                   ''~v037I~
+                ch = CHAR_KIGO_PLUS                                    ''~v037I~
+                If PswForm1 Then                                       ''~v037I~
+                    Return False                                       ''~v037I~
+                End If                                                 ''~v037I~
+                typeTgt = TYPE_KIGO                                    ''~v037I~
+            Case CHAR_KIGO_PLUS                                        ''~v037I~
+                typeSrc = TYPE_KIGO                                    ''~v037I~
+                If PswForm1 Then                                       ''~v037I~
+                    Return False                                       ''~v037I~
+                End If                                                 ''~v037I~
+                ch = CHAR_KANJI_JU                                     ''~v037I~
+                typeTgt = TYPE_KANJI                                   ''~v037I~
             Case Else                                                  ''~v026I~
                 Return False                                           ''~v026I~
         End Select                                                     ''~v026I~
         Ppcvch = ch                                                      ''~v026I~
         Return True                                                    ''~v026I~
     End Function                                                       ''~v026I~
-    Public Function changeLetterOther(Pch As Char, ByRef Ppcvch As Char) As Integer ''~7525I~
+'   Public Function changeLetterOther(Pch As Char, ByRef Ppcvch As Char) As Integer ''~7525I~''~v053R~
+    Public Function changeLetterOther(Pch As Char, ByRef Ppcvch As Char,PswForm1 as Boolean) As Integer''~v053I~
         '  Ha<-->Wa , U<-->cho-on etc                                      ''~7525I~
         ' rc=0 err,1:repeat                                               ''~7525I~
         Dim rc As Integer = 0                                            ''~7525I~
@@ -1337,7 +1382,11 @@ Public Class FormatBES                                                 ''~7421I~
         If rc = 0 Then                                                        ''~7525I~
             '           MessageBox.Show("""" & STR_LARGE_LETTER_OTHER & """" & "<-->" & """" & STR_SMALL_LETTER_OTHER & """ の変換対象外です") ''~7525I~''~7608R~''~7618R~
             '           MessageBox.Show(Pch, Rstr.MSG_ERR_SMALL_LARGE_OTHER & "(" & STR_LARGE_LETTER_OTHER & "<-->" & STR_SMALL_LETTER_OTHER & ")") ''~7618I~''~v034R~
+         if PswForm1                                                   ''~v053I~
+            Form1.MainForm.showStatus(String.Format(Rstr.MSG_ERR_SMALL_LARGE_OTHER, Pch) & "(" & STR_LARGE_LETTER_OTHER & "<-->" & STR_SMALL_LETTER_OTHER & ")")''~v053I~
+         else                                                          ''~v053I~
             Form1.formText.showStatus(String.Format(Rstr.MSG_ERR_SMALL_LARGE_OTHER, Pch) & "(" & STR_LARGE_LETTER_OTHER & "<-->" & STR_SMALL_LETTER_OTHER & ")") ''~v034R~
+         end if                                                        ''~v053I~
         End If                                                         ''~7525I~
         Return rc                                                      ''~7525I~
     End Function                                                       ''~7525I~
