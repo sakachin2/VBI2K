@@ -118,59 +118,53 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="ButtonDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>233, 0</value>
-  </data>
-  <data name="ButtonDown.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 41</value>
-  </data>
-  <data name="ButtonUp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>180, 0</value>
-  </data>
-  <data name="ButtonUp.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ButtonDefault.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 41</value>
-  </data>
-  <data name="ButtonAdd.Text" xml:space="preserve">
-    <value>Add</value>
   </data>
   <data name="ButtonDefault.Text" xml:space="preserve">
     <value>Default</value>
   </data>
+  <data name="ButtonAdd.Location" type="System.Drawing.Point, System.Drawing">
+    <value>50, 0</value>
+  </data>
+  <data name="ButtonAdd.Text" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="ButtonDelete.Location" type="System.Drawing.Point, System.Drawing">
+    <value>103, 0</value>
+  </data>
   <data name="ButtonDelete.Text" xml:space="preserve">
     <value>Del</value>
   </data>
-  <data name="Panel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>280, 41</value>
+  <data name="ButtonUp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>156, 0</value>
   </data>
-  <data name="Panel4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>280, 42</value>
+  <data name="ButtonUp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 41</value>
   </data>
-  <data name="ButtonOK.Size" type="System.Drawing.Size, System.Drawing">
-    <value>88, 48</value>
+  <data name="ButtonDown.Location" type="System.Drawing.Point, System.Drawing">
+    <value>206, 0</value>
   </data>
-  <data name="ButtonOK.Text" xml:space="preserve">
-    <value>Send</value>
+  <data name="ButtonDown.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 41</value>
   </data>
-  <data name="ButtonHelp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>88, 0</value>
+  <data name="ButtonHelp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>70, 36</value>
   </data>
   <data name="ButtonHelp.Text" xml:space="preserve">
     <value>Help</value>
   </data>
+  <data name="ButtonOK.Text" xml:space="preserve">
+    <value>Send</value>
+  </data>
   <data name="ButtonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>195, 0</value>
+    <value>156, 0</value>
   </data>
   <data name="ButtonCancel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>85, 48</value>
+    <value>97, 36</value>
   </data>
   <data name="ButtonCancel.Text" xml:space="preserve">
     <value>Close</value>
-  </data>
-  <data name="Panel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>280, 48</value>
-  </data>
-  <data name="Panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>280, 90</value>
   </data>
   <data name="ColumnSeqNum.Text" xml:space="preserve">
     <value>#</value>
@@ -184,12 +178,6 @@
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ColumnDesc.Width" type="System.Int32, mscorlib">
     <value>149</value>
-  </data>
-  <data name="ListViewSpecialChar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>280, 291</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>280, 381</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Symbol Input</value>

@@ -1,0 +1,28 @@
+(Form13E) 
+Words Definition Dialog
+
+Register those words repeatedly used in the document.
+Candidates are kanji character sometimes misrecognition occurs
+at extracting from image 
+When "Key"(One Alphabet Char,Case InSensitive) is registered,
+Ctrl+Key sends "Phrase" to text box if "Use" is checked ON.
+Preceding line is adopted when dumplicated key is registered.
+"Send" button also send the "Phrase" regardless "Use" checkbox 
+and "Del" checkbox setting.
+
+Use Mouse Right button for Copy & Paste
+not when cell is highlightened but when string is highlightened.
+Cut/CopyPaste buttons bellow title are used to copy/move row.
+"Paste" inserts row before the selected row(Delete flag is not copied). 
+
+The rows with "Del" is checked on is deleted at "OK" is clicked.
+
+Tou can sort by clickking header line.
+Column header "Use" sorts by sequence of Check-On and Check-Off.
+Column header "Key" sorts by sequense of values of "Key" column.
+
+Toolbar button Fie/Save/SaveAs are used to switch dictionary for each documents.
+Record format of dictionary file is as following, CRLF is 0x0d0a.
+Default extension is ".wrd"
+
+2017/09/24

@@ -29,7 +29,7 @@
     <UpdateUrl>http://localhost/VBImage2kana/</UpdateUrl>
     <WebPage>publish.htm</WebPage>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.3.0</ApplicationVersion>
+    <ApplicationVersion>1.1.4.0</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -148,6 +148,12 @@
     <Compile Include="Form12.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form13.Designer.vb">
+      <DependentUpon>Form13.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form13.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form2.Designer.vb">
       <DependentUpon>Form2.vb</DependentUpon>
     </Compile>
@@ -239,6 +245,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form12.resx">
       <DependentUpon>Form12.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form13.en-GB.resx">
+      <DependentUpon>Form13.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form13.resx">
+      <DependentUpon>Form13.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form2.en-GB.resx">
       <DependentUpon>Form2.vb</DependentUpon>
@@ -382,6 +394,8 @@
     <None Include="helps\help_form11E.txt" />
     <None Include="helps\help_form12.txt" />
     <None Include="helps\help_form12E.txt" />
+    <None Include="helps\help_form13.txt" />
+    <None Include="helps\help_form13E.txt" />
     <Content Include="Icon-i2k.ico" />
     <None Include="icons\Icon-i2k.ico" />
     <None Include="icons\Icon-i2k.png" />

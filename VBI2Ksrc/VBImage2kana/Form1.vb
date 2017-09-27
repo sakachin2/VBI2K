@@ -1,5 +1,11 @@
-﻿'CID:''+v052R~:#72                             update#=  659;         ''~v052R~
+﻿'CID:''+v068R~:#72                             update#=  669;         ''+v068R~
 '************************************************************************************''~v002I~
+'v073 2017/09/27 (Bug)crash when words dialog update, close form3 then replied discard cancel''~v073I~
+'v072 2017/09/26 Display doc option at receive text                    ''~v072I~
+'v071 2017/09/26 (Bug) clush when send from SpecialCharDialog after form3 closed''~v071I~
+'v068 2017/09/26 implement Debug trace                                 ''~v068I~
+'v067 2017/09/25 change caret width                                    ''~v067I~
+'v061 2017/09/23 Form1 showstatus for INFO_SHOW_TEXT                   ''~v061I~
 'v052 2017/09/21 utilize status bar at bottom also on Form1            ''~v052I~
 'v032 2017/09/21 English document, i2e was not used                    ''~v032I~
 'v015 2017/09/17 saveed evenif not updated                             ''~v015I~
@@ -9,8 +15,17 @@
 'v002 2017/09/11 have to confirm when received text remaining          ''~v002I~''~v008R~
 '************************************************************************************''~v002I~
 Imports System.Globalization                                           ''~7613I~
+Imports System.Diagnostics                                              ''~v068I~
+Imports System.IO
+
 Public Class Form1
     'localize completed                                                    ''~7617R~
+    ''~v067I~
+    Private Declare Auto Function CreateCaret Lib "user32.dll" (hWnd As IntPtr, hBitmap As IntPtr, nWidth As Integer, nHeight As Integer) As Boolean ''~v067I~
+    Private Declare Auto Function ShowCaret Lib "user32.dll" (hWnd As IntPtr) As Boolean ''~v067I~
+    Private caretWidth As Integer = 2                                  ''~v067I~
+    Private caretHeight As Integer                                     ''~v067I~
+    ''~v067I~
     Public Shared TestOption As Integer = My.Settings.CfgTestOption       ''~7522I~
     Const FONTSIZE_INCREASE = 1                                        ''~7515I~
     ''~7615I~
@@ -18,7 +33,7 @@ Public Class Form1
     Public Const TITLE_SEP = " : "                                      ''~7615I~
     Const INITIAL_SWKATAKANA = False                                     ''~7519I~
     Public Const FILTER_DEFAULT_KANJITEXT = "i2t"                             ''~7412R~''~7513R~''~7521R~
-'   Public Const FILTER_DEFAULT_ENGLISHTEXT = "i2e"                    ''~7619R~''~v032R~
+    '   Public Const FILTER_DEFAULT_ENGLISHTEXT = "i2e"                    ''~7619R~''~v032R~
     Public Const FILTER_DEFAULT_KANATEXT = "txt"                       ''~7513I~
     Private Const ERR_CHAR_OUTOFLINE = 1                                ''~7509I~
     Private Const ERR_CRLF_OUTOFLINE = 2                                ''~7509I~
@@ -56,10 +71,10 @@ Public Class Form1
     Private bgColor2 As Color = Color.FromArgb(&HE0, &HE0, &HE0)              ''~7415I~''~7421R~
     Private formWidth As Integer = My.Settings.CfgFormSizeWMain            ''~7411I~''~7421R~
     Private formHeight As Integer = My.Settings.CfgFormSizeHMain           ''~7411I~''~7421R~
-    Private Debug As Boolean = True                                ''~7421R~
+    '   Private Debug As Boolean = True                                ''~7421R~''~v068R~
     Private MRUList As New List(Of String)                         ''~7421R~''~7522I~
-'   Private MRU As New ClassMRU()                                  ''~7522I~''~v012R~
-    Public  MRU As New ClassMRU()                                      ''~v012I~
+    '   Private MRU As New ClassMRU()                                  ''~7522I~''~v012R~
+    Public MRU As New ClassMRU()                                      ''~v012I~
     Private imageFilename As String = ""                           ''~7421R~
     Private kanjiFilename As String = ""                           ''~7421R~
     Private kanaFilename As String = ""                            ''~7421R~
@@ -121,6 +136,7 @@ Public Class Form1
         initialTitle = Me.Text                                           ''~7519I~
         '       initialText = TBBES.Text                                         ''~7519I~''~7615R~
         TBBES.Text = initialText                                         ''~7615I~
+        debugInit()                                                    ''~v068I~
     End Sub
     Public Shared Sub setupTitlebarIcon(Pform As Form)                ''~7612R~
         Dim icon = My.Resources.Icon_i2k1                                ''~7612I~
@@ -132,11 +148,21 @@ Public Class Form1
         '    	TBBES.Focus()                                                  ''~7521R~
         Me.Width = formWidth                                           ''~7619I~
         Me.Height = formHeight                                         ''~7619I~
+        showCustomCaret()                                              ''~v067I~
     End Sub                                                            ''~7521I~
+    Private Sub showCustomCaret()                                      ''~v067I~
+        Dim fnt As Font = TBBES.Font                                ''~v067I~
+        caretHeight = CInt(fnt.GetHeight())                            ''~v067I~
+        CreateCaret(TBBES.Handle, IntPtr.Zero, caretWidth, caretHeight) ''~v067I~
+        ShowCaret(TBBES.Handle)                                     ''~v067I~
+    End Sub                                                            ''~v067I~
+    Private Sub TextBox_GotFocus(sender As System.Object, e As System.EventArgs) Handles TBBES.GotFocus ''~v067I~
+        showCustomCaret()                                              ''~v067I~
+    End Sub                                                            ''~v067I~
     Private Sub Form1_Closing(sender As System.Object, e As System.ComponentModel.CancelEventArgs) Handles MyBase.Closing ''~7501I~
-        if Not chkDiscard(e, Me.Text)                                          ''~7508R~''~v011R~
-        	exit sub                                                   ''~v011I~
-        end if                                                         ''~v011I~
+        If Not chkDiscard(e, Me.Text) Then                                          ''~7508R~''~v011R~
+            Exit Sub                                                   ''~v011I~
+        End If                                                         ''~v011I~
         closeForm(dlgFind1)                                            ''~7521I~
         Trace.fsClose()                                                ''~7619I~
     End Sub                                                            ''~7501I~
@@ -144,10 +170,10 @@ Public Class Form1
         showStatus("")      'clear                                     ''~v052I~
         If TBBES.Enabled Then    'called by Design.vb initial text setting  ''~7508I~
             TBChanged()                                                    ''~7501I~''~7508R~
-        	If pendingStatusMsg IsNot Nothing Then                     ''~v052I~
-            	showStatus(pendingStatusMsg)                           ''~v052I~
-            	pendingStatusMsg = Nothing                             ''~v052I~
-        	End If                                                     ''~v052I~
+            If pendingStatusMsg IsNot Nothing Then                     ''~v052I~
+                showStatus(pendingStatusMsg)                           ''~v052I~
+                pendingStatusMsg = Nothing                             ''~v052I~
+            End If                                                     ''~v052I~
         End If                                                         ''~7508I~
     End Sub                                                            ''~7501I~
     ''~7416I~
@@ -307,7 +333,7 @@ Public Class Form1
     End Sub                                                            ''~7412I~
     ''~7412I~
     Private Sub ExitToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ExitXToolStripMenuItem.Click
-        if Not chkDiscard(Me.Text) 'replyed NO                         ''~v011R~
+        If Not chkDiscard(Me.Text) Then 'replyed NO                         ''~v011R~
             Exit Sub                                                   ''~v011I~
         End If                                                         ''~v011I~
         Application.Exit()
@@ -490,7 +516,7 @@ Public Class Form1
     '*************************************************************
     Private Sub openKanaTextBox(Pfnm As String)
         If formkanaText Is Nothing Then                                     ''~7522I~
-'           formkanaText = New ClassKanaText                           ''~7522I~''~v032R~
+            '           formkanaText = New ClassKanaText                           ''~7522I~''~v032R~
             formkanaText = New ClassKanaText()                         ''~v032I~
         Else                                                           ''~7508I~
             If Not formkanaText.chkDiscard() Then                           ''~7508R~
@@ -528,7 +554,9 @@ Public Class Form1
         Me.Text = title                                                ''~7513R~
         If swReceive Then                                                  ''~7514I~
             '           MessageBox.Show(Me.Text & " を表示します")                 ''~7514R~''~7615R~
-            MessageBox.Show(Me.Text, Rstr.MSG_INFO_SHOW_TEXT)                ''~7615R~
+            '           MessageBox.Show(Me.Text, Rstr.MSG_INFO_SHOW_TEXT)                ''~7615R~''~v061R~
+            '           showStatus(Rstr.MSG_INFO_SHOW_TEXT)                        ''~v061I~''~v072R~
+            showStatus(Rstr.MSG_INFO_SHOW_TEXT & " : " & DocOptions.getDocOptions()) ''~v072I~
         End If                                                         ''~7514I~
         Me.Activate()                                                  ''~7514I~
     End Sub                                                            ''~7412I~
@@ -556,11 +584,11 @@ Public Class Form1
         MessageBox.Show(Pfnm, Rstr.MSG_ERR_NOT_FOUND)                       ''~7615I~
     End Sub                                                            ''~7428I~
     Public Shared Sub FileSaved(Pfnm As String)                        ''~7617I~
-'       MessageBox.Show(Pfnm, Rstr.MSG_INFO_SAVED)                     ''~7617I~''~v052R~
-        Form1.MainForm.showStatus(Rstr.MSG_INFO_SAVED & ":"  & Pfnm)   ''~v052R~
+        '       MessageBox.Show(Pfnm, Rstr.MSG_INFO_SAVED)                     ''~7617I~''~v052R~
+        Form1.MainForm.showStatus(Rstr.MSG_INFO_SAVED & ":" & Pfnm)   ''~v052R~
     End Sub                                                            ''~7617I~
     Public Shared Sub FileNotSaved()                                   ''~v015I~
-        MessageBox.Show(Rstr.GetStr("STR_MSG_INFO_NOT_SAVED_BY_NOUPDATE"))''~v015R~
+        MessageBox.Show(Rstr.getStr("STR_MSG_INFO_NOT_SAVED_BY_NOUPDATE")) ''~v015R~
     End Sub                                                            ''~v015I~
     Public Function chkDiscard(Ptitle As String) As Boolean            ''~v011I~
         ' rc:true=continue process                                     ''~v011I~
@@ -588,7 +616,7 @@ Public Class Form1
     End Function                                                       ''~7508I~
     Public Shared Function confirmDiscard(Ptitle As String) As Boolean ''~v011I~
         ' rc:true=continue close                                       ''~v011I~
-        If MessageBox.Show(Ptitle, Rstr.MSG_DISCARD_UPDATE, MessageBoxButtons.YesNo) = DialogResult.No Then''~v011I~
+        If MessageBox.Show(Ptitle, Rstr.MSG_DISCARD_UPDATE, MessageBoxButtons.YesNo) = DialogResult.No Then ''~v011I~
             Return False                                               ''~v011I~
         End If                                                         ''~v011I~
         Return True                                                    ''~v011I~
@@ -801,13 +829,36 @@ Public Class Form1
         End If                                                         ''~7521I~
         Return False                                                   ''~7521I~
     End Function                                                            ''~7516I~
-    Public Shared Sub closeForm(ByRef Ppform As Form)
+'   Public Shared Sub closeForm(ByRef Ppform As Form)                  ''~v073R~
+    Public Shared Function closeForm(ByRef Ppform As Form) as Boolean  ''~v073I~
+    '** rc true:closed or already closed, false close canceled         ''~v073I~
         If Ppform Is Nothing OrElse Ppform.IsDisposed Then             ''~7521I~
-            Exit Sub                                                   ''~7521I~
+'           Exit Sub                                                   ''~7521I~''~v073R~
+            return true                                                ''~v073I~
         End If                                                         ''~7521I~
         Ppform.Close()                                                 ''~7521I~
+        if Ppform.DialogResult=DialogResult.No                         ''~v073I~
+            return false                                               ''~v073I~
+        end if                                                         ''~v073R~
         Ppform = Nothing                                                 ''~7521I~
-    End Sub                                                       ''~7521I~
+        return true                                                    ''~v073I~
+'   End Sub                                                       ''~7521I~''~v073R~
+    End Function                                                       ''~v073I~
+'   Public Shared Sub closeForm(ByRef Ppform As Form, Pclear As Boolean) ''~v071I~''~v073R~
+    Public Shared Function closeForm(ByRef Ppform As Form, Pclear As Boolean) as Boolean''~v073I~
+    '** rc true:closed, false close canceled                           ''~v073I~
+    Dim rc as Boolean                                                  ''~v073I~
+        If Pclear Then                                                      ''~v071I~
+'           closeForm(Ppform)                                          ''~v071I~''~v073R~
+            rc=closeForm(Ppform)                                       ''~v073I~
+        Else                                                           ''~v071I~
+            Dim tmp As Form = Ppform  ' avoid set Nothing                ''~v071I~
+'           closeForm(tmp)                                             ''~v071I~''~v073R~
+            rc=closeForm(tmp)                                          ''~v073I~
+        End If                                                         ''~v071I~
+        return rc                                                      ''~v073I~
+'   End Sub                                                            ''~v071I~''~v073R~
+    End Function                                                       ''~v073I~
     Public Sub showFindDialog()                                        ''~7521I~
         newDlgFind(dlgFind1)                                           ''~7521I~
         dlgFind1.showForForm1(Me)                                      ''~7521I~
@@ -924,7 +975,7 @@ Public Class Form1
     Private Sub OpenFileDialog1_FileOk(sender As System.Object, e As System.ComponentModel.CancelEventArgs) Handles OpenFileDialog1.FileOk
 
     End Sub
-                                                                       ''~v052I~
+    ''~v052I~
     Public Sub showStatus(Pmsg As String)                              ''~v052I~
         ToolStripStatusLabel1.Text = Pmsg                              ''~v052I~
     End Sub                                                            ''~v052I~
@@ -935,13 +986,13 @@ Public Class Form1
             showStatus(Pmsg)                                           ''~v052I~
         End If                                                         ''~v052I~
     End Sub                                                            ''~v052I~
-    Public Sub showStatus(Pch As Char, Pchcv As Char, PtypeSrc As Integer, PtypeTgt As Integer)''+v052I~
-        Dim msg, strSrc, strTgt As String                              ''+v052I~
-        strSrc = FormatBES.getCharType(PtypeSrc)                       ''+v052I~
-        strTgt = FormatBES.getCharType(PtypeTgt)                       ''+v052I~
-        msg = Rstr.getStr("STR_MSG_CHANGELETTERWRAP")                  ''+v052I~
-        pendingStatusMsg = String.Format(msg, strSrc, Pch, strTgt, Pchcv)''+v052I~
-    End Sub                                                            ''+v052I~
+    Public Sub showStatus(Pch As Char, Pchcv As Char, PtypeSrc As Integer, PtypeTgt As Integer) ''~v052I~
+        Dim msg, strSrc, strTgt As String                              ''~v052I~
+        strSrc = FormatBES.getCharType(PtypeSrc)                       ''~v052I~
+        strTgt = FormatBES.getCharType(PtypeTgt)                       ''~v052I~
+        msg = Rstr.getStr("STR_MSG_CHANGELETTERWRAP")                  ''~v052I~
+        pendingStatusMsg = String.Format(msg, strSrc, Pch, strTgt, Pchcv) ''~v052I~
+    End Sub                                                            ''~v052I~
     Public Sub showStatus(Pch As Char, PtypeSrc As Integer)            ''~v052I~
         '** from class1 * F4(queryKey) target info                     ''~v052I~
         Dim msg, strSrc As String                                      ''~v052I~
@@ -950,4 +1001,15 @@ Public Class Form1
         msg = String.Format(msg, strSrc, Pch)                          ''~v052I~
         showStatus(msg)     'imediately put msg                        ''~v052I~
     End Sub                                                            ''~v052I~
+    Private Sub debugInit()                                            ''~v068I~
+#if DEBUG                                                              ''+v068I~
+        Debug.Listeners.Remove("Default")                              ''~v068I~
+        '       Dim lstener as TextWriterTraceListener(System.IO.File.createText("Debug.txt"))''~v068I~
+        Dim stream As New StreamWriter("Debug.txt")                    ''~v068I~
+        stream.AutoFlush = True                                          ''~v068I~
+        Dim writer As TextWriter = TextWriter.Synchronized(stream)   ''~v068I~
+        Dim listener As New TextWriterTraceListener(writer)                 ''~v068I~
+        Debug.Listeners.Add(listener)                                  ''~v068I~
+#end if                                                                ''+v068I~
+    End Sub                                                            ''~v068I~
 End Class

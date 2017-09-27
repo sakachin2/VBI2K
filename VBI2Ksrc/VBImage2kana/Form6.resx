@@ -118,24 +118,30 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="ButtonDelete.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 41</value>
+  <data name="ButtonDown.Location" type="System.Drawing.Point, System.Drawing">
+    <value>217, 0</value>
   </data>
   <data name="&gt;&gt;ButtonDelete.Name" xml:space="preserve">
     <value>ButtonDelete</value>
   </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>253, 381</value>
+  <data name="ButtonCancel.Text" xml:space="preserve">
+    <value>閉じる</value>
   </data>
-  <data name="&gt;&gt;Panel2.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;ButtonCancel.Name" xml:space="preserve">
+    <value>ButtonCancel</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Panel2.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ButtonDown.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Right</value>
   </data>
-  <data name="&gt;&gt;ListViewSpecialChar.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="PanelBottons.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
+  <data name="PanelBottons.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 303</value>
+  </data>
+  <data name="ButtonDown.Size" type="System.Drawing.Size, System.Drawing">
+    <value>36, 41</value>
   </data>
   <data name="&gt;&gt;ButtonDown.Name" xml:space="preserve">
     <value>ButtonDown</value>
@@ -143,29 +149,39 @@
   <data name="&gt;&gt;ButtonDefault.Name" xml:space="preserve">
     <value>ButtonDefault</value>
   </data>
-  <data name="&gt;&gt;Panel3.Type" xml:space="preserve">
+  <data name="ListViewSpecialChar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>253, 303</value>
+  </data>
+  <data name="&gt;&gt;PanelButtons2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="ButtonCancel.Text" xml:space="preserve">
-    <value>閉じる</value>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ButtonHelp.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="ButtonCancel.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="ColumnDesc.Width" type="System.Int32, mscorlib">
+    <value>100</value>
   </data>
   <data name="&gt;&gt;ButtonCancel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ButtonDelete.Location" type="System.Drawing.Point, System.Drawing">
-    <value>127, 0</value>
+    <value>128, 0</value>
   </data>
-  <data name="ButtonUp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>180, -1</value>
+  <data name="ButtonDelete.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Right</value>
   </data>
   <data name="ButtonDown.Font" type="System.Drawing.Font, System.Drawing">
     <value>MS UI Gothic, 9pt, style=Bold</value>
   </data>
   <data name="&gt;&gt;ButtonUp.Parent" xml:space="preserve">
-    <value>Panel2</value>
+    <value>PanelButtons1</value>
   </data>
-  <data name="ButtonOK.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 48</value>
+  <data name="PanelButtons2.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
   </data>
   <data name="&gt;&gt;ButtonDelete.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -173,33 +189,41 @@
   <data name="ButtonOK.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="ButtonHelp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>107, 48</value>
+  <data name="&gt;&gt;PanelBottons.Name" xml:space="preserve">
+    <value>PanelBottons</value>
   </data>
-  <data name="&gt;&gt;Panel2.Name" xml:space="preserve">
-    <value>Panel2</value>
+  <data name="&gt;&gt;ButtonOK.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ButtonCancel.Parent" xml:space="preserve">
+    <value>PanelButtons2</value>
+  </data>
+  <data name="&gt;&gt;PanelButtons1.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;ButtonAdd.Parent" xml:space="preserve">
-    <value>Panel2</value>
+    <value>PanelButtons1</value>
   </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 12</value>
+  <data name="&gt;&gt;ButtonCancel.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
-  <data name="&gt;&gt;Panel4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Panel4.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Panel3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Bottom</value>
+  <data name="&gt;&gt;ColumnSeqNum.Name" xml:space="preserve">
+    <value>ColumnSeqNum</value>
   </data>
-  <data name="ColumnChar.Text" xml:space="preserve">
-    <value>文字</value>
+  <data name="ButtonUp.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Right</value>
   </data>
   <data name="&gt;&gt;ButtonHelp.Parent" xml:space="preserve">
-    <value>Panel3</value>
+    <value>PanelButtons2</value>
   </data>
-  <data name="ColumnDesc.Width" type="System.Int32, mscorlib">
-    <value>100</value>
+  <data name="&gt;&gt;ListViewSpecialChar.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ListViewSpecialChar.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
   </data>
   <data name="Panel4.Size" type="System.Drawing.Size, System.Drawing">
     <value>253, 42</value>
@@ -207,29 +231,32 @@
   <data name="&gt;&gt;Panel4.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="ButtonAdd.Size" type="System.Drawing.Size, System.Drawing">
+    <value>53, 41</value>
+  </data>
   <data name="&gt;&gt;ButtonOK.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;PanelButtons1.Parent" xml:space="preserve">
+    <value>Panel4</value>
+  </data>
   <data name="&gt;&gt;ButtonAdd.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;ButtonDelete.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>2</value>
   </data>
-  <data name="Panel4.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;Panel1.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="ButtonAdd.Text" xml:space="preserve">
+    <value>追加</value>
   </data>
   <data name="&gt;&gt;ListViewSpecialChar.Name" xml:space="preserve">
     <value>ListViewSpecialChar</value>
   </data>
-  <data name="&gt;&gt;Panel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="PanelButtons2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 42</value>
   </data>
-  <data name="Panel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+  <data name="&gt;&gt;ButtonDefault.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="ButtonHelp.Text" xml:space="preserve">
     <value>ヘルプ</value>
@@ -237,11 +264,8 @@
   <data name="ButtonUp.Text" xml:space="preserve">
     <value>↑</value>
   </data>
-  <data name="ButtonDown.Size" type="System.Drawing.Size, System.Drawing">
-    <value>36, 41</value>
-  </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>Form6</value>
+  <data name="PanelButtons1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
   </data>
   <data name="&gt;&gt;ColumnChar.Type" xml:space="preserve">
     <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -250,22 +274,25 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ButtonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>180, 0</value>
+    <value>173, 0</value>
   </data>
   <data name="ButtonAdd.Location" type="System.Drawing.Point, System.Drawing">
-    <value>73, 0</value>
+    <value>75, 0</value>
   </data>
-  <data name="ListViewSpecialChar.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="&gt;&gt;PanelButtons2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;Panel4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ButtonHelp.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="Panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 291</value>
-  </data>
-  <data name="ButtonCancel.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="Panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="PanelButtons2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Bottom</value>
+  </data>
+  <data name="PanelButtons2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>253, 36</value>
   </data>
   <data name="&gt;&gt;ButtonDefault.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -276,53 +303,59 @@
   <data name="ButtonDown.Text" xml:space="preserve">
     <value>↓</value>
   </data>
-  <data name="ButtonAdd.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 41</value>
+  <data name="&gt;&gt;PanelBottons.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="&gt;&gt;ButtonDown.Parent" xml:space="preserve">
-    <value>Panel2</value>
+    <value>PanelButtons1</value>
+  </data>
+  <data name="&gt;&gt;PanelButtons2.Parent" xml:space="preserve">
+    <value>PanelBottons</value>
   </data>
   <data name="ButtonDefault.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 41</value>
+    <value>75, 41</value>
   </data>
   <data name="ListViewSpecialChar.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="Panel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>253, 41</value>
-  </data>
-  <data name="ListViewSpecialChar.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="PanelButtons1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="&gt;&gt;ButtonOK.Parent" xml:space="preserve">
-    <value>Panel3</value>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Panel1.Name" xml:space="preserve">
-    <value>Panel1</value>
+  <data name="&gt;&gt;ButtonOK.Parent" xml:space="preserve">
+    <value>PanelButtons2</value>
+  </data>
+  <data name="&gt;&gt;ListViewSpecialChar.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ButtonHelp.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="ColumnSeqNum.Width" type="System.Int32, mscorlib">
     <value>40</value>
   </data>
+  <data name="ButtonUp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>36, 41</value>
+  </data>
   <data name="&gt;&gt;ListViewSpecialChar.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ButtonCancel.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;PanelBottons.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ButtonHelp.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="ButtonDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>217, -1</value>
+  <data name="PanelBottons.Size" type="System.Drawing.Size, System.Drawing">
+    <value>253, 78</value>
   </data>
-  <data name="Panel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>253, 48</value>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 12</value>
   </data>
-  <data name="&gt;&gt;ButtonCancel.Parent" xml:space="preserve">
-    <value>Panel3</value>
+  <data name="PanelButtons1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>253, 41</value>
   </data>
   <data name="&gt;&gt;ColumnChar.Name" xml:space="preserve">
     <value>ColumnChar</value>
@@ -333,35 +366,38 @@
   <data name="&gt;&gt;ButtonOK.Name" xml:space="preserve">
     <value>ButtonOK</value>
   </data>
-  <data name="&gt;&gt;ColumnSeqNum.Name" xml:space="preserve">
-    <value>ColumnSeqNum</value>
+  <data name="ButtonDelete.Size" type="System.Drawing.Size, System.Drawing">
+    <value>53, 41</value>
   </data>
-  <data name="ButtonCancel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 48</value>
+  <data name="PanelBottons.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
-  <data name="&gt;&gt;Panel3.Parent" xml:space="preserve">
-    <value>Panel1</value>
+  <data name="ButtonAdd.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="&gt;&gt;PanelButtons1.Name" xml:space="preserve">
+    <value>PanelButtons1</value>
   </data>
   <data name="ColumnDesc.Text" xml:space="preserve">
     <value>用途</value>
   </data>
   <data name="ButtonDefault.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Left</value>
+    <value>Fill</value>
   </data>
-  <data name="&gt;&gt;Panel2.Parent" xml:space="preserve">
-    <value>Panel4</value>
+  <data name="&gt;&gt;PanelBottons.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
-  <data name="&gt;&gt;Panel4.Name" xml:space="preserve">
-    <value>Panel4</value>
+  <data name="ButtonHelp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>87, 36</value>
   </data>
   <data name="ButtonHelp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>73, 0</value>
+    <value>86, 0</value>
   </data>
-  <data name="&gt;&gt;ListViewSpecialChar.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="PanelButtons1.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
-  <data name="&gt;&gt;ButtonDefault.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="ButtonDelete.Text" xml:space="preserve">
+    <value>削除</value>
   </data>
   <data name="ButtonOK.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -369,20 +405,17 @@
   <data name="&gt;&gt;ButtonHelp.Name" xml:space="preserve">
     <value>ButtonHelp</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;ButtonAdd.Name" xml:space="preserve">
+    <value>ButtonAdd</value>
   </data>
   <data name="ButtonDefault.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="&gt;&gt;ButtonCancel.Name" xml:space="preserve">
-    <value>ButtonCancel</value>
-  </data>
   <data name="ColumnChar.Width" type="System.Int32, mscorlib">
     <value>88</value>
   </data>
-  <data name="ButtonUp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>36, 41</value>
+  <data name="&gt;&gt;Panel4.Name" xml:space="preserve">
+    <value>Panel4</value>
   </data>
   <data name="ButtonOK.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Left</value>
@@ -394,10 +427,13 @@
     <value>記号入力</value>
   </data>
   <data name="&gt;&gt;ButtonDelete.Parent" xml:space="preserve">
-    <value>Panel2</value>
+    <value>PanelButtons1</value>
   </data>
   <data name="ButtonDown.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
+  </data>
+  <data name="ButtonCancel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 36</value>
   </data>
   <data name="&gt;&gt;ButtonUp.Name" xml:space="preserve">
     <value>ButtonUp</value>
@@ -406,88 +442,64 @@
     <value>番号</value>
   </data>
   <data name="&gt;&gt;ButtonDefault.Parent" xml:space="preserve">
-    <value>Panel2</value>
-  </data>
-  <data name="&gt;&gt;Panel3.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>PanelButtons1</value>
   </data>
   <data name="ButtonOK.Text" xml:space="preserve">
     <value>送る</value>
   </data>
   <data name="&gt;&gt;ButtonUp.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;ButtonAdd.Name" xml:space="preserve">
-    <value>ButtonAdd</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;ButtonDown.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="Panel3.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;ColumnDesc.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="ButtonOK.Size" type="System.Drawing.Size, System.Drawing">
+    <value>86, 36</value>
   </data>
   <data name="ButtonDelete.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="Panel2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
+  <data name="ColumnChar.Text" xml:space="preserve">
+    <value>文字</value>
   </data>
-  <data name="Panel1.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="&gt;&gt;ColumnDesc.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Panel3.Name" xml:space="preserve">
-    <value>Panel3</value>
-  </data>
-  <data name="ButtonAdd.Text" xml:space="preserve">
-    <value>追加</value>
+  <data name="&gt;&gt;PanelButtons1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ButtonUp.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="ButtonHelp.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+  <data name="ButtonAdd.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
   <data name="ButtonDefault.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="ButtonAdd.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+  <data name="ListViewSpecialChar.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
   <data name="&gt;&gt;ButtonDown.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="ListViewSpecialChar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>253, 291</value>
+  <data name="ButtonCancel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Right</value>
   </data>
-  <data name="ButtonDelete.Text" xml:space="preserve">
-    <value>削除</value>
-  </data>
-  <data name="&gt;&gt;ButtonOK.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;Panel4.Parent" xml:space="preserve">
+    <value>PanelBottons</value>
   </data>
   <data name="ButtonUp.Font" type="System.Drawing.Font, System.Drawing">
     <value>MS UI Gothic, 9pt, style=Bold</value>
   </data>
-  <data name="Panel3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 42</value>
-  </data>
-  <data name="ButtonCancel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Right</value>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>Form6</value>
   </data>
   <data name="&gt;&gt;ColumnDesc.Name" xml:space="preserve">
     <value>ColumnDesc</value>
   </data>
-  <data name="&gt;&gt;Panel4.Parent" xml:space="preserve">
-    <value>Panel1</value>
-  </data>
-  <data name="&gt;&gt;Panel2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Panel1.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="&gt;&gt;PanelButtons2.Name" xml:space="preserve">
+    <value>PanelButtons2</value>
   </data>
   <data name="ButtonDefault.Text" xml:space="preserve">
     <value>既定に戻す</value>
@@ -495,8 +507,8 @@
   <data name="Panel4.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="Panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>253, 90</value>
+  <data name="ButtonUp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>181, 0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

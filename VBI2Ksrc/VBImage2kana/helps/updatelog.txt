@@ -1,3 +1,32 @@
+V1.14 : 2017/09/27 released *******************************************************
+'v073 2017/09/27 (Bug)crash when words dialog update, close form3 then replied discard cancel
+           form3.vb form13.vb Form1.vb
+'v073 2017/09/26 (Bug)ScrollToCaret will move Selectio start at botom of visible area,it sometimes scroll to top.
+           class2.vb
+'v072 2017/09/26 Display doc option at receive text
+           Form12.vb Form1.vb
+'v071 2017/09/26 (Bug) clush when send from SpecialCharDialog after form3 closed
+           Form3.vb Form1.vb
+'v070 2017/09/26 F3 for find dialog is configurable
+           Form5.vb class2.vb
+'v069 2017/09/26 save and restore clientsize
+           Form11.designner.vb Form13.designer.vb Form6.designer.vb
+'v068 2017/09/26 implement Debug trace
+           Form1.vb
+'v067 2017/09/25 change caret width
+           Form3.vb Form1.vb
+'v066 2017/09/25 (Bug)Dictionary dialog;if err line exist saveFile write "False"
+           Form11.vb
+'v065 2017/09/24 Word dialog by Ctrl+char(except "1"-"0")
+           Form13.vb Form3.vb class4.vb class2.vb form5.vb
+'v064 2017/09/24 (Bug) Doc option is not initialy applied
+           Form3.vb
+'v063 2017/09/24 support kanji file encoded by UTF8
+           Form3.vb Form12.vb
+'v062 2017/09/23 kanji repeated char "ÅX" is not treated as kanji
+           class5.vb
+'v061 2017/09/23 Form1 showstatus for INFO_SHOW_TEXT
+           Form1.vb
 V1.03 : 2017/09/23 released *******************************************************
 'v053 2017/09/21 crash by F4,S+F5 at Form1 by V1.02
            class1.vb class2.vb
@@ -62,7 +91,7 @@ V1.02 : 2017/09/23 released ****************************************************
            calss5.vb
 'v013 2017/09/16 katakana "Å["(815b=u30fc) have to be assumed as hiraganais for BES99
            calss5.vb
-'v013 2017/09/16 Cut&PAste support for Dictionary
+'v013 2017/09/16 Cut&Paste support for Dictionary
            Form11.vb
 'v012 2017/09/15 Load/Save/SaveAs from/to disctionary file
            Form11.vb Form1.vb Class4.vb
@@ -73,7 +102,7 @@ V1.02 : 2017/09/23 released ****************************************************
 'v009 2017/09/12 hirgana Ri and katakana Ri is similar looking
            Class5.vb
 'v008 2017/09/12 dictionary support
-           Form1.vb Form3.vb Form9.vb
+           Form11.vb Form1.vb Form3.vb Form9.vb
 'v007 2017/09/12 duplicated confirm discard msg
            Form3.vb
 'v006 2017/09/12 katakana okurigana is optional

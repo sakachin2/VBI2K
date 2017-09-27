@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="&gt;&gt;Label3.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
   <data name="ButtonReplace.Text" xml:space="preserve">
     <value>置換</value>
   </data>
@@ -127,17 +130,14 @@
   <data name="&gt;&gt;ButtonFind.Name" xml:space="preserve">
     <value>ButtonFind</value>
   </data>
-  <data name="&gt;&gt;Label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="Label3.Text" xml:space="preserve">
     <value>オプション</value>
   </data>
   <data name="&gt;&gt;ButtonReplaceAll.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;ComboBoxRepWord.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;Panel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="CheckBoxCase.Size" type="System.Drawing.Size, System.Drawing">
@@ -194,9 +194,6 @@
   <data name="&gt;&gt;CheckBoxUp.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>48, 12</value>
-  </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>87, 12</value>
   </data>
@@ -228,8 +225,8 @@
   <data name="&gt;&gt;ButtonFind.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Panel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;Label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label3.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -246,6 +243,9 @@
   <data name="Panel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 164</value>
   </data>
+  <data name="&gt;&gt;Panel1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
   <data name="ComboBoxRepWord.Size" type="System.Drawing.Size, System.Drawing">
     <value>192, 20</value>
   </data>
@@ -257,9 +257,6 @@
   </data>
   <data name="Panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Bottom</value>
-  </data>
-  <data name="ButtonReplace.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Right</value>
   </data>
   <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
     <value>$this</value>
@@ -281,6 +278,9 @@
   </data>
   <data name="CheckBoxUp.Text" xml:space="preserve">
     <value>上へ検索</value>
+  </data>
+  <data name="&gt;&gt;ComboBoxRepWord.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ButtonFind.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Left</value>
@@ -306,8 +306,8 @@
   <data name="CheckBoxCase.Text" xml:space="preserve">
     <value>大文字と小文字を区別する</value>
   </data>
-  <data name="&gt;&gt;Label3.ZOrder" xml:space="preserve">
-    <value>5</value>
+  <data name="ButtonReplace.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Right</value>
   </data>
   <data name="ButtonReplaceAll.Location" type="System.Drawing.Point, System.Drawing">
     <value>75, 0</value>
@@ -411,16 +411,13 @@
   <data name="ButtonReplace.Location" type="System.Drawing.Point, System.Drawing">
     <value>141, 0</value>
   </data>
-  <data name="&gt;&gt;Panel1.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 12</value>
   </data>
   <data name="CheckBoxUp.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </metadata>
-  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>en-GB</value>
   </metadata>
 </root>

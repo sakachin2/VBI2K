@@ -1,28 +1,45 @@
+(UTF8 encoding)
+
+V1.14 : Update                               2017/09/27
+
+. Support Kanji file of encoding = UTF-8.
+. Words Definition support.
+    On Kanji text form, register those words repeatedly used in the document.
+    Candidates are kanji character sometimes misrecognition occurs
+    at extracting from image, e.g. "ä¸‰" may be recognized as "ä¸€äºŒ" 
+    When "Key"(One Alphabet Char,Case InSensitive) is registered,
+    Ctrl+Key sends "Phrase" to text box.
+    When the dialog is opened, "Send" button also send the "Phrase".
+. Miscellaneous.
+   .Cursor and Caret shape was changed.
+   .(Bug)It may scroll to top by Enter key at Kanji Form.
+   .(Bug)Form size is not restored at re-open.
+
 V1.03 : Update                               2017/09/23
 
-EAdded some characters resembling in shape for Char-Replacing-Key(F5 as Default), 
-    ƒ\(katakana:so) <--> ƒ“(katakana:n)
-    \(kanji) <--> {(Plus) 
+ãƒ»Added some characters resembling in shape for Char-Replacing-Key(F5 as Default), 
+    ã‚½(katakana:so) <--> ãƒ³(katakana:n)
+    å(kanji) <--> ï¼‹(Plus) 
 
 V1.02 : Update                               2017/09/20
 
-E(Bug)Translating line by line on kanji text caused errornouse output at end of line.
-ECollectly translates such words  as 3ƒ•Œ,‰àƒ–‰Y or Oƒc which includes ƒJƒPƒ•ƒ– or ƒcƒb.
-ESupports simple dictionary.
-EAdded some characters resembling in shape for Char-Replacing-Key(F5 as Default), 
+ãƒ»(Bug)Translating line by line on kanji text caused errornouse output at end of line.
+ãƒ»Collectly translates such words  as 3ãƒµæœˆ,éœãƒ¶æµ¦ or ä¸‰ãƒ„ which includes ã‚«ã‚±ãƒµãƒ¶ or ãƒ„ãƒƒ.
+ãƒ»Supports simple dictionary.
+ãƒ»Added some characters resembling in shape for Char-Replacing-Key(F5 as Default), 
   extracting character from image sometimes mis-understands.
   Confirmation Key(Default:F4) reports the charcter type.
-    Ri:ƒŠ(katakana)<-->‚è(hiragana)
-    He:ƒw(katakana)<-->‚Ö(hiragana)
-    Be:ƒx(katakana)<-->‚×(hiragana)
-    H(‹Æ:kougyou=industry:kanji) --> ƒG(ƒlƒ‹ƒM[:e=Energy:katakana) -->ƒF(small e:katakana) -->H(‹Æ) (back to kanji)
-    —Í(m:rikisi=Sumo wrestler:kanji) --> ƒJ(ƒGƒ‹:kaeru=frog:katakana) -->ƒ•(small ka:katakana) --> —Í(m) (back to kanji)
-    —[(Ä‚¯:yuuyake=sunset glow:kanji) <--> ƒ^(ƒIƒ‹:taoru=towel:katakana)                  
-    ˆê(kanji) --> [(katakana) --> „Ÿ(HorizontalBar) --> ˆê(kanji)  (WrapAround)
-    —[(kanji) <--> ƒ^(katakana)                                     
-    “ñ(kanji) <--> ƒj(katakana) 
-    ”ª(kanji) <--> ƒn(katakana) 
-    Œû(kanji) <--> ƒ(katakana) 
+    Ri:ãƒª(katakana)<-->ã‚Š(hiragana)
+    He:ãƒ˜(katakana)<-->ã¸(hiragana)
+    Be:ãƒ™(katakana)<-->ã¹(hiragana)
+    å·¥(æ¥­:kougyou=industry:kanji) --> ã‚¨(ãƒãƒ«ã‚®ãƒ¼:e=Energy:katakana) -->ã‚§(small e:katakana) -->å·¥(æ¥­) (back to kanji)
+    åŠ›(å£«:rikisi=Sumo wrestler:kanji) --> ã‚«(ã‚¨ãƒ«:kaeru=frog:katakana) -->ãƒµ(small ka:katakana) --> åŠ›(å£«) (back to kanji)
+    å¤•(ç„¼ã‘:yuuyake=sunset glow:kanji) <--> ã‚¿(ã‚ªãƒ«:taoru=towel:katakana)                  
+    ä¸€(kanji) --> ãƒ¼(katakana) --> â”€(HorizontalBar) --> ä¸€(kanji)  (WrapAround)
+    å¤•(kanji) <--> ã‚¿(katakana)                                     
+    äºŒ(kanji) <--> ãƒ‹(katakana) 
+    å…«(kanji) <--> ãƒ(katakana) 
+    å£(kanji) <--> ãƒ­(katakana) 
 
 *********************************************************************************************
 
@@ -41,7 +58,7 @@ WinBES99 is a text translation tool into Braille.
 Windows app "Windows Fax and Scan" can be used to create image file. 
 Application may crash depending quality of image file, in that case try re-scan the document.
 
-RequirementFTo extranct text from image file,
+Requirementï¼šTo extranct text from image file,
       This app requires "Microsoft Office Document Imaging"(MODI) installed.
       See (Note) bellow.
 
@@ -63,7 +80,7 @@ GitHub sakachin2/VBI2K contains MSVS2010Express project source
           Install MODI ony to avoid other version of Office("Install Now" skips installing of MODI).
             By "Custom Install",set all(SharepointDesigner,Office Common,Office Tool) to "No install".
             Then set "Microsoft Office Document Imaging" of Office tool to "execute all from My Computer".
-       .rtf ƒtƒ@ƒCƒ‹‚ÍWord Document.
+       .rtf ãƒ•ã‚¡ã‚¤ãƒ«ã¯Word Document.
        SharePointDesigner2007 is supported until 2017/10/10.
        (It is saved in GitHub sakachin2/VBI2K)
        SP3+languagePack-Japanese(sharepointdesigner2007sp3-kb2526089-fullfile-ja-jp.exe) is also required to install.

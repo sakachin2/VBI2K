@@ -5,13 +5,15 @@ Print Font/Screen Font:
   Choose Standard/Bold/Italic/Bold Italic only for FontStyle.
 
 Japanese Kana Letter Replace Query Key:
-  Set PFKey Number(F4<-->F12) to display type of char at cursor position
+  Set PFKey Number(F1<-->F12) to display type of char at cursor position
   to confirm that it is target of replacement of "Japanese Kana Letter Replacement Key". 
+  F7 and F8 is not to be assigned because those are used by Japanese IME
+  to translate to Katakana and Hankaku-Katakana,
   Set Default:F4 when set space.
 
 Japanese Kana Letter Replacement Key:
-  Set PFKey Number(F4<-->F12) for replacement of Small and large Japanese Letter like as
-  Set Default:F5 when set space.
+  Set PFKey Number for replacement of Small and large Japanese Letter like as bellow.
+  Defaultis :F5.
     "あいうえおやゆよつわかけ" <--> "ぁぃぅぇぉゃゅょっゎゕゖ"     Hiragana
     "アイウエオヤユヨツワカケ" <--> "ァィゥェォャュョッヮヵヶ"     Katakana(DBCS)
     "ｱｲｳｴｵﾔﾕﾖﾂ"                <--> "ｧｨｩｪｫｬｭｮｯ"                    Katakana(SBCS)
@@ -37,10 +39,18 @@ Japanese Kana Letter Replacement Key:
     は<-->わ、へ<-->え、う<-->ー
 
 Symbol Character Input Dialog Open Key:
-  Set PFKey(F4<-->F12) to open "Symbol Character Input" Dialog
-  The dialog will be opened from Context Menu shown by Mouse Right Button Click
+  Set PFKey to open "Symbol Character Input" Dialog
+  The dialog is opened also from Context Menu shown by Mouse Right Button Click
   Set Default:F6 when set space.
 
+Word Definition Dialog Open Key:
+  Use on KanjiText Form.
+  Default is F9.
+  The dialog is opened also from Context Menu.
+
+Find & Replace Dialog Open Key:
+  Default is F3.
+  The dialog is opened also from Context Menu.
 
 Language(Label,Message):
     You can select language diffrent from environment.	

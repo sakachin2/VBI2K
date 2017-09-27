@@ -104,5 +104,29 @@
     <Setting Name="CFGF5_KeySmallQ" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">4</Value>
     </Setting>
+    <Setting Name="CFGF12_swUTF8" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="CFGMRUWords" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="CFGF13_Words" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="CFGF5_KeyWords" Type="System.String" Scope="User">
+      <Value Profile="(Default)">7</Value>
+    </Setting>
+    <Setting Name="CFG_Form11ClientSize" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)">474, 261</Value>
+    </Setting>
+    <Setting Name="CFG_Form13ClientSize" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)">425, 261</Value>
+    </Setting>
+    <Setting Name="CFG_Form6ClientSize" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)">253, 381</Value>
+    </Setting>
+    <Setting Name="CFGF5_KeyFind" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">3</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

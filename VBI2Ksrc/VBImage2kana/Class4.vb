@@ -1,17 +1,20 @@
-﻿''*CID:''+dateR~:#72                          update#=   15;          ''~7522R~
+﻿''*CID:''+v065R~:#72                          update#=   17;          ''+v065R~
 '************************************************************************************''~7915I~
+'v065 2017/09/24 Word dialog by Ctrl+char(except "1"-"0")              ''+v065I~
 'v012 2017/09/15 Load/Save/SaveAs from/to disctionary file             ''~7915I~
 '************************************************************************************''~7915I~
 Public Class ClassMRU                                                  ''~7522R~
     'localization not required                                             ''~7618R~
     Public Const MRULISTSZ = 10                                        ''~7522R~
-    Public Const ID_DICTIONARY = 4                                  ''~7915I~
+    Public Const ID_DICTIONARY = 4                                     ''~v012R~
+    Public Const ID_WORDS=5                                            ''+v065I~
     Private MRUList As New List(Of String)                         ''~7421R~''~7522M~
     Private MRUListImage As New List(Of String)                            ''~7411I~''~7421R~''~7522M~
     Private MRUListText As New List(Of String)                             ''~7411I~''~7421R~''~7522M~
     Private MRUListKanaText As New List(Of String)                         ''~7411I~''~7421R~''~7522M~
     Private MRUListBESText As New List(Of String)                          ''~7412I~''~7421R~''~7522M~
-    Private MRUListDictionary As New List(Of String)                   ''~7916I~
+    Private MRUListDictionary As New List(Of String)                   ''~v012R~
+    Private MRUListWords As New List(Of String)                        ''+v065I~
     Public Sub New()                                                   ''~7522I~
         '        loadMRUList()                                                  ''~7522M~
     End Sub                                                            ''~7522I~
@@ -21,8 +24,10 @@ Public Class ClassMRU                                                  ''~7522R~
                 MRUList = MRUListImage                                   ''~7411I~''~7522M~
             Case 2 'KanjiText                                          ''~7411I~''~7522M~
                 MRUList = MRUListText                                    ''~7411I~''~7522M~
-            Case ID_DICTIONARY                                         ''~7916I~
-                MRUList = MRUListDictionary                            ''~7916I~
+            Case ID_DICTIONARY                                         ''~v012R~
+                MRUList = MRUListDictionary                            ''~v012R~
+            Case ID_WORDS                                              ''+v065I~
+                MRUList = MRUListWords                                 ''+v065I~
             Case Else '3 'KanaText                                           ''~7411I~''~7522I~
                 MRUList = MRUListKanaText                                ''~7411I~''~7522M~
         End Select                                                     ''~7411I~''~7522M~
@@ -49,8 +54,10 @@ Public Class ClassMRU                                                  ''~7522R~
                 My.Settings.CfgMRUImage = Pstr                           ''~7411I~''~7522M~
             Case 2 'KanjiText                                          ''~7411I~''~7522M~
                 My.Settings.CfgMRUtext = Pstr                            ''~7411I~''~7522M~
-            Case ID_DICTIONARY                                         ''~7916I~
-                My.Settings.CfgMRUDictionary = Pstr                    ''~7916I~
+            Case ID_DICTIONARY                                         ''~v012R~
+                My.Settings.CfgMRUDictionary = Pstr                    ''~v012R~
+            Case ID_WORDS                                              ''+v065I~
+                My.Settings.CfgMRUWords = Pstr                         ''+v065I~
             Case 3 'KanaText                                           ''~7411I~''~7522M~
                 My.Settings.CfgMRUKanaText = Pstr                        ''~7411I~''~7522M~
         End Select                                                     ''~7411I~''~7522M~
@@ -75,15 +82,18 @@ Public Class ClassMRU                                                  ''~7522R~
             My.Settings.CfgMRUImage = ""                                 ''~7522I~
             My.Settings.CfgMRUtext = ""                                  ''~7522I~
             My.Settings.CfgMRUKanaText = ""                              ''~7522I~
-            My.Settings.CfgMRUDictionary = ""                          ''~7916I~
+            My.Settings.CfgMRUDictionary = ""                          ''~v012R~
+            My.Settings.CfgMRUWords = ""                               ''+v065I~
         End If                                                         ''~7522I~
         Select Case Pcase                                              ''~7522I~
             Case 1 'Image                                              ''~7522I~
                 str = My.Settings.CfgMRUImage                            ''~7522I~
             Case 2 'KanjiText                                          ''~7522I~
                 str = My.Settings.CfgMRUtext                             ''~7522I~
-            Case ID_DICTIONARY                                         ''~7916I~
-                str = My.Settings.CfgMRUDictionary                       ''~7916I~
+            Case ID_DICTIONARY                                         ''~v012R~
+                str = My.Settings.CfgMRUDictionary                     ''~v012R~
+            Case ID_WORDS                                              ''+v065I~
+                str = My.Settings.CfgMRUWords                          ''+v065I~
             Case Else '3 'KanaText                                     ''~7522I~
                 str = My.Settings.CfgMRUKanaText                         ''~7522I~
         End Select                                                     ''~7522I~
@@ -112,20 +122,22 @@ Public Class ClassMRU                                                  ''~7522R~
         Dim str = sb.ToString()                                        ''~7411R~''~7522M~
         saveMRUListCfg(Pcase, str)                                      ''~7411I~''~7522M~
     End Sub                                                            ''~7522M~
-    Public Function clearMRUList(Pcase As Integer) As Integer          ''+7916I~
-    	Dim tmp As List(Of String)                                     ''+7916I~
-        Select Case Pcase                                              ''+7916I~
-            Case 1 'Image                                              ''+7916I~
-                tmp = MRUListImage                                     ''+7916I~
-            Case 2 'KanjiText                                          ''+7916I~
-                tmp = MRUListText                                      ''+7916I~
-            Case ID_DICTIONARY                                         ''+7916I~
-                tmp = MRUListDictionary                                ''+7916I~
-            Case Else '3 'KanaText                                     ''+7916I~
-                tmp = MRUListKanaText                                  ''+7916I~
-        End Select                                                     ''+7916I~
-        Dim rc=tmp.Count                                               ''+7916I~
-        tmp.clear()                                                    ''+7916I~
-        Return rc                                                      ''+7916I~
-    End Function                                                       ''+7916I~
+    Public Function clearMRUList(Pcase As Integer) As Integer          ''~v012R~
+    	Dim tmp As List(Of String)                                     ''~v012R~
+        Select Case Pcase                                              ''~v012R~
+            Case 1 'Image                                              ''~v012R~
+                tmp = MRUListImage                                     ''~v012R~
+            Case 2 'KanjiText                                          ''~v012R~
+                tmp = MRUListText                                      ''~v012R~
+            Case ID_DICTIONARY                                         ''~v012R~
+                tmp = MRUListDictionary                                ''~v012R~
+            Case ID_WORDS                                              ''+v065I~
+                tmp = MRUListWords                                     ''+v065I~
+            Case Else '3 'KanaText                                     ''~v012R~
+                tmp = MRUListKanaText                                  ''~v012R~
+        End Select                                                     ''~v012R~
+        Dim rc=tmp.Count                                               ''~v012R~
+        tmp.clear()                                                    ''~v012R~
+        Return rc                                                      ''~v012R~
+    End Function                                                       ''~v012R~
 End Class

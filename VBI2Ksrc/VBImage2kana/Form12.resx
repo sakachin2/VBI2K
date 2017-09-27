@@ -118,58 +118,52 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="CheckBox1.AutoSize" type="System.Boolean, mscorlib">
+  <data name="CheckBoxBES99.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="CheckBoxKatakanaDoc.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="CheckBoxBES99.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="CheckBoxBES99.Font" type="System.Drawing.Font, System.Drawing">
+    <value>MS UI Gothic, 12pt</value>
+  </data>
+  <data name="CheckBoxBES99.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="CheckBoxBES99.Size" type="System.Drawing.Size, System.Drawing">
+    <value>271, 20</value>
+  </data>
+  <data name="CheckBoxBES99.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="CheckBoxBES99.Text" xml:space="preserve">
     <value>点訳作法を考慮</value>
   </data>
-  <data name="&gt;&gt;CheckBox1.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;CheckBoxBES99.Name" xml:space="preserve">
+    <value>CheckBoxBES99</value>
   </data>
-  <data name="&gt;&gt;ButtonCancel.Name" xml:space="preserve">
-    <value>ButtonCancel</value>
+  <data name="&gt;&gt;CheckBoxBES99.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="ButtonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+  <data name="&gt;&gt;CheckBoxBES99.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
-  <data name="CheckBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>82, 16</value>
-  </data>
-  <data name="&gt;&gt;CheckBoxKatakanaDoc.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;Panel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="CheckBoxEnglishDoc.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
-  </data>
-  <data name="CheckBoxEnglishDoc.Font" type="System.Drawing.Font, System.Drawing">
-    <value>MS UI Gothic, 12pt</value>
-  </data>
-  <data name="CheckBoxBES99.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
-  </data>
-  <data name="ButtonCancel.Text" xml:space="preserve">
-    <value>キャンセル</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>271, 126</value>
+  <data name="&gt;&gt;CheckBoxBES99.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="CheckBoxKatakanaDoc.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;ButtonCancel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="CheckBoxKatakanaDoc.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
   </data>
-  <data name="&gt;&gt;CheckBoxBES99.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="CheckBoxKatakanaDoc.Font" type="System.Drawing.Font, System.Drawing">
+    <value>MS UI Gothic, 12pt</value>
+  </data>
+  <data name="CheckBoxKatakanaDoc.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 20</value>
   </data>
   <data name="CheckBoxKatakanaDoc.Size" type="System.Drawing.Size, System.Drawing">
     <value>271, 20</value>
@@ -177,196 +171,244 @@
   <data name="CheckBoxKatakanaDoc.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="ButtonOK.Size" type="System.Drawing.Size, System.Drawing">
-    <value>99, 35</value>
-  </data>
   <data name="CheckBoxKatakanaDoc.Text" xml:space="preserve">
     <value>カタカナ文書</value>
-  </data>
-  <data name="ButtonHelp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>84, 35</value>
-  </data>
-  <data name="&gt;&gt;ButtonCancel.Parent" xml:space="preserve">
-    <value>Panel1</value>
-  </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 12</value>
-  </data>
-  <data name="&gt;&gt;ButtonHelp.Parent" xml:space="preserve">
-    <value>Panel1</value>
-  </data>
-  <data name="&gt;&gt;CheckBoxEnglishDoc.Name" xml:space="preserve">
-    <value>CheckBoxEnglishDoc</value>
-  </data>
-  <data name="&gt;&gt;ButtonOK.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="CheckBoxBES99.Size" type="System.Drawing.Size, System.Drawing">
-    <value>271, 20</value>
-  </data>
-  <data name="CheckBoxEnglishDoc.Size" type="System.Drawing.Size, System.Drawing">
-    <value>271, 20</value>
-  </data>
-  <data name="&gt;&gt;CheckBoxBES99.Name" xml:space="preserve">
-    <value>CheckBoxBES99</value>
-  </data>
-  <data name="ButtonOK.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="ButtonHelp.Text" xml:space="preserve">
-    <value>ヘルプ</value>
-  </data>
-  <data name="CheckBoxEnglishDoc.Text" xml:space="preserve">
-    <value>英語文書</value>
-  </data>
-  <data name="CheckBoxBES99.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="Panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Bottom</value>
-  </data>
-  <data name="CheckBoxEnglishDoc.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="ButtonCancel.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;CheckBoxEnglishDoc.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="Panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 91</value>
-  </data>
-  <data name="ButtonHelp.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="CheckBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="CheckBox1.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="Panel1.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;CheckBoxKatakanaDoc.Parent" xml:space="preserve">
-    <value>$this</value>
   </data>
   <data name="&gt;&gt;CheckBoxKatakanaDoc.Name" xml:space="preserve">
     <value>CheckBoxKatakanaDoc</value>
   </data>
-  <data name="&gt;&gt;Panel1.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;CheckBoxKatakanaDoc.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Panel1.Name" xml:space="preserve">
+  <data name="&gt;&gt;CheckBoxKatakanaDoc.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;CheckBoxKatakanaDoc.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;ButtonCancel.Name" xml:space="preserve">
+    <value>ButtonCancel</value>
+  </data>
+  <data name="&gt;&gt;ButtonCancel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ButtonCancel.Parent" xml:space="preserve">
     <value>Panel1</value>
   </data>
   <data name="&gt;&gt;ButtonCancel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;ButtonHelp.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;CheckBoxKatakanaDoc.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="CheckBoxBES99.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="CheckBox1.Text" xml:space="preserve">
-    <value>CheckBox1</value>
-  </data>
-  <data name="CheckBoxBES99.Font" type="System.Drawing.Font, System.Drawing">
-    <value>MS UI Gothic, 12pt</value>
-  </data>
-  <data name="&gt;&gt;ButtonOK.Name" xml:space="preserve">
-    <value>ButtonOK</value>
-  </data>
-  <data name="&gt;&gt;CheckBox1.Name" xml:space="preserve">
-    <value>CheckBox1</value>
-  </data>
-  <data name="&gt;&gt;CheckBoxBES99.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="ButtonCancel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>88, 35</value>
-  </data>
-  <data name="ButtonHelp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>99, 0</value>
-  </data>
-  <data name="CheckBoxEnglishDoc.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 40</value>
-  </data>
-  <data name="CheckBoxKatakanaDoc.Font" type="System.Drawing.Font, System.Drawing">
-    <value>MS UI Gothic, 12pt</value>
-  </data>
   <data name="&gt;&gt;ButtonHelp.Name" xml:space="preserve">
     <value>ButtonHelp</value>
   </data>
-  <data name="Panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>271, 35</value>
+  <data name="&gt;&gt;ButtonHelp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="ButtonOK.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Left</value>
+  <data name="&gt;&gt;ButtonHelp.Parent" xml:space="preserve">
+    <value>Panel1</value>
   </data>
   <data name="&gt;&gt;ButtonHelp.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>文書オプション</value>
+  <data name="&gt;&gt;ButtonOK.Name" xml:space="preserve">
+    <value>ButtonOK</value>
   </data>
-  <data name="&gt;&gt;CheckBox1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;CheckBoxEnglishDoc.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="ButtonHelp.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Left</value>
-  </data>
-  <data name="ButtonOK.Text" xml:space="preserve">
-    <value>OK</value>
+  <data name="&gt;&gt;ButtonOK.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ButtonOK.Parent" xml:space="preserve">
     <value>Panel1</value>
   </data>
-  <data name="CheckBoxBES99.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="&gt;&gt;CheckBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;CheckBoxEnglishDoc.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;CheckBoxBES99.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="ButtonCancel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Left</value>
-  </data>
   <data name="&gt;&gt;ButtonOK.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>DocOptions</value>
+  <data name="Panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
+  <data name="Panel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 91</value>
+  </data>
+  <data name="Panel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>271, 35</value>
+  </data>
+  <data name="Panel1.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;Panel1.Name" xml:space="preserve">
+    <value>Panel1</value>
+  </data>
+  <data name="&gt;&gt;Panel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Panel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
+  <data name="&gt;&gt;Panel1.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="ButtonCancel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Left</value>
+  </data>
   <data name="ButtonCancel.Location" type="System.Drawing.Point, System.Drawing">
     <value>183, 0</value>
+  </data>
+  <data name="ButtonCancel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 35</value>
+  </data>
+  <data name="ButtonCancel.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="ButtonCancel.Text" xml:space="preserve">
+    <value>キャンセル</value>
+  </data>
+  <data name="&gt;&gt;ButtonCancel.Name" xml:space="preserve">
+    <value>ButtonCancel</value>
+  </data>
+  <data name="&gt;&gt;ButtonCancel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ButtonCancel.Parent" xml:space="preserve">
+    <value>Panel1</value>
+  </data>
+  <data name="&gt;&gt;ButtonCancel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ButtonHelp.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="ButtonHelp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>99, 0</value>
+  </data>
+  <data name="ButtonHelp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>84, 35</value>
+  </data>
+  <data name="ButtonHelp.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="ButtonHelp.Text" xml:space="preserve">
+    <value>ヘルプ</value>
+  </data>
+  <data name="&gt;&gt;ButtonHelp.Name" xml:space="preserve">
+    <value>ButtonHelp</value>
+  </data>
+  <data name="&gt;&gt;ButtonHelp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ButtonHelp.Parent" xml:space="preserve">
+    <value>Panel1</value>
+  </data>
+  <data name="&gt;&gt;ButtonHelp.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ButtonOK.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="ButtonOK.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="ButtonOK.Size" type="System.Drawing.Size, System.Drawing">
+    <value>99, 35</value>
+  </data>
+  <data name="ButtonOK.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="ButtonOK.Text" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="&gt;&gt;ButtonOK.Name" xml:space="preserve">
+    <value>ButtonOK</value>
+  </data>
+  <data name="&gt;&gt;ButtonOK.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ButtonOK.Parent" xml:space="preserve">
+    <value>Panel1</value>
+  </data>
+  <data name="&gt;&gt;ButtonOK.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="CheckBoxEnglishDoc.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="CheckBoxKatakanaDoc.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 20</value>
+  <data name="CheckBoxEnglishDoc.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="CheckBoxEnglishDoc.Font" type="System.Drawing.Font, System.Drawing">
+    <value>MS UI Gothic, 12pt</value>
+  </data>
+  <data name="CheckBoxEnglishDoc.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 40</value>
+  </data>
+  <data name="CheckBoxEnglishDoc.Size" type="System.Drawing.Size, System.Drawing">
+    <value>271, 20</value>
+  </data>
+  <data name="CheckBoxEnglishDoc.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="CheckBoxEnglishDoc.Text" xml:space="preserve">
+    <value>英語文書</value>
+  </data>
+  <data name="&gt;&gt;CheckBoxEnglishDoc.Name" xml:space="preserve">
+    <value>CheckBoxEnglishDoc</value>
+  </data>
+  <data name="&gt;&gt;CheckBoxEnglishDoc.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;CheckBoxEnglishDoc.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;CheckBoxEnglishDoc.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="CheckBoxUTF8.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="CheckBoxUTF8.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="CheckBoxUTF8.Font" type="System.Drawing.Font, System.Drawing">
+    <value>MS UI Gothic, 12pt</value>
+  </data>
+  <data name="CheckBoxUTF8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 60</value>
+  </data>
+  <data name="CheckBoxUTF8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>271, 20</value>
+  </data>
+  <data name="CheckBoxUTF8.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="CheckBoxUTF8.Text" xml:space="preserve">
+    <value>UTF8</value>
+  </data>
+  <data name="&gt;&gt;CheckBoxUTF8.Name" xml:space="preserve">
+    <value>CheckBoxUTF8</value>
+  </data>
+  <data name="&gt;&gt;CheckBoxUTF8.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;CheckBoxUTF8.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;CheckBoxUTF8.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 12</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>271, 126</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>文書オプション</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>DocOptions</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

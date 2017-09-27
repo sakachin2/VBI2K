@@ -1,11 +1,11 @@
-﻿'CID:''+v032R~:#72                             update#=  158;         ''+v032R~
+﻿'CID:''+v032R~:#72                             update#=  159;         ''~v032R~
 '************************************************************************************''~v017I~
 'v032 2017/09/21 English document, i2e was not used                    ''~v032I~
 'v018 2017/09/17 requires activate to move ImageView to top of z-order when next image open''~v018I~
 'v017 2017/09/17 Image2kanji issues already processed msg when saved even updated,it dose not allow re-i2k''~v017I~
 '************************************************************************************''~v017I~
 Public Class Form2
-    'localize done                                                         ''~7617I~
+    '*** image file processing                                         ''+v032R~
     Const SCROLLBAR_MARGIN = 0                                            ''~7408R~
     Const SCALELIMIT_LOW = 100     'smallest pixcell                  ''~7408I~
     Private formWidth As Integer = My.Settings.CfgFormSizeWImage            ''~7411I~''~7430R~

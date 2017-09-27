@@ -336,4 +336,37 @@
   <data name="STR_MSG_CHANGELETTERWRAP_QUERY" xml:space="preserve">
     <value>{0} : {1} </value>
   </data>
+  <data name="STR_MSG_TEXT_NEW" xml:space="preserve">
+    <value>Create New</value>
+  </data>
+  <data name="STR_MSG_TEXT_READ" xml:space="preserve">
+    <value>File Encoding={0}</value>
+  </data>
+  <data name="STR_FILTER_WORDS" xml:space="preserve">
+    <value>Words File(*.wrd)|*.wrd|All(*.*)|*.*</value>
+  </data>
+  <data name="STR_ERR_MSG_WORDS_ROW_IGNORED" xml:space="preserve">
+    <value>Row {0} contains error, Total {1} error lines</value>
+  </data>
+  <data name="STR_ERR_MSG_WORDS_ERRVALUE" xml:space="preserve">
+    <value>Key have to be one Char and ";" is not available({0})</value>
+  </data>
+  <data name="STR_MSG_CONFIRM_DISCARD_WORDS_UPDATE" xml:space="preserve">
+    <value>Discard update ?</value>
+  </data>
+  <data name="STR_ERR_MSG_WORDS_FILE_LINE_FORMAT" xml:space="preserve">
+    <value>Words File LineNo = {0} contains error</value>
+  </data>
+  <data name="STR_ERR_MSG_WORDS_FILE_NO_SAVE_FILE" xml:space="preserve">
+    <value>This worrd definition is not loaded from a file, use SaveAS button</value>
+  </data>
+  <data name="STR_INFO_MSG_WORDS_LOADED" xml:space="preserve">
+    <value>Words file was loaded.</value>
+  </data>
+  <data name="STR_ERR_MSG_NOT_REGISTERED_KEY" xml:space="preserve">
+    <value>Not Registered on Word definition.(Ctrl+{0})</value>
+  </data>
+  <data name="STR_ERR_MSG_NOT_ENABLED_KEY" xml:space="preserve">
+    <value>On phrase definition, "Use" is not checked ON(Ctrl+{0})</value>
+  </data>
 </root>

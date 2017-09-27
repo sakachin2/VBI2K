@@ -25,4 +25,11 @@ English Document:
   When checked ON,  "Kana" button simply send text to Kana form.
   If "EN" button was used at Image Foram, it is treated as English document.
 
-2017/09/20
+UTF8:
+  Specify Kanji Document is UTF8.
+  Encoding of Kanji text file extracted from image document is SJIS.
+  This option is applied to the text file separately created.
+  When changed, currently opened file is read again,
+  and also applied to the following.
+
+2017/09/24

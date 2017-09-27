@@ -1,5 +1,6 @@
-﻿''*CID:''+v033R~:#72                          update#=  226;          ''~v033R~
+﻿''*CID:''+v062R~:#72                          update#=  229;          ''~v062R~
 '************************************************************************************''~v001I~
+'v062 2017/09/23 kanji repeated char "々" is not treated as kanji      ''~v062I~
 'v033 2017/09/21 insert space before katakana only when prev of katakana is josi or 2 sounds string;''~v033I~
 '                it is difficult,so no space insert berfore after katakana''~v033I~
 'v032 2017/09/21 English document, i2e was not used                    ''~v032I~
@@ -36,13 +37,18 @@ Public Class ClassKanaText                                             ''~7522R~
     ''~7522I~
     Private Const FONTSIZE_INCREASE = 5                                        ''~7522I~''~7608R~
     Private Const FUSEJI_FOLLOWING = "まみむめもマミムメモﾏﾐﾑﾒﾓ"         ''~7608I~
-    Private Const HIRAGANA_RI = "り"                                   ''~v009I~
-    Private Const KATAKANA_RI = "リ"                                   ''~v009I~
-    Private Const HIRAGANA_HE = "へ"                                   ''~v004I~
-    Private Const HIRAGANA_BE = "べ"                                   ''~v004I~
-    Private Const KATAKANA_HE = "ヘ"                                   ''~v004I~
-    Private Const KATAKANA_BE = "ベ"                                   ''~v004I~
-    Private Const KATAKANA_CHOON = "ー"                                ''~v005I~
+'   Private Const HIRAGANA_RI = "り"                                   ''~v009I~''+v062R~
+'   Private Const KATAKANA_RI = "リ"                                   ''~v009I~''+v062R~
+'   Private Const HIRAGANA_HE = "へ"                                   ''~v004I~''+v062R~
+    Private Const HIRAGANA_HE = "へ"c                                  ''+v062I~
+'   Private Const HIRAGANA_BE = "べ"                                   ''~v004I~''+v062R~
+    Private Const HIRAGANA_BE = "べ"c                                  ''+v062I~
+'   Private Const KATAKANA_HE = "ヘ"                                   ''~v004I~''+v062R~
+    Private Const KATAKANA_HE = "ヘ"c                                  ''+v062I~
+'   Private Const KATAKANA_BE = "ベ"                                   ''~v004I~''+v062R~
+    Private Const KATAKANA_BE = "ベ"c                                  ''+v062I~
+'   Private Const KATAKANA_CHOON = "ー"                                ''~v005I~''~v062R~
+    Private Const KATAKANA_CHOON = "ー"c                               ''~v062I~
     '   Private Const DELMCHARS = " ,.　、。"                              ''~v023R~
     Private Const DELMCHARS = " ,.?!　、。・？！｡､･"    '+ hankaku katakana                            ''~v010I~''~v023I~
     Private Const KAKECHARS = "カケヵヶ"                               ''~v025I~
@@ -517,7 +523,7 @@ Public Class ClassKanaText                                             ''~7522R~
 '                               If DocOptions.swBES99 Then             ''~v010I~''~v030R~''~v033R~
 '                                   appendSpace(sb, 1)                     ''~v010I~''~v033R~
 '                               End If                                     ''~v010R~''~v033R~
-'                           End If                                         ''~v010I~''+v033R~
+'                           End If                                         ''~v010I~''~v033R~
                         End If                                           ''~v031I~
                         '                       Trace.W("conv2kanaM2 hira appendto SbConv chii=" & chii)            ''~v010I~''~v029R~
                         sbConv.Append(chii)                            ''~v010I~
@@ -685,6 +691,7 @@ Public Class ClassKanaText                                             ''~7522R~
                 Dim kanjistr As String = PsbConv.ToString()              ''~v010I~
                 kanastr = strConv(Psb, kanjistr)                         ''~v010I~
                 '               Trace.W("strConvM2 kanji=" & kanjistr & ",kanastr=" & kanastr)          '@@@@test''~v010I~''~v029R~
+                Debug.WriteLine("strConvM2 kanji=" & kanjistr & ",kanastr=" & kanastr)          '@@@@test''~v033I~
                 '               If DocOptions.swBES99 Then                         ''~v014I~''~v016R~''~v030R~
                 '                   kanastr = applyBES99_U2Choon(kanastr)                ''~v014I~''~v016R~
                 '               End If                                                 ''~v014I~''~v016R~

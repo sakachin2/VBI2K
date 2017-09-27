@@ -1,6 +1,12 @@
-﻿'CID:''+v050R~:#72                             update#=  334;         ''+v050R~
+﻿'CID:''+v073R~:#72                             update#=  364;         ''+v073R~
 '************************************************************************************''~v006I~
-'v050 2017/09/23 kanji form,saved msg to status bar                    ''+v050I~
+'v073 2017/09/27 (Bug)crash when words dialog update, close form3 then replied discard cancel''~v073I~
+'v071 2017/09/26 (Bug) clush when send from SpecialCharDialog after form3 closed''~v071I~
+'v067 2017/09/25 change caret width                                    ''~v067I~
+'v065 2017/09/24 Word dialog by Ctrl+char(except "1"-"0")              ''~v065I~
+'v064 2017/09/24 (Bug) Doc option is not initialy applied              ''~v064I~
+'v063 2017/09/24 support kanji file encoded by UTF8                    ''~v063I~
+'v050 2017/09/23 kanji form,saved msg to status bar                    ''~v050I~
 'v037 2017/09/22 assign F4 as query of replacing char                  ''~v037I~
 '                Forecolor have to be InactiveCaptureText to get effective for switching Text by language''~v037I~
 'v035 2017/09/21 additional to v017 when discard old=yes               ''~v035I~
@@ -18,6 +24,12 @@ Public Class Form3
     '**image 2 kanji by MODI                                               ''~7619I~
     'localized                                                             ''~7617I~
     '*** kanji text file                                                   ''~7612I~
+    ''~v067I~
+    Private Declare Auto Function CreateCaret Lib "user32.dll" (hWnd As IntPtr, hBitmap As IntPtr, nWidth As Integer, nHeight As Integer) As Boolean ''~v067I~
+    Private Declare Auto Function ShowCaret Lib "user32.dll" (hWnd As IntPtr) As Boolean ''~v067I~
+    Private caretWidth As Integer = 2                                    ''~v067R~
+    Private caretHeight As Integer                                     ''~v067M~
+    ''~v067I~
     Private Const FONTSIZE_INCREASE = 1                                          ''~7411R~''~7412R~''~7429M~''~7614R~
     '   Private TITLE_READ = "テキストファイル"                            ''~7614I~''~7617R~
     Private STR_PUNCT As String = " 　,、｡。?？"                           ''~7428I~''~7430R~
@@ -38,6 +50,10 @@ Public Class Form3
     Public swSaved As Boolean = False                                  ''~v015I~
     Private pendingStatusMsg As String = Nothing                              ''~v034I~
 
+    Sub New()                                                          ''~v064I~
+        InitializeComponent()                                          ''~v064I~
+        DocOptions.initByCFG()  ' load English doc option etc          ''~v064I~
+    End Sub                                                            ''~v064I~
     Private Sub Form3_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load ''~7412I~''~7514R~
         ToolStripButtonUndo.enabled = False                              ''~7429I~
         ToolStripButtonRedo.enabled = False                              ''~7429I~
@@ -46,12 +62,23 @@ Public Class Form3
         title = Me.text    'save before update by lang                 ''~7614R~
         setLocale(False)   'change title for extracted                 ''~7614R~
         updateTitle(title)                                             ''~7614I~
-        DocOptions.initByCFG()  ' load English doc option etc          ''~v032I~
+        '       DocOptions.initByCFG()  ' load English doc option etc          ''~v032I~''~v064R~
     End Sub                                                            ''~7412I~
     Private Sub Form3_Shown(sender As System.Object, e As System.EventArgs) Handles Me.Shown ''~7412I~''~7514R~
         Me.Width = formWidth                                           ''~7619I~
         Me.Height = formHeight                                         ''~7619I~
+        showCustomCaret()                                              ''~v067R~
+        ''~v067I~
     End Sub                                                            ''~7412I~
+    Private Sub showCustomCaret()                                      ''~v067I~
+        Dim fnt As Font = TextBox1.Font                                  ''~v067I~
+        caretHeight = CInt(fnt.GetHeight())                              ''~v067I~
+        CreateCaret(TextBox1.handle, IntPtr.Zero, caretWidth, caretHeight) ''~v067I~
+        ShowCaret(TextBox1.handle)                                     ''~v067I~
+    End Sub                                                            ''~v067I~
+    Private Sub TextBox_GotFocus(sender As System.Object, e As System.EventArgs) Handles TextBox1.GotFocus ''~v067I~
+        showCustomCaret()                                              ''~v067I~
+    End Sub                                                            ''~v067I~
     Private Sub Form3_Activated(sender As System.Object, e As System.EventArgs) Handles Me.Activated ''~7514I~
         '        TextBox1.DeSelectAll()                                         ''~7514I~''~7519R~
     End Sub                                                            ''~7514I~
@@ -66,7 +93,7 @@ Public Class Form3
     Private Sub Form3_Closing(sender As System.Object, e As System.ComponentModel.CancelEventArgs) Handles MyBase.Closing ''~7429I~
         chkDiscard(e)                                                  ''~7508I~
     End Sub                                                            ''~7429I~
-    Private Sub ContextMenu_Opening(sender As System.Object, e As System.ComponentModel.CancelEventArgs) Handles ContextMenuStrip1.Opening, ContextMenuStrip1.Opening ''~7614I~
+    Private Sub ContextMenu_Opening(sender As System.Object, e As System.ComponentModel.CancelEventArgs) Handles ContextMenuWordSelection.Opening, ContextMenuWordSelection.Opening ''~7614I~
         '       swKatakanaOkurigana = My.Settings.CFGF3_KatakanaOkurigana      ''~v006I~''~v030R~
         Dim menu As ContextMenuStrip = CType(sender, ContextMenuStrip) ''~7614I~
         FormOptions.setLangContextMenu(menu, GetType(Form3))           ''~7614I~
@@ -74,7 +101,15 @@ Public Class Form3
     End Sub                                                            ''~7614I~
     Public Function chkDiscard(e As System.ComponentModel.CancelEventArgs) As Boolean ''~7508R~
         ' rc:true=continue process                                     ''~7508I~
+        if Not Form1.closeForm(Form13.dlgWord) 'canceled               ''~v073I~
+        	if e isnot Nothing                                         ''~v073I~
+            	e.Cancel=True                                          ''~v073I~
+            end if                                                     ''~v073I~
+        	return true   ' continue process                           ''~v073I~
+        end if                                                         ''~v073I~
         Form1.closeForm(Form1.dlgFind3)                                ''~7521I~
+'       Form1.closeForm(Form13.dlgWord)                                ''~v065I~''~v073R~
+        Form1.closeForm(Form1.MainForm.dlgSpecialKey,false) 'keep dlgSpecialKey''~v071R~
         Dim rc As Boolean = True                                       ''~7508I~
         If IsNothing(undoRedo) Then      'fine not found or read err   ''~7617I~
             Return True                                                ''~7617I~
@@ -152,13 +187,22 @@ Public Class Form3
             swNewText = True                                             ''~7612I~
             readText(fnm)                                              ''~7612R~
             swNewText = False                                            ''~7612I~
+            showStatus(Rstr.getStr("STR_MSG_TEXT_NEW"))                ''~v063R~
         Else                                                           ''~7612I~
             Me.Text = prefix & Form1.TITLE_SEP & Pfnm                        ''~7614R~''~7619R~
             readText(Pfnm)                                                 ''~7411I~''~7612I~
+            Dim encoding As String = IIf(DocOptions.swUTF8, System.Text.Encoding.UTF8.EncodingName, System.Text.Encoding.Default.EncodingName) ''~v063R~
+            showStatus(String.Format(Rstr.getStr("STR_MSG_TEXT_READ"), encoding)) ''~v063R~
         End If                                                          ''~7612I~
         '       Me.Width = formWidth                                             ''~7411R~''~7619R~
         '       Me.Height = formHeight                                           ''~7411R~''~7619R~
     End Sub                                                            ''~7411I~
+    Sub changedEncoding()                                              ''~v063I~
+        If Not chkDiscard(Nothing) Then                                     ''~v063I~
+            Exit Sub                                                   ''~v063I~
+        End If                                                         ''~v063I~
+        setText(textFilename)                                          ''~v063I~
+    End Sub                                                            ''~v063I~
 
 
     Sub readText(Pfnm As String)                                       ''~7411R~
@@ -174,7 +218,11 @@ Public Class Form3
                 Exit Sub                                                   ''~7410I~''~7612R~
             End If                                                         ''~7410I~''~7612R~
             Try                                                        ''~7612R~
-                text = System.IO.File.ReadAllText(textFilename, System.Text.Encoding.Default) ''~7410I~''~7609R~''~7612R~
+                If DocOptions.swUTF8 Then                                     ''~v063I~
+                    text = System.IO.File.ReadAllText(textFilename, System.Text.Encoding.UTF8) ''~v063I~
+                Else                                                     ''~v063I~
+                    text = System.IO.File.ReadAllText(textFilename, System.Text.Encoding.Default) ''~7410I~''~7609R~''~7612R~
+                End If                                                   ''~v063I~
                 swRead = True                                            ''~7612I~
             Catch ex As Exception                                      ''~7612R~
                 Form1.ReadError(Pfnm, ex)                                   ''~7428I~''~7612R~
@@ -240,8 +288,8 @@ Public Class Form3
             Form1.MainForm.insertMRUList(2, Pfnm)                                ''~7429I~''~7521R~
             undoRedo.saved()                                           ''~7430I~
             '           MessageBox.Show(Pfnm & " を保存しました")                  ''~7513I~''~7617R~
-'           MessageBox.Show(Pfnm, Rstr.MSG_INFO_SAVED)                       ''~7617I~''+v050R~
-            showStatus(Rstr.MSG_INFO_SAVED & ":"  & Pfnm)              ''+v050I~
+            '           MessageBox.Show(Pfnm, Rstr.MSG_INFO_SAVED)                       ''~7617I~''~v050R~
+            showStatus(Rstr.MSG_INFO_SAVED & ":" & Pfnm)              ''~v050I~
             swSaved = True                                             ''~v015I~
         Catch ex As Exception                                          ''~7410I~
             Form1.WriteError(Pfnm, ex)                                  ''~7428I~
@@ -433,7 +481,16 @@ Public Class Form3
         showDocOptionsDialog()                                         ''~v030I~
     End Sub                                                            ''~v030I~
     Public Sub showDocOptionsDialog()                                  ''~v030I~
-        DocOptions.showDlg(Me)                                         ''~v030I~
+        '       DocOptions.showDlg(Me)                                         ''~v030I~''~v063R~
+        Dim oldUTF8 As Boolean = DocOptions.swUTF8                       ''~v063I~
+        Dim rc As Integer = DocOptions.showDlg(Me)                       ''~v063I~
+        If rc = DialogResult.OK Then                                          ''~v063I~
+            If DocOptions.swUTF8 <> oldUTF8 Then                              ''~v063I~
+                If swRead Then 'file read                                   ''~v063I~
+                    changedEncoding()                                  ''~v063I~
+                End If                                                 ''~v063I~
+            End If                                                     ''~v063I~
+        End If                                                         ''~v063I~
     End Sub                                                            ''~v030I~
     '    Private Sub ToolStripMenuItemkatakanaOkurigana_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripMenuItem_DocOptions.Click ''~7516I~''~v006R~''~v030R~
     '        swapKatakanaOkurigana()                                               ''~7516I~''~v006R~''~v030R~
@@ -442,6 +499,10 @@ Public Class Form3
         '       Form1.MainForm.dlgDictionary.showDlg()                         ''~v008R~
         Form11.sharedShowDlg()                                         ''~v008R~
     End Sub                                                            ''~v008I~
+    Private Sub ToolStripMenuItemWords_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripMenuItemWords.Click ''~v065I~
+        '       Form13.sharedShowDlg()                                         ''~v065R~
+        Form13.sharedShowDlg(False)      'not Form1                    ''~v065I~
+    End Sub                                                            ''~v065I~
     Private Sub ToolStripMenuItemFind_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripMenuItemFind.Click ''~v006I~
         showFindDialog()                                               ''~v006I~
     End Sub                                                            ''~v006I~
@@ -513,4 +574,8 @@ Public Class Form3
         msg = String.Format(msg, strSrc, Pch)                          ''~v037R~
         showStatus(msg)     'imediately put msg                        ''~v037I~
     End Sub                                                            ''~v037I~
+
+    Private Sub BackgroundWorker1_DoWork(sender As System.Object, e As System.ComponentModel.DoWorkEventArgs) Handles BackgroundWorker1.DoWork
+
+    End Sub
 End Class

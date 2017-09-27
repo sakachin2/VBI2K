@@ -34,12 +34,15 @@ Partial Class FormOptions
         Me.RBLangEN = New System.Windows.Forms.RadioButton()
         Me.RBLangJP = New System.Windows.Forms.RadioButton()
         Me.RBLangDefault = New System.Windows.Forms.RadioButton()
-        Me.RGLang = New System.Windows.Forms.Panel()
-        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.PanelMiddle = New System.Windows.Forms.Panel()
+        Me.TextBoxKeyFind = New System.Windows.Forms.TextBox()
+        Me.TextBoxKeyWords = New System.Windows.Forms.TextBox()
         Me.TextBoxKeySmallkanaQ = New System.Windows.Forms.TextBox()
         Me.TextBoxKeySpecialChar = New System.Windows.Forms.TextBox()
         Me.TextBoxKeySmallKana = New System.Windows.Forms.TextBox()
-        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.PanelMiddleLabel = New System.Windows.Forms.Panel()
+        Me.TextBoxLabelFind = New System.Windows.Forms.TextBox()
+        Me.TextBoxlabelWords = New System.Windows.Forms.TextBox()
         Me.TextBoxLabelQueryKey = New System.Windows.Forms.TextBox()
         Me.TextBoxLabelSpecialChar = New System.Windows.Forms.TextBox()
         Me.CheckBoxPrintFont = New System.Windows.Forms.CheckBox()
@@ -61,8 +64,8 @@ Partial Class FormOptions
         Me.SplitContainer3.Panel2.SuspendLayout()
         Me.SplitContainer3.SuspendLayout()
         Me.GroupBoxLang.SuspendLayout()
-        Me.Panel1.SuspendLayout()
-        Me.Panel2.SuspendLayout()
+        Me.PanelMiddle.SuspendLayout()
+        Me.PanelMiddleLabel.SuspendLayout()
         Me.SuspendLayout()
         '
         'SplitContainer1
@@ -72,12 +75,10 @@ Partial Class FormOptions
         '
         'SplitContainer1.Panel1
         '
-        resources.ApplyResources(Me.SplitContainer1.Panel1, "SplitContainer1.Panel1")
         Me.SplitContainer1.Panel1.Controls.Add(Me.SplitContainer2)
         '
         'SplitContainer1.Panel2
         '
-        resources.ApplyResources(Me.SplitContainer1.Panel2, "SplitContainer1.Panel2")
         Me.SplitContainer1.Panel2.Controls.Add(Me.SplitContainer3)
         '
         'SplitContainer2
@@ -87,13 +88,11 @@ Partial Class FormOptions
         '
         'SplitContainer2.Panel1
         '
-        resources.ApplyResources(Me.SplitContainer2.Panel1, "SplitContainer2.Panel1")
         Me.SplitContainer2.Panel1.Controls.Add(Me.ButtonPrintFont)
         Me.SplitContainer2.Panel1.Controls.Add(Me.ButtonScrFont)
         '
         'SplitContainer2.Panel2
         '
-        resources.ApplyResources(Me.SplitContainer2.Panel2, "SplitContainer2.Panel2")
         Me.SplitContainer2.Panel2.Controls.Add(Me.TextBoxPrintFontname)
         Me.SplitContainer2.Panel2.Controls.Add(Me.TextBoxScrFontName)
         '
@@ -128,24 +127,21 @@ Partial Class FormOptions
         '
         'SplitContainer3.Panel1
         '
-        resources.ApplyResources(Me.SplitContainer3.Panel1, "SplitContainer3.Panel1")
         Me.SplitContainer3.Panel1.Controls.Add(Me.GroupBoxLang)
-        Me.SplitContainer3.Panel1.Controls.Add(Me.RGLang)
-        Me.SplitContainer3.Panel1.Controls.Add(Me.Panel1)
+        Me.SplitContainer3.Panel1.Controls.Add(Me.PanelMiddle)
         '
         'SplitContainer3.Panel2
         '
-        resources.ApplyResources(Me.SplitContainer3.Panel2, "SplitContainer3.Panel2")
         Me.SplitContainer3.Panel2.Controls.Add(Me.ButtonHelp)
         Me.SplitContainer3.Panel2.Controls.Add(Me.ButtonCancel)
         Me.SplitContainer3.Panel2.Controls.Add(Me.ButtonOK)
         '
         'GroupBoxLang
         '
-        resources.ApplyResources(Me.GroupBoxLang, "GroupBoxLang")
         Me.GroupBoxLang.Controls.Add(Me.RBLangEN)
         Me.GroupBoxLang.Controls.Add(Me.RBLangJP)
         Me.GroupBoxLang.Controls.Add(Me.RBLangDefault)
+        resources.ApplyResources(Me.GroupBoxLang, "GroupBoxLang")
         Me.GroupBoxLang.Name = "GroupBoxLang"
         Me.GroupBoxLang.TabStop = False
         '
@@ -170,19 +166,26 @@ Partial Class FormOptions
         Me.RBLangDefault.TabStop = True
         Me.RBLangDefault.UseVisualStyleBackColor = True
         '
-        'RGLang
+        'PanelMiddle
         '
-        resources.ApplyResources(Me.RGLang, "RGLang")
-        Me.RGLang.Name = "RGLang"
+        Me.PanelMiddle.Controls.Add(Me.TextBoxKeyFind)
+        Me.PanelMiddle.Controls.Add(Me.TextBoxKeyWords)
+        Me.PanelMiddle.Controls.Add(Me.TextBoxKeySmallkanaQ)
+        Me.PanelMiddle.Controls.Add(Me.TextBoxKeySpecialChar)
+        Me.PanelMiddle.Controls.Add(Me.TextBoxKeySmallKana)
+        Me.PanelMiddle.Controls.Add(Me.PanelMiddleLabel)
+        resources.ApplyResources(Me.PanelMiddle, "PanelMiddle")
+        Me.PanelMiddle.Name = "PanelMiddle"
         '
-        'Panel1
+        'TextBoxKeyFind
         '
-        resources.ApplyResources(Me.Panel1, "Panel1")
-        Me.Panel1.Controls.Add(Me.TextBoxKeySmallkanaQ)
-        Me.Panel1.Controls.Add(Me.TextBoxKeySpecialChar)
-        Me.Panel1.Controls.Add(Me.TextBoxKeySmallKana)
-        Me.Panel1.Controls.Add(Me.Panel2)
-        Me.Panel1.Name = "Panel1"
+        resources.ApplyResources(Me.TextBoxKeyFind, "TextBoxKeyFind")
+        Me.TextBoxKeyFind.Name = "TextBoxKeyFind"
+        '
+        'TextBoxKeyWords
+        '
+        resources.ApplyResources(Me.TextBoxKeyWords, "TextBoxKeyWords")
+        Me.TextBoxKeyWords.Name = "TextBoxKeyWords"
         '
         'TextBoxKeySmallkanaQ
         '
@@ -199,27 +202,43 @@ Partial Class FormOptions
         resources.ApplyResources(Me.TextBoxKeySmallKana, "TextBoxKeySmallKana")
         Me.TextBoxKeySmallKana.Name = "TextBoxKeySmallKana"
         '
-        'Panel2
+        'PanelMiddleLabel
         '
-        resources.ApplyResources(Me.Panel2, "Panel2")
-        Me.Panel2.Controls.Add(Me.TextBoxLabelQueryKey)
-        Me.Panel2.Controls.Add(Me.TextBoxLabelSpecialChar)
-        Me.Panel2.Controls.Add(Me.CheckBoxPrintFont)
-        Me.Panel2.Controls.Add(Me.TextBoxLabelSmallKey)
-        Me.Panel2.Name = "Panel2"
+        Me.PanelMiddleLabel.Controls.Add(Me.TextBoxLabelFind)
+        Me.PanelMiddleLabel.Controls.Add(Me.TextBoxlabelWords)
+        Me.PanelMiddleLabel.Controls.Add(Me.TextBoxLabelQueryKey)
+        Me.PanelMiddleLabel.Controls.Add(Me.TextBoxLabelSpecialChar)
+        Me.PanelMiddleLabel.Controls.Add(Me.CheckBoxPrintFont)
+        Me.PanelMiddleLabel.Controls.Add(Me.TextBoxLabelSmallKey)
+        resources.ApplyResources(Me.PanelMiddleLabel, "PanelMiddleLabel")
+        Me.PanelMiddleLabel.Name = "PanelMiddleLabel"
+        '
+        'TextBoxLabelFind
+        '
+        Me.TextBoxLabelFind.BackColor = System.Drawing.SystemColors.Control
+        Me.TextBoxLabelFind.ForeColor = System.Drawing.SystemColors.InactiveCaptionText
+        resources.ApplyResources(Me.TextBoxLabelFind, "TextBoxLabelFind")
+        Me.TextBoxLabelFind.Name = "TextBoxLabelFind"
+        '
+        'TextBoxlabelWords
+        '
+        Me.TextBoxlabelWords.BackColor = System.Drawing.SystemColors.Control
+        Me.TextBoxlabelWords.ForeColor = System.Drawing.SystemColors.InactiveCaptionText
+        resources.ApplyResources(Me.TextBoxlabelWords, "TextBoxlabelWords")
+        Me.TextBoxlabelWords.Name = "TextBoxlabelWords"
         '
         'TextBoxLabelQueryKey
         '
-        resources.ApplyResources(Me.TextBoxLabelQueryKey, "TextBoxLabelQueryKey")
         Me.TextBoxLabelQueryKey.ForeColor = System.Drawing.SystemColors.InactiveCaptionText
+        resources.ApplyResources(Me.TextBoxLabelQueryKey, "TextBoxLabelQueryKey")
         Me.TextBoxLabelQueryKey.Name = "TextBoxLabelQueryKey"
         Me.TextBoxLabelQueryKey.ReadOnly = True
         '
         'TextBoxLabelSpecialChar
         '
-        resources.ApplyResources(Me.TextBoxLabelSpecialChar, "TextBoxLabelSpecialChar")
         Me.TextBoxLabelSpecialChar.BackColor = System.Drawing.SystemColors.Control
         Me.TextBoxLabelSpecialChar.ForeColor = System.Drawing.SystemColors.InactiveCaptionText
+        resources.ApplyResources(Me.TextBoxLabelSpecialChar, "TextBoxLabelSpecialChar")
         Me.TextBoxLabelSpecialChar.Name = "TextBoxLabelSpecialChar"
         Me.TextBoxLabelSpecialChar.ReadOnly = True
         '
@@ -231,8 +250,8 @@ Partial Class FormOptions
         '
         'TextBoxLabelSmallKey
         '
-        resources.ApplyResources(Me.TextBoxLabelSmallKey, "TextBoxLabelSmallKey")
         Me.TextBoxLabelSmallKey.ForeColor = System.Drawing.SystemColors.InactiveCaptionText
+        resources.ApplyResources(Me.TextBoxLabelSmallKey, "TextBoxLabelSmallKey")
         Me.TextBoxLabelSmallKey.Name = "TextBoxLabelSmallKey"
         Me.TextBoxLabelSmallKey.ReadOnly = True
         '
@@ -244,8 +263,8 @@ Partial Class FormOptions
         '
         'ButtonCancel
         '
-        resources.ApplyResources(Me.ButtonCancel, "ButtonCancel")
         Me.ButtonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
+        resources.ApplyResources(Me.ButtonCancel, "ButtonCancel")
         Me.ButtonCancel.Name = "ButtonCancel"
         Me.ButtonCancel.UseVisualStyleBackColor = True
         '
@@ -278,10 +297,10 @@ Partial Class FormOptions
         Me.SplitContainer3.ResumeLayout(False)
         Me.GroupBoxLang.ResumeLayout(False)
         Me.GroupBoxLang.PerformLayout()
-        Me.Panel1.ResumeLayout(False)
-        Me.Panel1.PerformLayout()
-        Me.Panel2.ResumeLayout(False)
-        Me.Panel2.PerformLayout()
+        Me.PanelMiddle.ResumeLayout(False)
+        Me.PanelMiddle.PerformLayout()
+        Me.PanelMiddleLabel.ResumeLayout(False)
+        Me.PanelMiddleLabel.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -294,20 +313,23 @@ Partial Class FormOptions
     Friend WithEvents ButtonPrintFont As System.Windows.Forms.Button
     Friend WithEvents FontDialog1 As System.Windows.Forms.FontDialog
     Friend WithEvents ButtonHelp As System.Windows.Forms.Button
-    Friend WithEvents Panel1 As System.Windows.Forms.Panel
+    Friend WithEvents PanelMiddle As System.Windows.Forms.Panel
     Friend WithEvents TextBoxKeySmallKana As System.Windows.Forms.TextBox
-    Friend WithEvents Panel2 As System.Windows.Forms.Panel
+    Friend WithEvents PanelMiddleLabel As System.Windows.Forms.Panel
     Friend WithEvents TextBoxLabelSmallKey As System.Windows.Forms.TextBox
     Friend WithEvents ButtonScrFont As System.Windows.Forms.Button
     Friend WithEvents TextBoxPrintFontname As System.Windows.Forms.TextBox
     Friend WithEvents CheckBoxPrintFont As System.Windows.Forms.CheckBox
     Friend WithEvents TextBoxKeySpecialChar As System.Windows.Forms.TextBox
     Friend WithEvents TextBoxLabelSpecialChar As System.Windows.Forms.TextBox
-    Friend WithEvents RGLang As System.Windows.Forms.Panel
     Friend WithEvents GroupBoxLang As System.Windows.Forms.GroupBox
     Friend WithEvents RBLangEN As System.Windows.Forms.RadioButton
     Friend WithEvents RBLangJP As System.Windows.Forms.RadioButton
     Friend WithEvents RBLangDefault As System.Windows.Forms.RadioButton
     Friend WithEvents TextBoxKeySmallkanaQ As System.Windows.Forms.TextBox
     Friend WithEvents TextBoxLabelQueryKey As System.Windows.Forms.TextBox
+    Friend WithEvents TextBoxKeyWords As System.Windows.Forms.TextBox
+    Friend WithEvents TextBoxlabelWords As System.Windows.Forms.TextBox
+    Friend WithEvents TextBoxLabelFind As System.Windows.Forms.TextBox
+    Friend WithEvents TextBoxKeyFind As System.Windows.Forms.TextBox
 End Class

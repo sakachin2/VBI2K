@@ -461,6 +461,102 @@ Namespace My
                 Me("CFGF5_KeySmallQ") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CFGF12_swUTF8() As Boolean
+            Get
+                Return CType(Me("CFGF12_swUTF8"),Boolean)
+            End Get
+            Set
+                Me("CFGF12_swUTF8") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property CFGMRUWords() As String
+            Get
+                Return CType(Me("CFGMRUWords"),String)
+            End Get
+            Set
+                Me("CFGMRUWords") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property CFGF13_Words() As String
+            Get
+                Return CType(Me("CFGF13_Words"),String)
+            End Get
+            Set
+                Me("CFGF13_Words") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("7")>  _
+        Public Property CFGF5_KeyWords() As String
+            Get
+                Return CType(Me("CFGF5_KeyWords"),String)
+            End Get
+            Set
+                Me("CFGF5_KeyWords") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("474, 261")>  _
+        Public Property CFG_Form11ClientSize() As Global.System.Drawing.Size
+            Get
+                Return CType(Me("CFG_Form11ClientSize"),Global.System.Drawing.Size)
+            End Get
+            Set
+                Me("CFG_Form11ClientSize") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("425, 261")>  _
+        Public Property CFG_Form13ClientSize() As Global.System.Drawing.Size
+            Get
+                Return CType(Me("CFG_Form13ClientSize"),Global.System.Drawing.Size)
+            End Get
+            Set
+                Me("CFG_Form13ClientSize") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("253, 381")>  _
+        Public Property CFG_Form6ClientSize() As Global.System.Drawing.Size
+            Get
+                Return CType(Me("CFG_Form6ClientSize"),Global.System.Drawing.Size)
+            End Get
+            Set
+                Me("CFG_Form6ClientSize") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("3")>  _
+        Public Property CFGF5_KeyFind() As Integer
+            Get
+                Return CType(Me("CFGF5_KeyFind"),Integer)
+            End Get
+            Set
+                Me("CFGF5_KeyFind") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

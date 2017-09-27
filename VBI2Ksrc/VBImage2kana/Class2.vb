@@ -1,6 +1,9 @@
-﻿'CID:''+v053R~:#72                          update#=  197;            ''+v053R~
+﻿'CID:''+v073R~:#72                          update#=  214;            ''+v073R~
 '************************************************************************************''~v026I~
-'v053 2017/09/21 crash by F4,S+F5 at Form1 by V1.02                    ''+v053I~
+'v073 2017/09/26 (Bug)ScrollToCaret will move Selectio start at botom of visible area,it sometimes scroll to top.''~v073I~
+'v070 2017/09/26 F3 for find dialog is configurable                    ''~v070I~
+'v065 2017/09/24 Word dialog by Ctrl+char(except "1"-"0")              ''~v065I~
+'v053 2017/09/21 crash by F4,S+F5 at Form1 by V1.02                    ''~v053I~
 'v037 2017/09/22 assign F4 as query of replacing char                  ''~v037I~
 '                Forecolor have to be InactiveCaptureText to get effective for switching Text by language''~v037I~
 'v026 2017/09/19 By F5,"り"(hiragana)<-->"リ"(katakana),"工"(kanji)-->"エ"(katakana)-->"ェ"(katakana-small)-->"工" (wrap),"力"(kanji)-->"カ"(katakana)-->"ヵ"(katakana)-->"力"(Wrap)''~v026I~
@@ -326,6 +329,7 @@ Public Class ClassUndoRedo                                             ''~7429R~
         Return TB.SelectionStart                                     ''~7502I~
     End Function                                                       ''~7502I~
     Private Sub setVScrollPos(Ppos As Integer)                         ''~7502I~
+    	Debug.WriteLine("setVscrollPos issue ScrollToCaret pos=" & Ppos)''~v070I~
         TB.ScrollToCaret()                                    ''~7502R~
     End Sub                                                            ''~7502I~
     Public Sub CMCut(Pafter As Integer)      'Cut&Paste                ''~7514R~
@@ -391,7 +395,8 @@ Public Class ClassUndoRedo                                             ''~7429R~
                         Form1.formText.showFindDialog()                         ''~7516I~''~7521R~
                     End If                                             ''~7516I~
                 End If                                                 ''~7516I~
-            Case Keys.F3                                               ''~7519I~
+'           Case Keys.F3                                               ''~7519I~''~v070R~
+            Case FormOptions.keyFindKey                                ''~v070R~
                 Dim swUp As Boolean = ((e.Modifiers And Keys.Shift) = Keys.Shift) ''~7521I~''~7609R~
                 If swForm1 Then                                        ''~7521I~
                     Form1.MainForm.findNext(swUp)                      ''~7521R~
@@ -431,8 +436,8 @@ Public Class ClassUndoRedo                                             ''~7429R~
                     	swRepeat=true                                  ''~7525I~
                     end if                                             ''~7525I~
 #Else                                                                  ''~7608I~
-'                   fmtBES.changeLetterOther(ch, cvch)                 ''~7608I~''+v053R~
-                    fmtBES.changeLetterOther(ch, cvch,swForm1)         ''+v053I~
+                    '                   fmtBES.changeLetterOther(ch, cvch)                 ''~7608I~''~v053R~
+                    fmtBES.changeLetterOther(ch, cvch, swForm1)         ''~v053I~
 #End If                                                                ''~7608I~
                 Else                                                   ''~7525I~
                     '                   fmtBES.changeLetterSmallLarge(ch, cvch)                ''~7515I~''~7525R~''~v026R~
@@ -440,6 +445,8 @@ Public Class ClassUndoRedo                                             ''~7429R~
                 End If                                                 ''~7525I~
             Case FormOptions.keySpecialCharKey                         ''~7525I~
                 showDialogSpecialKey(cvch)                             ''~7515I~
+            Case FormOptions.keyWordsKey                               ''~v065I~
+                showDialogWords()                                      ''~v065I~
             Case Else                                                  ''~7515I~
                 If key >= Keys.D0 AndAlso key <= Keys.D9 Then                   ''~7525I~
                     If (e.Modifiers And Keys.Control) = Keys.Control Then 'with shift key''~7525I~''~7608R~
@@ -484,6 +491,10 @@ Public Class ClassUndoRedo                                             ''~7429R~
         End If                                                         ''~7525I~
     End Sub                                                            ''~7501I~''~7506M~
     Public Sub TB_KeyPress(e As System.Windows.Forms.KeyPressEventArgs) ''~7506M~
+        If setWord(e.KeyChar) Then                                          ''~v065R~
+            e.Handled = True                                           ''~v065R~
+            Exit Sub                                                   ''~v065R~
+        End If                                                         ''~v065R~
         Dim pos As Integer = getCaretPos()                             ''~7506M~
         Dim txt As String = TB.Text                                    ''~7506I~
         If pos < 0 OrElse pos >= txt.Length Then                       ''~7506M~
@@ -554,6 +565,7 @@ Public Class ClassUndoRedo                                             ''~7429R~
     Private Sub restoreCaretPosLen(Ppoint As Rectangle)                     ''~7506R~
         TB.SelectionStart = Ppoint.X                                     ''~7506I~
         TB.SelectionLength = Ppoint.Y                                    ''~7506I~
+        Debug.WriteLine("restoreCaretPosLen before Selection=" & TB.SelectionStart & ",len=" & TB.SelectionLength)''~v070I~
         If Ppoint.X < TB.Text.Length Then                                     ''~7525R~
             If TB.Text.Chars(Ppoint.X) = FormatBES.CHAR_CR Then               ''~7525I~
                 TB.SelectionStart += vbCrLf.Length  'move caret at top of next line''~7525R~
@@ -564,12 +576,18 @@ Public Class ClassUndoRedo                                             ''~7429R~
                 TB.SelectionLength = 0                                 ''~7525I~
             End If                                                     ''~7525I~
         End If                                                         ''~7525I~
+        Debug.WriteLine("restoreCaretPosLen after Selection=" & TB.SelectionStart & ",len=" & TB.SelectionLength)''~v070I~
         If optFormat = OPT_KANATEXT Then                                    ''~7508R~
             Form1.MainForm.formkanaText.setHirakata(Ppoint.Width = 1)  ''~7522I~
             If (Ppoint.Height And POSFLAG_VSCROLL) = POSFLAG_VSCROLL Then                                        ''~7507I~''~7525R~''~7609R~
                 scrollTB(Ppoint.Height And POSFLAG_VSCROLL_CTR)                                ''~7507I~''~7525R~
             End If                                                     ''~7507I~
         End If                                                         ''~7508I~
+        If optFormat = OPT_KANJITEXT Then                              ''~v073I~
+            If (Ppoint.Height And POSFLAG_VSCROLL) = POSFLAG_VSCROLL Then''~v073I~
+                scrollTB(Ppoint.Height And POSFLAG_VSCROLL_CTR)        ''~v073I~
+            End If                                                     ''~v073I~
+        End If                                                         ''~v073I~
     End Sub                                                            ''~7507R~
     Private Sub scrollTB(Ppos As Integer)                              ''~7507I~
         '       TB.ScrollToCaret()                                             ''~7507R~
@@ -577,6 +595,7 @@ Public Class ClassUndoRedo                                             ''~7429R~
         '        SetScrollPos(TB.Handle, SB_VERT, pos, True)                    ''~7507I~
         pos = (pos << 16) + SB_THUMBPOSITION                                 ''~7507R~
         Dim rc = SendMessage(TB.Handle, WM_VSCROLL, pos, 0)                 ''~7507R~
+        Debug.WriteLine("scrollTB sendMsg Ppos=" & Ppos)               ''~v070I~
     End Sub                                                            ''~7507I~
     '***************************************************************************''~7507I~
     Private Const SB_VERT = 1                                          ''~7507R~
@@ -595,6 +614,12 @@ Public Class ClassUndoRedo                                             ''~7429R~
             Form1.formText.showSpecialKeyDialog()                               ''~7515I~''~7521R~
         End If                                                         ''~7515I~
     End Sub                                                            ''~7515I~
+    Private Sub showDialogWords()                                      ''~v065I~
+        If swForm1 Then                                                ''~v065I~
+        Else                                                           ''~v065I~
+	        Form13.sharedShowDlg(False)      'not Form1                ''~v065I~
+        End If                                                         ''~v065I~
+    End Sub                                                            ''~v065I~
     Public Sub setSpecialChar(Pstr As String)                          ''~7515R~
         Dim pos As Integer = TB.SelectionStart                           ''~7515I~
         Dim txt As String = TB.Text                                     ''~7515I~
@@ -608,6 +633,18 @@ Public Class ClassUndoRedo                                             ''~7429R~
         TB.Select(pos + Pstr.Length, 0)                                   ''~7523R~
         TB.Focus()                                                     ''~7523R~
     End Sub                                                            ''~7515I~
+    Public Sub setWord(Pstr As String)                                 ''~v065I~
+	    setSpecialChar(Pstr)                                           ''~v065I~
+    End Sub                                                            ''~v065I~
+    Public Function setWord(Pchar As Char) As Boolean                  ''~v065R~
+        '** Ctl+Char key sets predefined phrase                            ''~v065I~
+        Dim word As String = Form13.sharedApplyWords(Pchar, swForm1)       ''~v065R~
+        If word Is Nothing Then                                             ''~v065I~
+            Return False                                               ''~v065I~
+        End If                                                         ''~v065I~
+        setSpecialChar(word)                                           ''~v065I~
+        Return True                                                    ''~v065I~
+    End Function                                                            ''~v065I~
     Public Sub repWord(Prepword As String, PswRepAll As Boolean, PcaseRepAll As Integer)                             ''~7524I~''~7612R~
         Dim pos As Integer = TB.SelectionStart                         ''~7524I~
         Dim txt As String = TB.Text                                    ''~7524I~

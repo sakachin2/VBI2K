@@ -187,6 +187,7 @@ Partial Class Form1
         '
         Me.TBBES.BackColor = System.Drawing.SystemColors.Info
         Me.TBBES.ContextMenuStrip = Me.ContextMenuSpecialChar
+        Me.TBBES.Cursor = System.Windows.Forms.Cursors.Default
         resources.ApplyResources(Me.TBBES, "TBBES")
         Me.TBBES.HideSelection = False
         Me.TBBES.Name = "TBBES"

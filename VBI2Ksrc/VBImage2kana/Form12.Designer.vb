@@ -30,6 +30,7 @@ Partial Class DocOptions
         Me.ButtonHelp = New System.Windows.Forms.Button()
         Me.ButtonOK = New System.Windows.Forms.Button()
         Me.CheckBoxEnglishDoc = New System.Windows.Forms.CheckBox()
+        Me.CheckBoxUTF8 = New System.Windows.Forms.CheckBox()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -47,10 +48,10 @@ Partial Class DocOptions
         '
         'Panel1
         '
-        resources.ApplyResources(Me.Panel1, "Panel1")
         Me.Panel1.Controls.Add(Me.ButtonCancel)
         Me.Panel1.Controls.Add(Me.ButtonHelp)
         Me.Panel1.Controls.Add(Me.ButtonOK)
+        resources.ApplyResources(Me.Panel1, "Panel1")
         Me.Panel1.Name = "Panel1"
         '
         'ButtonCancel
@@ -77,10 +78,17 @@ Partial Class DocOptions
         Me.CheckBoxEnglishDoc.Name = "CheckBoxEnglishDoc"
         Me.CheckBoxEnglishDoc.UseVisualStyleBackColor = True
         '
+        'CheckBoxUTF8
+        '
+        resources.ApplyResources(Me.CheckBoxUTF8, "CheckBoxUTF8")
+        Me.CheckBoxUTF8.Name = "CheckBoxUTF8"
+        Me.CheckBoxUTF8.UseVisualStyleBackColor = True
+        '
         'DocOptions
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.CheckBoxUTF8)
         Me.Controls.Add(Me.CheckBoxEnglishDoc)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.CheckBoxKatakanaDoc)
@@ -98,4 +106,5 @@ Partial Class DocOptions
     Friend WithEvents ButtonHelp As System.Windows.Forms.Button
     Friend WithEvents ButtonOK As System.Windows.Forms.Button
     Friend WithEvents CheckBoxEnglishDoc As System.Windows.Forms.CheckBox
+    Friend WithEvents CheckBoxUTF8 As System.Windows.Forms.CheckBox
 End Class

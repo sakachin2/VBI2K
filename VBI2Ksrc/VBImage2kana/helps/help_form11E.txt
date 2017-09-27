@@ -28,6 +28,8 @@ Column header "String" sorts by sequense of values of "String" column.
 
 Fie/Save/SaveAs buttons are used to select dictionary for each documents.
 Record format of dictionary file is as following, CRLF is 0x0d0a.
+Default extension is ".dct".
+
 n;String;Kana
 n is '1':Use,  '0':Not Use
 e.g)  1;îÚÇ—ín;Å@Ç∆Ç—Çø

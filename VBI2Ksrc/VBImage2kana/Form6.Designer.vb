@@ -23,68 +23,50 @@ Partial Class Form6
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form6))
-        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.PanelBottons = New System.Windows.Forms.Panel()
         Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.ButtonDown = New System.Windows.Forms.Button()
-        Me.ButtonUp = New System.Windows.Forms.Button()
-        Me.ButtonAdd = New System.Windows.Forms.Button()
+        Me.PanelButtons1 = New System.Windows.Forms.Panel()
         Me.ButtonDefault = New System.Windows.Forms.Button()
+        Me.ButtonAdd = New System.Windows.Forms.Button()
         Me.ButtonDelete = New System.Windows.Forms.Button()
-        Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.ButtonOK = New System.Windows.Forms.Button()
+        Me.ButtonUp = New System.Windows.Forms.Button()
+        Me.ButtonDown = New System.Windows.Forms.Button()
+        Me.PanelButtons2 = New System.Windows.Forms.Panel()
         Me.ButtonHelp = New System.Windows.Forms.Button()
         Me.ButtonCancel = New System.Windows.Forms.Button()
+        Me.ButtonOK = New System.Windows.Forms.Button()
         Me.ListViewSpecialChar = New System.Windows.Forms.ListView()
         Me.ColumnSeqNum = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnChar = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnDesc = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.Panel1.SuspendLayout()
+        Me.PanelBottons.SuspendLayout()
         Me.Panel4.SuspendLayout()
-        Me.Panel2.SuspendLayout()
-        Me.Panel3.SuspendLayout()
+        Me.PanelButtons1.SuspendLayout()
+        Me.PanelButtons2.SuspendLayout()
         Me.SuspendLayout()
         '
-        'Panel1
+        'PanelBottons
         '
-        resources.ApplyResources(Me.Panel1, "Panel1")
-        Me.Panel1.Controls.Add(Me.Panel4)
-        Me.Panel1.Controls.Add(Me.Panel3)
-        Me.Panel1.Name = "Panel1"
+        resources.ApplyResources(Me.PanelBottons, "PanelBottons")
+        Me.PanelBottons.Controls.Add(Me.Panel4)
+        Me.PanelBottons.Controls.Add(Me.PanelButtons2)
+        Me.PanelBottons.Name = "PanelBottons"
         '
         'Panel4
         '
         resources.ApplyResources(Me.Panel4, "Panel4")
-        Me.Panel4.Controls.Add(Me.Panel2)
+        Me.Panel4.Controls.Add(Me.PanelButtons1)
         Me.Panel4.Name = "Panel4"
         '
-        'Panel2
+        'PanelButtons1
         '
-        resources.ApplyResources(Me.Panel2, "Panel2")
-        Me.Panel2.Controls.Add(Me.ButtonDown)
-        Me.Panel2.Controls.Add(Me.ButtonUp)
-        Me.Panel2.Controls.Add(Me.ButtonAdd)
-        Me.Panel2.Controls.Add(Me.ButtonDefault)
-        Me.Panel2.Controls.Add(Me.ButtonDelete)
-        Me.Panel2.Name = "Panel2"
-        '
-        'ButtonDown
-        '
-        resources.ApplyResources(Me.ButtonDown, "ButtonDown")
-        Me.ButtonDown.Name = "ButtonDown"
-        Me.ButtonDown.UseVisualStyleBackColor = True
-        '
-        'ButtonUp
-        '
-        resources.ApplyResources(Me.ButtonUp, "ButtonUp")
-        Me.ButtonUp.Name = "ButtonUp"
-        Me.ButtonUp.UseVisualStyleBackColor = True
-        '
-        'ButtonAdd
-        '
-        resources.ApplyResources(Me.ButtonAdd, "ButtonAdd")
-        Me.ButtonAdd.Name = "ButtonAdd"
-        Me.ButtonAdd.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.PanelButtons1, "PanelButtons1")
+        Me.PanelButtons1.Controls.Add(Me.ButtonDefault)
+        Me.PanelButtons1.Controls.Add(Me.ButtonAdd)
+        Me.PanelButtons1.Controls.Add(Me.ButtonDelete)
+        Me.PanelButtons1.Controls.Add(Me.ButtonUp)
+        Me.PanelButtons1.Controls.Add(Me.ButtonDown)
+        Me.PanelButtons1.Name = "PanelButtons1"
         '
         'ButtonDefault
         '
@@ -92,25 +74,37 @@ Partial Class Form6
         Me.ButtonDefault.Name = "ButtonDefault"
         Me.ButtonDefault.UseVisualStyleBackColor = True
         '
+        'ButtonAdd
+        '
+        resources.ApplyResources(Me.ButtonAdd, "ButtonAdd")
+        Me.ButtonAdd.Name = "ButtonAdd"
+        Me.ButtonAdd.UseVisualStyleBackColor = True
+        '
         'ButtonDelete
         '
         resources.ApplyResources(Me.ButtonDelete, "ButtonDelete")
         Me.ButtonDelete.Name = "ButtonDelete"
         Me.ButtonDelete.UseVisualStyleBackColor = True
         '
-        'Panel3
+        'ButtonUp
         '
-        resources.ApplyResources(Me.Panel3, "Panel3")
-        Me.Panel3.Controls.Add(Me.ButtonOK)
-        Me.Panel3.Controls.Add(Me.ButtonHelp)
-        Me.Panel3.Controls.Add(Me.ButtonCancel)
-        Me.Panel3.Name = "Panel3"
+        resources.ApplyResources(Me.ButtonUp, "ButtonUp")
+        Me.ButtonUp.Name = "ButtonUp"
+        Me.ButtonUp.UseVisualStyleBackColor = True
         '
-        'ButtonOK
+        'ButtonDown
         '
-        resources.ApplyResources(Me.ButtonOK, "ButtonOK")
-        Me.ButtonOK.Name = "ButtonOK"
-        Me.ButtonOK.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.ButtonDown, "ButtonDown")
+        Me.ButtonDown.Name = "ButtonDown"
+        Me.ButtonDown.UseVisualStyleBackColor = True
+        '
+        'PanelButtons2
+        '
+        resources.ApplyResources(Me.PanelButtons2, "PanelButtons2")
+        Me.PanelButtons2.Controls.Add(Me.ButtonHelp)
+        Me.PanelButtons2.Controls.Add(Me.ButtonOK)
+        Me.PanelButtons2.Controls.Add(Me.ButtonCancel)
+        Me.PanelButtons2.Name = "PanelButtons2"
         '
         'ButtonHelp
         '
@@ -124,6 +118,12 @@ Partial Class Form6
         Me.ButtonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.ButtonCancel.Name = "ButtonCancel"
         Me.ButtonCancel.UseVisualStyleBackColor = True
+        '
+        'ButtonOK
+        '
+        resources.ApplyResources(Me.ButtonOK, "ButtonOK")
+        Me.ButtonOK.Name = "ButtonOK"
+        Me.ButtonOK.UseVisualStyleBackColor = True
         '
         'ListViewSpecialChar
         '
@@ -154,19 +154,21 @@ Partial Class Form6
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.ClientSize = Global.WindowsApplication1.My.MySettings.Default.CFG_Form6ClientSize
         Me.Controls.Add(Me.ListViewSpecialChar)
-        Me.Controls.Add(Me.Panel1)
+        Me.Controls.Add(Me.PanelBottons)
+        Me.DataBindings.Add(New System.Windows.Forms.Binding("ClientSize", Global.WindowsApplication1.My.MySettings.Default, "CFG_Form6ClientSize", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "Form6"
-        Me.Panel1.ResumeLayout(False)
+        Me.PanelBottons.ResumeLayout(False)
         Me.Panel4.ResumeLayout(False)
-        Me.Panel2.ResumeLayout(False)
-        Me.Panel3.ResumeLayout(False)
+        Me.PanelButtons1.ResumeLayout(False)
+        Me.PanelButtons2.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents Panel1 As System.Windows.Forms.Panel
+    Friend WithEvents PanelBottons As System.Windows.Forms.Panel
     Friend WithEvents ButtonOK As System.Windows.Forms.Button
     Friend WithEvents ButtonCancel As System.Windows.Forms.Button
     Friend WithEvents ButtonHelp As System.Windows.Forms.Button
@@ -175,9 +177,9 @@ Partial Class Form6
     Friend WithEvents ColumnDesc As System.Windows.Forms.ColumnHeader
     Friend WithEvents ButtonDefault As System.Windows.Forms.Button
     Friend WithEvents ButtonDelete As System.Windows.Forms.Button
-    Friend WithEvents Panel2 As System.Windows.Forms.Panel
+    Friend WithEvents PanelButtons1 As System.Windows.Forms.Panel
     Friend WithEvents ButtonAdd As System.Windows.Forms.Button
-    Friend WithEvents Panel3 As System.Windows.Forms.Panel
+    Friend WithEvents PanelButtons2 As System.Windows.Forms.Panel
     Friend WithEvents Panel4 As System.Windows.Forms.Panel
     Friend WithEvents ColumnSeqNum As System.Windows.Forms.ColumnHeader
     Friend WithEvents ButtonDown As System.Windows.Forms.Button
