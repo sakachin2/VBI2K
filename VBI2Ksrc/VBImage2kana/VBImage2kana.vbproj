@@ -29,7 +29,7 @@
     <UpdateUrl>http://localhost/VBImage2kana/</UpdateUrl>
     <WebPage>publish.htm</WebPage>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.1.4.0</ApplicationVersion>
+    <ApplicationVersion>1.1.5.0</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -123,6 +123,8 @@
     <Compile Include="Class5.vb" />
     <Compile Include="Class6.vb" />
     <Compile Include="Class7.vb" />
+    <Compile Include="Class8.vb" />
+    <Compile Include="Class9.vb" />
     <Compile Include="Form1.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -152,6 +154,12 @@
       <DependentUpon>Form13.vb</DependentUpon>
     </Compile>
     <Compile Include="Form13.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form14.Designer.vb">
+      <DependentUpon>Form14.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form14.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form2.Designer.vb">
@@ -251,6 +259,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form13.resx">
       <DependentUpon>Form13.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form14.en-GB.resx">
+      <DependentUpon>Form14.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form14.resx">
+      <DependentUpon>Form14.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form2.en-GB.resx">
       <DependentUpon>Form2.vb</DependentUpon>
@@ -396,6 +410,8 @@
     <None Include="helps\help_form12E.txt" />
     <None Include="helps\help_form13.txt" />
     <None Include="helps\help_form13E.txt" />
+    <None Include="helps\help_form14.txt" />
+    <None Include="helps\help_form14E.txt" />
     <Content Include="Icon-i2k.ico" />
     <None Include="icons\Icon-i2k.ico" />
     <None Include="icons\Icon-i2k.png" />

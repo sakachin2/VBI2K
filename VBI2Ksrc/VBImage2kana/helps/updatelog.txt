@@ -1,3 +1,18 @@
+V1.15 : 2017/10/27 released *******************************************************
+'v080 2017/10/10 (BUG)2nd paste after cut remove cut pos twice
+           form11.vb form13.vb 
+'v079 2017/10/10 class DataGridView
+           class9.vb form14.vb 
+'v078 2017/10/09 dialog status bar
+           class8.vb form13.vb form11.vb
+'v077 2017/10/08 Commit required when cut/copy
+           form13.vb form11.vb
+'v076 2017/10/08 Symbol Dialog by DataGridView
+           form14.vb class4.vb Form1.vb class2.vb
+'v075 2017/10/08 Set background color to Word dialog gridview
+           form13.vb
+'v074 2017/10/08 (Bug)Word Dialog cut&Paste word was not copyed(requires set button text)
+           form13.vb
 V1.14 : 2017/09/27 released *******************************************************
 'v073 2017/09/27 (Bug)crash when words dialog update, close form3 then replied discard cancel
            form3.vb form13.vb Form1.vb

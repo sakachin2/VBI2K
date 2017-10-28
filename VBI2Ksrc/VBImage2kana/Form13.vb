@@ -1,6 +1,11 @@
-﻿'CID:''+v073R~:#72                             update#=  128;         ''+v073R~
+﻿'CID:''+v078R~:#72                             update#=  139;         ''+v078R~
 '************************************************************************************''~v008I~
-'v073 2017/09/27 (Bug)crash when words dialog update, close form3 then replied discard cancel''+v073I~
+'v080 2017/10/10 (BUG)2nd paste after cut remove cut pos twice         ''~v080I~
+'v078 2017/10/09 dialog status bar                                     ''~v078I~
+'v077 2017/10/08 Commit required when cut/copy                         ''~v077I~
+'v075 2017/10/08 Set background color to Word dialog gridview          ''~v075I~
+'v074 2017/10/08 (Bug)Word Dialog cut&Paste word was not copyed(requires set button text)''~v074I~
+'v073 2017/09/27 (Bug)crash when words dialog update, close form3 then replied discard cancel''~v073I~
 'v065 2017/09/24 Word dialog by Ctrl+char(except "1"-"0")              ''~v065I~
 '************************************************************************************''~v008I~
 Imports System.Runtime.InteropServices.Marshal                         ''~v008I~
@@ -31,6 +36,7 @@ Public Class Form13                                                    ''~v008R~
     Private mruID = ClassMRU.ID_WORDS                                  ''~v065R~
     Private MRU As ClassMRU = Form1.MAinForm.MRU                         ''~v012I~
     Private saveFilename As String                                     ''~v012I~
+    Private iDGV As KDGV   'DataGridView wrapper class                 ''~v078I~
     '***************************************************************************''~v008I~
     Private swUpdated As Boolean = False                               ''~v008I~
     Private swInvalid As Boolean = False                               ''~v065I~
@@ -40,15 +46,18 @@ Public Class Form13                                                    ''~v008R~
     Private MRUList As New List(Of String)                             ''~v012I~
     Private CPenable As Boolean                                        ''~v013I~
     Private CPcharkey, CPphrase As String                                   ''~v013I~''~v065R~
+    Private CPButtonLabel As String                              ''~v074I~
     Private CPstatus As Integer = 0                                      ''~v013I~
     Private Const CPSTATUS_NONE = 0                                      ''~v013I~
     Private Const CPSTATUS_CUT = 1                                       ''~v013I~
     Private Const CPSTATUS_COPY = 2                                      ''~v013I~
+    Private Const CPSTATUS_CUTDONE = 3                                 ''~v080I~
     Private CPcutrow As Integer                                        ''~v013I~
     Private swForm1 As Boolean = False                                   ''~v065I~
     Private strSendID = CHAR_SENDID.toString                             ''~v065I~
     Private swDirty As Boolean = False                                   ''~v065I~
     Private swNotEnabled As Boolean = False                              ''~v065I~
+    Private SB As SBM     'StatusBar                                   ''~v078I~
     '***************************************************************************''~v008I~
     Public Shared Sub sharedShowDlg(PswForm1 As Boolean)                                  ''~v008R~
         If dlgWord Is Nothing Then                                     ''~v008I~''~v012R~
@@ -78,6 +87,8 @@ Public Class Form13                                                    ''~v008R~
         setLang()   'should set CurrentUICulture before InitializeComponent''~v008I~
         InitializeComponent()                                          ''~v008I~
         Form1.setupTitlebarIcon(Me)                                    ''~v008I~
+        SB = New SBM(ToolStripStatusLabel1)                              ''~v078I~
+        iDGV = New KDGV(DataGridViewWords)                             ''~v078I~
         getCfg()                                                       ''~v008I~
     End Sub                                                            ''~v008I~
     '   Public Sub showDlg()                                               ''~v008I~''~v065R~
@@ -97,13 +108,13 @@ Public Class Form13                                                    ''~v008R~
         swForm1 = PswForm1                                               ''~v065I~
     End Sub                                                            ''~v008I~
     Private Sub Form13_Closing(sender As System.Object, e As System.ComponentModel.CancelEventArgs) Handles MyBase.Closing ''~v065I~
-        '        chkDiscard(e)                                                  ''~v065I~''+v073R~
-        Dim rc As Boolean = chkDiscard(e)                                   ''+v073I~
-        If rc Then                                                          ''+v073I~
-            Me.DialogResult = DialogResult.Yes                           ''+v073I~
-        Else                                                           ''+v073I~
-            Me.DialogResult = DialogResult.No                            ''+v073I~
-        End If                                                         ''+v073I~
+        '        chkDiscard(e)                                                  ''~v065I~''~v073R~
+        Dim rc As Boolean = chkDiscard(e)                                   ''~v073I~
+        If rc Then                                                          ''~v073I~
+            Me.DialogResult = DialogResult.Yes                           ''~v073I~
+        Else                                                           ''~v073I~
+            Me.DialogResult = DialogResult.No                            ''~v073I~
+        End If                                                         ''~v073I~
     End Sub                                                            ''~v065I~
     Private Sub SaveToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles SaveToolStripMenuItem.Click ''~v012I~
         saveFile()                                                     ''~v012I~
@@ -173,6 +184,7 @@ Public Class Form13                                                    ''~v008R~
                 swDirty = True                                           ''~v065I~
             End If                                                     ''~v065I~
         End If                                                         ''~v012I~
+        SB.show(SBM.MSGID.CLEAR, "")                                   ''~v078I~
         swUpdated = True                                               ''~v065I~
     End Sub                                                            ''~v012I~
     Private Sub CellValueChanged(ByVal sender As System.Object, ByVal e As DataGridViewCellEventArgs) Handles DataGridViewWords.CellValueChanged ''~v008I~
@@ -200,6 +212,8 @@ Public Class Form13                                                    ''~v008R~
     Private Sub initListView()                                         ''~v008I~
         DGV = DataGridViewWords                                     ''~v008I~
         fillColumn()                                                   ''~v008I~
+        '       DGV.DefaultCellStyle.BackColor=Color.PaleGreen                 ''~v075R~
+        DGV.DefaultCellStyle.BackColor = Form1.formText.TextBox1.BackColor ''~v075I~
     End Sub                                                            ''~v008I~
     Private Sub fillColumn()                                           ''~v008I~
         clearDGV()                                                     ''~v008R~
@@ -387,10 +401,12 @@ Public Class Form13                                                    ''~v008R~
         Dim phrase As String = DGV.Rows(Ppos).Cells(CELLNO_PHRASE).Value       ''~v008I~''~v065R~
         Dim rc As Integer = 0                                            ''~v008R~
         Dim errstr As String = ""                                           ''~v008I~
+        Dim cell As Integer = 0                                        ''~v078I~
         If charkey Is Nothing OrElse charkey.Trim().Length = 0 Then               ''~v008R~''~v012R~''~v065R~
         Else                                                           ''~v008I~
             If charkey.IndexOf(";"c) >= 0 OrElse charkey.Length > 1 Then        ''~v008I~''~v065R~
                 errstr = charkey                                           ''~v008I~''~v065R~
+                cell = CELLNO_CHARKEY                                  ''~v078I~
                 rc = 4                                                 ''~v008R~
             End If                                                     ''~v008R~
         End If                                                         ''~v008I~
@@ -399,15 +415,19 @@ Public Class Form13                                                    ''~v008R~
             If phrase.IndexOf(";"c) >= 0 Then                            ''~v008I~''~v065R~
                 If rc < 4 Then                                                ''~v008I~
                     errstr = phrase                                      ''~v008R~''~v065R~
+                cell = CELLNO_PHRASE                                   ''~v078I~
                     rc = 4                                             ''~v008R~
                 End If                                                 ''~v008I~
             End If                                                     ''~v008R~
         End If                                                         ''~v008I~
         If rc = 4 Then                                               ''~v008R~''~v065I~
-            If PswHandler Then                                             ''~v008I~''~v065R~
+'           If PswHandler Then                                             ''~v008I~''~v065R~''~v078R~
                 Dim errinfo As String = "Row-" & (Ppos + 1)                ''~v008I~
-                MessageBox.Show(String.Format(Rstr.getStr("STR_ERR_MSG_WORDS_ERRVALUE"), errstr), Me.Text) ''~v008I~''~v065R~
-            End If                                                      ''~v008I~
+'               MessageBox.Show(String.Format(Rstr.getStr("STR_ERR_MSG_WORDS_ERRVALUE"), errstr), Me.Text) ''~v008I~''~v065R~''~v078R~
+'           End If                                                      ''~v008I~''~v078R~
+            Dim msg As String = String.Format(Rstr.getStr("STR_ERR_MSG_WORDS_ERRVALUE"), errstr)''~v078I~
+            SB.show(msg, True)   ' delayed set text after cleared      ''~v078I~
+            iDGV.setSelectedPos(Ppos, cell)                            ''~v078I~
             swInvalid = True                                             ''~v065I~
         End If
         Return rc ''~v008I~
@@ -566,7 +586,8 @@ Public Class Form13                                                    ''~v008R~
         ListData = tmp                                                   ''~v012I~
         fillColumn()                                                   ''~v012I~
         setTitle(Pfnm)                                                 ''~v012I~
-        MessageBox.Show(Pfnm, Rstr.getStr("STR_INFO_MSG_WORDS_LOADED")) ''~v013R~''~v065R~
+        'MessageBox.Show(Pfnm, Rstr.getStr("STR_INFO_MSG_WORDS_LOADED")) ''~v013R~''~v065R~''~v078R~
+        SB.show(SBM.MSGID.LOAD, Pfnm)                                   ''~v078I~
     End Sub                                                            ''~v012I~
     Private Sub setTitle(Pfnm As String)                               ''~v012I~
         Dim newtitle As String, oldtitle As String = Me.Text           ''~v012I~
@@ -648,6 +669,7 @@ Public Class Form13                                                    ''~v008R~
             Exit Sub                                                   ''~v012I~
         End If                                                         ''~v012I~
         saveFile(saveFilename)                                         ''~v012R~
+        SB.show(SBM.MSGID.SAVE, saveFilename)                           ''~v078I~
     End Sub                                                            ''~v012I~
     Private Sub saveAsFile()                             ''~v012I~
         SaveFileDialog1.Filter = Rstr.getStr("STR_FILTER_WORDS")  ''~v012I~''~v065R~
@@ -656,6 +678,7 @@ Public Class Form13                                                    ''~v008R~
             If saveFile(fnm) Then                                           ''~v012R~
                 saveFilename = fnm                                       ''~v012I~
                 setTitle(fnm)                                          ''~v012I~
+	            SB.show(SBM.MSGID.SAVEAS, saveFilename)                ''~v078I~
             End If                                                     ''~v012I~
         End If                                                         ''+v012I~                                                      ''~v012I~
     End Sub                                                            ''~v012I~
@@ -683,7 +706,7 @@ Public Class Form13                                                    ''~v008R~
             If str IsNot Nothing Then                                       ''~v065I~
                 System.IO.File.WriteAllText(Pfnm, str, fileEncoding)       ''~v012R~''~v065R~
                 insertMRUList(Pfnm)                                        ''~v012I~''~v065R~
-                MessageBox.Show(Pfnm, Rstr.MSG_INFO_SAVED)                 ''~v012I~''~v065R~
+'               MessageBox.Show(Pfnm, Rstr.MSG_INFO_SAVED)                 ''~v012I~''~v065R~''~v078R~
             End If                                                     ''~v065I~
         Catch ex As Exception                                          ''~v012I~
             Form1.WriteError(Pfnm, ex)                                 ''~v012I~
@@ -710,15 +733,21 @@ Public Class Form13                                                    ''~v008R~
     End Function                                                       ''~v012I~
     '*************************************************************     ''~v013I~
     Private Sub cutRow()                                               ''~v013I~
-        Dim cpos As Integer = getCurrentRowData(CPenable, CPcharkey, CPphrase) ''~v013R~''~v065R~
+        commitDGV()                                                    ''~v077I~
+        '       Dim cpos As Integer = getCurrentRowData(CPenable, CPcharkey, CPphrase) ''~v013R~''~v065R~''~v074R~
+        Dim cpos As Integer = getCurrentRowData(CPenable, CPcharkey, CPButtonLabel, CPphrase) ''~v074I~
         If cpos >= 0 Then                                                     ''~v013I~
             CPstatus = CPSTATUS_CUT                                      ''~v013I~
             CPcutrow = cpos                                              ''~v013I~
+	        SB.show(SBM.MSGID.CUT, CPphrase)                           ''~v078I~
         End If                                                         ''~v013I~
     End Sub                                                            ''~v013I~
     Private Sub copyRow()                                              ''~v013I~
-        If getCurrentRowData(CPenable, CPcharkey, CPphrase) >= 0 Then             ''~v013R~''~v065R~
+        commitDGV()                                                    ''~v077I~
+        '       If getCurrentRowData(CPenable, CPcharkey, CPphrase) >= 0 Then             ''~v013R~''~v065R~''~v074R~
+        If getCurrentRowData(CPenable, CPcharkey, CPButtonLabel, CPphrase) >= 0 Then ''~v074I~
             CPstatus = CPSTATUS_COPY                                     ''~v013I~
+	        SB.show(SBM.MSGID.COPY, CPphrase)                          ''~v078I~
         End If                                                         ''~v013I~
     End Sub                                                            ''~v013I~
     Private Sub pasteRow()                                             ''~v013I~
@@ -727,7 +756,8 @@ Public Class Form13                                                    ''~v008R~
             Exit Sub                                                   ''~v013I~
         End If                                                         ''~v013I~
         Dim cpos As Integer = getValidCPos(True) ' true:allow addrow    ''~v013I~
-        DGV.Rows.Insert(cpos, CPenable, CPcharkey, CPphrase, False) 'false:not deleted''~v013I~''~v065R~
+        '       DGV.Rows.Insert(cpos, CPenable, CPcharkey, CPphrase, False) 'false:not deleted''~v013I~''~v065R~''~v074R~
+        DGV.Rows.Insert(cpos, CPenable, CPcharkey, CPButtonLabel, CPphrase, False) 'false:not deleted''~v074I~
         swUpdated = True                                               ''~v013I~
         If CPstatus = CPSTATUS_CUT Then                                ''~v013I~
             If cpos <= CPcutrow Then                                          ''~v013I~
@@ -736,9 +766,14 @@ Public Class Form13                                                    ''~v008R~
                 cutrow = CPcutrow                                        ''~v013I~
             End If                                                     ''~v013I~
             DGV.Rows.RemoveAt(cutrow)                                  ''~v013I~
+            SB.show(SBM.MSGID.CUT_PASTE, CPphrase)                      ''~v078I~
+        	CPstatus = CPSTATUS_CUTDONE                                ''~v080I~
+        Else                                                           ''~v078I~
+            SB.show(SBM.MSGID.COPY_PASTE, CPphrase)                     ''~v078I~
         End If                                                         ''~v013I~
     End Sub                                                            ''~v013I~
-    Private Function getCurrentRowData(ByRef Ppenable As Boolean, ByRef Ppcharkey As String, ByRef Ppphrase As String) As Integer ''~v013R~''~v065R~
+    '   Private Function getCurrentRowData(ByRef Ppenable As Boolean, ByRef Ppcharkey As String, ByRef Ppphrase As String) As Integer ''~v013R~''~v065R~''~v074R~
+    Private Function getCurrentRowData(ByRef Ppenable As Boolean, ByRef Ppcharkey As String, ByRef PpbuttonLabel As String, ByRef Ppphrase As String) As Integer ''~v074I~
         Dim cpos As Integer = getValidCPos(False) ' false:not allow addrow''~v013I~
         If cpos < 0 Then                                                      ''~v013I~
             Return -1                                                  ''~v013R~
@@ -746,6 +781,7 @@ Public Class Form13                                                    ''~v008R~
         Ppenable = DGV.Rows(cpos).Cells(CELLNO_ENABLE).Value               ''~v013I~
         Ppcharkey = DGV.Rows(cpos).Cells(CELLNO_CHARKEY).Value                 ''~v013I~''~v065R~
         Ppphrase = DGV.Rows(cpos).Cells(CELLNO_PHRASE).Value                 ''~v013I~''~v065R~
+        PpbuttonLabel = DGV.Rows(cpos).Cells(CELLNO_SEND).Value         ''~v074I~
         Return cpos                                                    ''~v013R~
     End Function                                                            ''~v013I~
     Private Sub errNotRegisteredKey(PswForm1 As Boolean, Pasckey As Integer) ''~v065I~
@@ -779,6 +815,7 @@ Public Class Form13                                                    ''~v008R~
         Else                                                           ''~v065I~
             Form1.formText.undoRedo.setWord(phrase)                    ''~v065R~
         End If
+        SB.show(SBM.MSGID.SEND, phrase)                                 ''~v078I~
         Return True ''~v065I~
     End Function                                                            ''~v065I~
     Public Function chkDiscard(e As System.ComponentModel.CancelEventArgs) As Boolean ''~v065I~

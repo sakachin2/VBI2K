@@ -24,5 +24,7 @@ Column header "Key" sorts by sequense of values of "Key" column.
 Toolbar button Fie/Save/SaveAs are used to switch dictionary for each documents.
 Record format of dictionary file is as following, CRLF is 0x0d0a.
 Default extension is ".wrd"
+Line format :
+   n;Key;Phrase    (n: '1':Use, '0':NotUse)
 
-2017/09/24
+2017/10/09 

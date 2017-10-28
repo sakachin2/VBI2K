@@ -1,20 +1,23 @@
-﻿''*CID:''+v065R~:#72                          update#=   17;          ''+v065R~
+﻿''*CID:''+v076R~:#72                          update#=   19;          ''~v076R~
 '************************************************************************************''~7915I~
-'v065 2017/09/24 Word dialog by Ctrl+char(except "1"-"0")              ''+v065I~
+'v076 2017/10/08 Symbol Dialog by DataGridView                         ''~v076I~
+'v065 2017/09/24 Word dialog by Ctrl+char(except "1"-"0")              ''~v065I~
 'v012 2017/09/15 Load/Save/SaveAs from/to disctionary file             ''~7915I~
 '************************************************************************************''~7915I~
 Public Class ClassMRU                                                  ''~7522R~
     'localization not required                                             ''~7618R~
     Public Const MRULISTSZ = 10                                        ''~7522R~
     Public Const ID_DICTIONARY = 4                                     ''~v012R~
-    Public Const ID_WORDS=5                                            ''+v065I~
+    Public Const ID_WORDS=5                                            ''~v065I~
+    Public Const ID_SYMBOL=6                                           ''~v076I~
     Private MRUList As New List(Of String)                         ''~7421R~''~7522M~
     Private MRUListImage As New List(Of String)                            ''~7411I~''~7421R~''~7522M~
     Private MRUListText As New List(Of String)                             ''~7411I~''~7421R~''~7522M~
     Private MRUListKanaText As New List(Of String)                         ''~7411I~''~7421R~''~7522M~
     Private MRUListBESText As New List(Of String)                          ''~7412I~''~7421R~''~7522M~
     Private MRUListDictionary As New List(Of String)                   ''~v012R~
-    Private MRUListWords As New List(Of String)                        ''+v065I~
+    Private MRUListWords As New List(Of String)                        ''~v065I~
+    Private MRUListSymbol As New List(Of String)                       ''+v076I~
     Public Sub New()                                                   ''~7522I~
         '        loadMRUList()                                                  ''~7522M~
     End Sub                                                            ''~7522I~
@@ -26,8 +29,10 @@ Public Class ClassMRU                                                  ''~7522R~
                 MRUList = MRUListText                                    ''~7411I~''~7522M~
             Case ID_DICTIONARY                                         ''~v012R~
                 MRUList = MRUListDictionary                            ''~v012R~
-            Case ID_WORDS                                              ''+v065I~
-                MRUList = MRUListWords                                 ''+v065I~
+            Case ID_WORDS                                              ''~v065I~
+                MRUList = MRUListWords                                 ''~v065I~
+            Case ID_SYMBOL                                             ''+v076I~
+                MRUList = MRUListSymbol                                ''+v076I~
             Case Else '3 'KanaText                                           ''~7411I~''~7522I~
                 MRUList = MRUListKanaText                                ''~7411I~''~7522M~
         End Select                                                     ''~7411I~''~7522M~
@@ -56,8 +61,10 @@ Public Class ClassMRU                                                  ''~7522R~
                 My.Settings.CfgMRUtext = Pstr                            ''~7411I~''~7522M~
             Case ID_DICTIONARY                                         ''~v012R~
                 My.Settings.CfgMRUDictionary = Pstr                    ''~v012R~
-            Case ID_WORDS                                              ''+v065I~
-                My.Settings.CfgMRUWords = Pstr                         ''+v065I~
+            Case ID_WORDS                                              ''~v065I~
+                My.Settings.CfgMRUWords = Pstr                         ''~v065I~
+            Case ID_SYMBOL                                             ''+v076I~
+                My.Settings.CfgMRUSymbol = Pstr                        ''+v076I~
             Case 3 'KanaText                                           ''~7411I~''~7522M~
                 My.Settings.CfgMRUKanaText = Pstr                        ''~7411I~''~7522M~
         End Select                                                     ''~7411I~''~7522M~
@@ -83,7 +90,8 @@ Public Class ClassMRU                                                  ''~7522R~
             My.Settings.CfgMRUtext = ""                                  ''~7522I~
             My.Settings.CfgMRUKanaText = ""                              ''~7522I~
             My.Settings.CfgMRUDictionary = ""                          ''~v012R~
-            My.Settings.CfgMRUWords = ""                               ''+v065I~
+            My.Settings.CfgMRUWords = ""                               ''~v065I~
+            My.Settings.CfgMRUSymbol = ""                              ''+v076I~
         End If                                                         ''~7522I~
         Select Case Pcase                                              ''~7522I~
             Case 1 'Image                                              ''~7522I~
@@ -92,8 +100,10 @@ Public Class ClassMRU                                                  ''~7522R~
                 str = My.Settings.CfgMRUtext                             ''~7522I~
             Case ID_DICTIONARY                                         ''~v012R~
                 str = My.Settings.CfgMRUDictionary                     ''~v012R~
-            Case ID_WORDS                                              ''+v065I~
-                str = My.Settings.CfgMRUWords                          ''+v065I~
+            Case ID_WORDS                                              ''~v065I~
+                str = My.Settings.CfgMRUWords                          ''~v065I~
+            Case ID_SYMBOL                                             ''+v076I~
+                str = My.Settings.CfgMRUSymbol                         ''+v076I~
             Case Else '3 'KanaText                                     ''~7522I~
                 str = My.Settings.CfgMRUKanaText                         ''~7522I~
         End Select                                                     ''~7522I~
@@ -131,8 +141,10 @@ Public Class ClassMRU                                                  ''~7522R~
                 tmp = MRUListText                                      ''~v012R~
             Case ID_DICTIONARY                                         ''~v012R~
                 tmp = MRUListDictionary                                ''~v012R~
-            Case ID_WORDS                                              ''+v065I~
-                tmp = MRUListWords                                     ''+v065I~
+            Case ID_WORDS                                              ''~v065I~
+                tmp = MRUListWords                                     ''~v065I~
+            Case ID_SYMBOL                                             ''+v076I~
+                tmp = MRUListSymbol                                    ''+v076I~
             Case Else '3 'KanaText                                     ''~v012R~
                 tmp = MRUListKanaText                                  ''~v012R~
         End Select                                                     ''~v012R~

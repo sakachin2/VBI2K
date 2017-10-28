@@ -235,7 +235,7 @@
     <value>Select a line to be inserted before</value>
   </data>
   <data name="STR_MSG_CONFIRM_RESTORE_DEFAULT" xml:space="preserve">
-    <value>Restore Default ?</value>
+    <value>Merge Default ?</value>
   </data>
   <data name="STR_MSG_ERR_FIND_NULL" xml:space="preserve">
     <value>Search word is not set</value>
@@ -355,10 +355,10 @@
     <value>Discard update ?</value>
   </data>
   <data name="STR_ERR_MSG_WORDS_FILE_LINE_FORMAT" xml:space="preserve">
-    <value>Words File LineNo = {0} contains error</value>
+    <value>File LineNo = {0} contains error</value>
   </data>
   <data name="STR_ERR_MSG_WORDS_FILE_NO_SAVE_FILE" xml:space="preserve">
-    <value>This worrd definition is not loaded from a file, use SaveAS button</value>
+    <value>This definition is not loaded from a file, use SaveAS button</value>
   </data>
   <data name="STR_INFO_MSG_WORDS_LOADED" xml:space="preserve">
     <value>Words file was loaded.</value>
@@ -368,5 +368,38 @@
   </data>
   <data name="STR_ERR_MSG_NOT_ENABLED_KEY" xml:space="preserve">
     <value>On phrase definition, "Use" is not checked ON(Ctrl+{0})</value>
+  </data>
+  <data name="STR_ERR_MSG_NOT_REGISTERED_KEY_SYMBOL" xml:space="preserve">
+    <value>Not Registered on SymbolInput dialog.(Ctrl+{0})</value>
+  </data>
+  <data name="STR_ERR_MSG_NOT_ENABLED_KEY_SYMBOL" xml:space="preserve">
+    <value>On SymbolInput dialog, "Use" is not checked ON(Ctrl+{0})</value>
+  </data>
+  <data name="STR_LOAD" xml:space="preserve">
+    <value>Loaded from</value>
+  </data>
+  <data name="STR_SAVE" xml:space="preserve">
+    <value>Saved</value>
+  </data>
+  <data name="STR_SAVEAS" xml:space="preserve">
+    <value>SaveAs</value>
+  </data>
+  <data name="STR_CUT" xml:space="preserve">
+    <value>Cut</value>
+  </data>
+  <data name="STR_COPY" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+  <data name="STR_CUTPASTE" xml:space="preserve">
+    <value>Cut-Paste</value>
+  </data>
+  <data name="STR_COPYPASTE" xml:space="preserve">
+    <value>Copy-Paste</value>
+  </data>
+  <data name="STR_SEND" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="STR_FILTER_SYMBOL" xml:space="preserve">
+    <value>SymbolFile (*.sym)|*.sym|All(*.*)|*.*</value>
   </data>
 </root>

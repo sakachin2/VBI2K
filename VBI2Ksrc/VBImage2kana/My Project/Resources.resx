@@ -281,7 +281,7 @@
     <value>追加する位置（その行の前に追加）を選択してください</value>
   </data>
   <data name="STR_MSG_CONFIRM_RESTORE_DEFAULT" xml:space="preserve">
-    <value>既定に戻しますか？</value>
+    <value>既定を組み込みますか？</value>
   </data>
   <data name="STR_MSG_ERR_FIND_NULL" xml:space="preserve">
     <value>検索文字列が未設定です</value>
@@ -431,10 +431,10 @@
     <value>変更がありました、破棄しますか</value>
   </data>
   <data name="STR_ERR_MSG_WORDS_FILE_LINE_FORMAT" xml:space="preserve">
-    <value>語句ファイルの {0} 行目にエラーがあります</value>
+    <value>ファイルの {0} 行目にエラーがあります</value>
   </data>
   <data name="STR_ERR_MSG_WORDS_FILE_NO_SAVE_FILE" xml:space="preserve">
-    <value>この語句定義はファイルからロードしたものでは有りません、名前を付けて保存をしてください</value>
+    <value>この定義はファイルからロードしたものでは有りません、名前を付けて保存をしてください</value>
   </data>
   <data name="STR_INFO_MSG_WORDS_LOADED" xml:space="preserve">
     <value>語句ファイルを読み込みました</value>
@@ -444,5 +444,44 @@
   </data>
   <data name="STR_ERR_MSG_NOT_ENABLED_KEY" xml:space="preserve">
     <value>語句定義で有効になっていません(Ctrl+{0})</value>
+  </data>
+  <data name="STR_ERR_MSG_NOT_REGISTERED_KEY_SYMBOL" xml:space="preserve">
+    <value>記号入力ダイアログに登録されていません(Ctrl+{0})</value>
+  </data>
+  <data name="STR_ERR_MSG_NOT_ENABLED_KEY_SYMBOL" xml:space="preserve">
+    <value>記号入力ダイアログで有効になっていません(Ctrl+{0})</value>
+  </data>
+  <data name="help_form14" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\helps\help_form14.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="help_form14E" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\helps\help_form14E.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="STR_LOAD" xml:space="preserve">
+    <value>ファイルから設定</value>
+  </data>
+  <data name="STR_SAVE" xml:space="preserve">
+    <value>上書き保存</value>
+  </data>
+  <data name="STR_SAVEAS" xml:space="preserve">
+    <value>別名保存</value>
+  </data>
+  <data name="STR_CUT" xml:space="preserve">
+    <value>切り取り</value>
+  </data>
+  <data name="STR_COPY" xml:space="preserve">
+    <value>複写</value>
+  </data>
+  <data name="STR_CUTPASTE" xml:space="preserve">
+    <value>切り取り-貼り付け</value>
+  </data>
+  <data name="STR_COPYPASTE" xml:space="preserve">
+    <value>複写-貼り付け</value>
+  </data>
+  <data name="STR_SEND" xml:space="preserve">
+    <value>転送</value>
+  </data>
+  <data name="STR_FILTER_SYMBOL" xml:space="preserve">
+    <value>記号ファイル(*.sym)|*.sym|すべてのファイル(*.*)|*.*</value>
   </data>
 </root>

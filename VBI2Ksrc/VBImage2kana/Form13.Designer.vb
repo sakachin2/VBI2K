@@ -44,67 +44,70 @@ Partial Class Form13
         Me.ColumnDel = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
+        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
+        Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.Panel1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.PanelBottons.SuspendLayout()
         Me.PanelDataGrid.SuspendLayout()
         CType(Me.DataGridViewWords, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.StatusStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
         '
-        resources.ApplyResources(Me.Panel1, "Panel1")
         Me.Panel1.Controls.Add(Me.MenuStrip1)
+        resources.ApplyResources(Me.Panel1, "Panel1")
         Me.Panel1.Name = "Panel1"
         '
         'MenuStrip1
         '
-        resources.ApplyResources(Me.MenuStrip1, "MenuStrip1")
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OpenToolStripMenuItem, Me.SaveToolStripMenuItem, Me.SaveAsToolStripMenuItem, Me.CutToolStripMenuItem, Me.CopyToolStripMenuItem, Me.PasteToolStripMenuItem})
+        resources.ApplyResources(Me.MenuStrip1, "MenuStrip1")
         Me.MenuStrip1.Name = "MenuStrip1"
         '
         'OpenToolStripMenuItem
         '
-        resources.ApplyResources(Me.OpenToolStripMenuItem, "OpenToolStripMenuItem")
         Me.OpenToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        resources.ApplyResources(Me.OpenToolStripMenuItem, "OpenToolStripMenuItem")
         Me.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem"
         '
         'SaveToolStripMenuItem
         '
-        resources.ApplyResources(Me.SaveToolStripMenuItem, "SaveToolStripMenuItem")
         Me.SaveToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        resources.ApplyResources(Me.SaveToolStripMenuItem, "SaveToolStripMenuItem")
         Me.SaveToolStripMenuItem.Name = "SaveToolStripMenuItem"
         '
         'SaveAsToolStripMenuItem
         '
-        resources.ApplyResources(Me.SaveAsToolStripMenuItem, "SaveAsToolStripMenuItem")
         Me.SaveAsToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        resources.ApplyResources(Me.SaveAsToolStripMenuItem, "SaveAsToolStripMenuItem")
         Me.SaveAsToolStripMenuItem.Name = "SaveAsToolStripMenuItem"
         '
         'CutToolStripMenuItem
         '
-        resources.ApplyResources(Me.CutToolStripMenuItem, "CutToolStripMenuItem")
         Me.CutToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        resources.ApplyResources(Me.CutToolStripMenuItem, "CutToolStripMenuItem")
         Me.CutToolStripMenuItem.Name = "CutToolStripMenuItem"
         '
         'CopyToolStripMenuItem
         '
-        resources.ApplyResources(Me.CopyToolStripMenuItem, "CopyToolStripMenuItem")
         Me.CopyToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        resources.ApplyResources(Me.CopyToolStripMenuItem, "CopyToolStripMenuItem")
         Me.CopyToolStripMenuItem.Name = "CopyToolStripMenuItem"
         '
         'PasteToolStripMenuItem
         '
-        resources.ApplyResources(Me.PasteToolStripMenuItem, "PasteToolStripMenuItem")
         Me.PasteToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        resources.ApplyResources(Me.PasteToolStripMenuItem, "PasteToolStripMenuItem")
         Me.PasteToolStripMenuItem.Name = "PasteToolStripMenuItem"
         '
         'PanelBottons
         '
-        resources.ApplyResources(Me.PanelBottons, "PanelBottons")
         Me.PanelBottons.Controls.Add(Me.ButtonCancel)
         Me.PanelBottons.Controls.Add(Me.ButtonHelp)
         Me.PanelBottons.Controls.Add(Me.ButtonOK)
+        resources.ApplyResources(Me.PanelBottons, "PanelBottons")
         Me.PanelBottons.Name = "PanelBottons"
         '
         'ButtonCancel
@@ -127,16 +130,16 @@ Partial Class Form13
         '
         'PanelDataGrid
         '
-        resources.ApplyResources(Me.PanelDataGrid, "PanelDataGrid")
         Me.PanelDataGrid.Controls.Add(Me.DataGridViewWords)
+        resources.ApplyResources(Me.PanelDataGrid, "PanelDataGrid")
         Me.PanelDataGrid.Name = "PanelDataGrid"
         '
         'DataGridViewWords
         '
-        resources.ApplyResources(Me.DataGridViewWords, "DataGridViewWords")
         Me.DataGridViewWords.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText
         Me.DataGridViewWords.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridViewWords.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ColumnEnable, Me.ColumnKanji, Me.ColumnSend, Me.ColumnKana, Me.ColumnDel})
+        resources.ApplyResources(Me.DataGridViewWords, "DataGridViewWords")
         Me.DataGridViewWords.Name = "DataGridViewWords"
         Me.DataGridViewWords.RowTemplate.Height = 21
         '
@@ -176,17 +179,24 @@ Partial Class Form13
         'OpenFileDialog1
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
-        resources.ApplyResources(Me.OpenFileDialog1, "OpenFileDialog1")
         '
-        'SaveFileDialog1
+        'StatusStrip1
         '
-        resources.ApplyResources(Me.SaveFileDialog1, "SaveFileDialog1")
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1})
+        resources.ApplyResources(Me.StatusStrip1, "StatusStrip1")
+        Me.StatusStrip1.Name = "StatusStrip1"
+        '
+        'ToolStripStatusLabel1
+        '
+        Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
+        resources.ApplyResources(Me.ToolStripStatusLabel1, "ToolStripStatusLabel1")
         '
         'Form13
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = Global.WindowsApplication1.My.MySettings.Default.CFG_Form13ClientSize
+        Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.PanelDataGrid)
         Me.Controls.Add(Me.PanelBottons)
         Me.Controls.Add(Me.Panel1)
@@ -200,7 +210,10 @@ Partial Class Form13
         Me.PanelBottons.ResumeLayout(False)
         Me.PanelDataGrid.ResumeLayout(False)
         CType(Me.DataGridViewWords, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.StatusStrip1.ResumeLayout(False)
+        Me.StatusStrip1.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
@@ -224,4 +237,6 @@ Partial Class Form13
     Friend WithEvents ColumnSend As System.Windows.Forms.DataGridViewButtonColumn
     Friend WithEvents ColumnKana As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ColumnDel As System.Windows.Forms.DataGridViewCheckBoxColumn
+    Friend WithEvents StatusStrip1 As System.Windows.Forms.StatusStrip
+    Friend WithEvents ToolStripStatusLabel1 As System.Windows.Forms.ToolStripStatusLabel
 End Class

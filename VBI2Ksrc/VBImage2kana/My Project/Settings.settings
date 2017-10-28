@@ -128,5 +128,14 @@
     <Setting Name="CFGF5_KeyFind" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">3</Value>
     </Setting>
+    <Setting Name="CFGF14_Symbol" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="CFG_Form14ClientSize" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)">477, 343</Value>
+    </Setting>
+    <Setting Name="CfgMRUSymbol" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

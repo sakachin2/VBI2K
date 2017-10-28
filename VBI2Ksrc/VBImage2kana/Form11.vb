@@ -1,5 +1,8 @@
-﻿'CID:''+v066R~:#72                             update#=   85;         ''~v066R~
+﻿'CID:''+v078R~:#72                             update#=   91;         ''~v078R~
 '************************************************************************************''~v008I~
+'v080 2017/10/10 (BUG)2nd paste after cut remove cut pos twice         ''~v080I~
+'v078 2017/10/09 dialog status bar                                     ''~v078I~
+'v077 2017/10/08 Commit required when cut/copy                         ''~v077I~
 'v066 2017/09/25 (Bug)Dictionary dialog;if err line exist saveFile write "False"''~v066I~
 'v013 2017/09/16 Cut&PAste support for Dictionary                      ''~v013I~
 'v012 2017/09/15 Load/Save/SaveAs from/to disctionary file             ''~v012I~
@@ -31,6 +34,7 @@ Public Class Form11                                                    ''~v008R~
     Private mruID = ClassMRU.ID_DICTIONARY                          ''~v012I~
     Private MRU As ClassMRU = Form1.MAinForm.MRU                         ''~v012I~
     Private saveFilename As String                                     ''~v012I~
+    Private iDGV As KDGV   'DataGridView wrapper class                 ''+v078I~
     '***************************************************************************''~v008I~
     Private swUpdated As Boolean = False                               ''~v008I~
     Private swShown As Boolean = False                                 ''~v008I~
@@ -42,9 +46,11 @@ Public Class Form11                                                    ''~v008R~
     Private Const CPSTATUS_NONE = 0                                      ''~v013I~
     Private Const CPSTATUS_CUT = 1                                       ''~v013I~
     Private Const CPSTATUS_COPY = 2                                      ''~v013I~
+    Private Const CPSTATUS_CUTDONE = 3                                 ''~v080I~
     Private CPcutrow As Integer                                        ''~v013I~
-    Private swCommitting As Boolean = False                            ''+v066I~
-    Private swInvalid As Boolean = False                               ''+v066I~
+    Private swCommitting As Boolean = False                            ''~v066I~
+    Private swInvalid As Boolean = False                               ''~v066I~
+    Private SB As SBM     'StatusBar                                   ''~v078I~
     '***************************************************************************''~v008I~
     Public Shared Sub sharedShowDlg()                                  ''~v008R~
         If dlgDictionary Is Nothing Then                                     ''~v008I~
@@ -69,6 +75,8 @@ Public Class Form11                                                    ''~v008R~
         setLang()   'should set CurrentUICulture before InitializeComponent''~v008I~
         InitializeComponent()                                          ''~v008I~
         Form1.setupTitlebarIcon(Me)                                    ''~v008I~
+        SB = New SBM(ToolStripStatusLabel1)                            ''~v078I~
+        iDGV = New KDGV(DataGridViewDictionary)                        ''+v078I~
         getCfg()                                                       ''~v008I~
     End Sub                                                            ''~v008I~
     Public Sub showDlg()                                               ''~v008I~
@@ -139,6 +147,7 @@ Public Class Form11                                                    ''~v008R~
                 DGV.CommitEdit(DataGridViewDataErrorContexts.Commit)    ''~v012I~
             End If                                                     ''~v012I~
         End If                                                         ''~v012I~
+        SB.show(SBM.MSGID.CLEAR, "")                                   ''~v078I~
     End Sub                                                            ''~v012I~
     Private Sub CellValueChanged(ByVal sender As System.Object, ByVal e As DataGridViewCellEventArgs) Handles DataGridViewDictionary.CellValueChanged ''~v008I~
         ' e.ColumnIndex, e.RowIndex                                        ''~v008I~
@@ -146,11 +155,11 @@ Public Class Form11                                                    ''~v008R~
             Exit Sub                                                   ''~v008I~
         End If                                                         ''~v008I~
         Dim pos As Integer = e.RowIndex                                ''~v008R~
-      If Not swCommitting Then                                         ''+v066I~
-        chkValueValidity(pos, False)    'skip errmsg if committing     ''+v066I~
-      else                                                             ''+v066I~
-        chkValueValidity(pos, True)                                     ''~v008I~
-      end if                                                           ''+v066I~
+        If Not swCommitting Then                                         ''~v066I~
+            chkValueValidity(pos, False)    'skip errmsg if committing     ''~v066I~
+        Else                                                             ''~v066I~
+            chkValueValidity(pos, True)                                     ''~v008I~
+        End If                                                           ''~v066I~
         swUpdated = True                                                  ''~v008I~
     End Sub                                                            ''~v008I~
     Private Sub showHelp()                                             ''~v008I~
@@ -287,11 +296,13 @@ Public Class Form11                                                    ''~v008R~
         Dim kana As String = DGV.Rows(Ppos).Cells(CELLNO_KANA).Value       ''~v008I~
         Dim rc As Integer = 0                                            ''~v008R~
         Dim errstr As String = ""                                           ''~v008I~
+        Dim cell As Integer = 0                                        ''~v078I~
         If kanji Is Nothing OrElse kanji.Trim().CompareTo("") = 0 Then               ''~v008R~''~v012R~
             rc = 1                                                       ''~v008I~
         Else                                                           ''~v008I~
             If kanji.IndexOf(";"c) >= 0 Then                           ''~v008I~
                 errstr = kanji                                           ''~v008I~
+                cell = CELLNO_KANJI                                    ''~v078I~
                 rc = 4                                                 ''~v008R~
             End If                                                     ''~v008R~
         End If                                                         ''~v008I~
@@ -303,19 +314,23 @@ Public Class Form11                                                    ''~v008R~
             If kana.IndexOf(";"c) >= 0 Then                            ''~v008I~
                 If rc < 4 Then                                                ''~v008I~
                     errstr = kana                                      ''~v008R~
+	                cell = CELLNO_KANA                                 ''~v078I~
                     rc = 4                                             ''~v008R~
                 End If                                                 ''~v008I~
             End If                                                     ''~v008R~
         End If                                                         ''~v008I~
-      If rc = 4 Then                                                   ''+v066I~
-        If PswHandler Then                                             ''~v008I~
-'           If rc = 4 Then                                               ''~v008R~''+v066R~
+        If rc = 4 Then                                                   ''~v066I~
+'           If PswHandler Then                                             ''~v008I~''~v078R~
+                '           If rc = 4 Then                                               ''~v008R~''~v066R~
                 Dim errinfo As String = "Row-" & (Ppos + 1)                ''~v008I~
-                MessageBox.Show(String.Format(Rstr.getStr("STR_ERR_MSG_DICTIONARY_ERRVALUE"), errstr), Me.Text) ''~v008I~
-'           End If                                                      ''~v008I~''+v066R~
-        End If
-	    swInvalid = True                                               ''+v066I~
-      End If                                                           ''+v066I~
+'               MessageBox.Show(String.Format(Rstr.getStr("STR_ERR_MSG_DICTIONARY_ERRVALUE"), errstr), Me.Text) ''~v008I~''~v078R~
+                '           End If                                                      ''~v008I~''~v066R~
+            Dim msg As String = String.Format(Rstr.getStr("STR_ERR_MSG_DICTIONARY_ERRVALUE"), errstr)''~v078I~
+            SB.show(msg, True)   ' delayed set text after cleared      ''~v078I~
+            iDGV.setSelectedPos(Ppos, cell)                            ''~v078I~
+'           End If                                                     ''~v078R~
+            swInvalid = True                                               ''~v066I~
+        End If                                                           ''~v066I~
         Return rc ''~v008I~
     End Function                                                            ''~v008I~
     Private Sub errIgnoredRow(Perrctr As Integer, Perrrow As Integer)   ''~v008I~
@@ -449,7 +464,8 @@ Public Class Form11                                                    ''~v008R~
         ListData = tmp                                                   ''~v012I~
         fillColumn()                                                   ''~v012I~
         setTitle(Pfnm)                                                 ''~v012I~
-        MessageBox.Show(Pfnm, Rstr.getStr("STR_INFO_MSG_DICTIONARY_LOADED")) ''~v013R~
+        '       MessageBox.Show(Pfnm, Rstr.getStr("STR_INFO_MSG_DICTIONARY_LOADED")) ''~v013R~''~v078R~
+        SB.show(SBM.MSGID.LOAD, Pfnm)                                  ''~v078I~
     End Sub                                                            ''~v012I~
     Private Sub setTitle(Pfnm As String)                               ''~v012I~
         Dim newtitle As String, oldtitle As String = Me.Text           ''~v012I~
@@ -531,6 +547,7 @@ Public Class Form11                                                    ''~v008R~
             Exit Sub                                                   ''~v012I~
         End If                                                         ''~v012I~
         saveFile(saveFilename)                                         ''~v012R~
+        SB.show(SBM.MSGID.SAVE, saveFilename)                          ''~v078I~
     End Sub                                                            ''~v012I~
     Private Sub saveAsFile()                             ''~v012I~
         SaveFileDialog1.Filter = Rstr.getStr("STR_FILTER_DICTIONARY")  ''~v012I~
@@ -539,34 +556,35 @@ Public Class Form11                                                    ''~v008R~
             If saveFile(fnm) Then                                           ''~v012R~
                 saveFilename = fnm                                       ''~v012I~
                 setTitle(fnm)                                          ''~v012I~
+                SB.show(SBM.MSGID.SAVEAS, saveFilename)                ''~v078I~
             End If                                                     ''~v012I~
         End If                                                         ''+v012I~                                                      ''~v012I~
     End Sub                                                            ''~v012I~
-    Private Function commitDGV() As Boolean                            ''+v066I~
-        Try                                                            ''+v066I~
-            If DGV.IsCurrentCellDirty Then                             ''+v066I~
-                swCommitting = True                                    ''+v066I~
-                DGV.CommitEdit(DataGridViewDataErrorContexts.Commit)   ''+v066I~
-                swCommitting = False                                   ''+v066I~
-            End If                                                     ''+v066I~
-        Catch ex As Exception                                          ''+v066I~
-            Return False                                               ''+v066I~
-        End Try                                                        ''+v066I~
-        Return True                                                    ''+v066I~
-    End Function                                                       ''+v066I~
+    Private Function commitDGV() As Boolean                            ''~v066I~
+        Try                                                            ''~v066I~
+            If DGV.IsCurrentCellDirty Then                             ''~v066I~
+                swCommitting = True                                    ''~v066I~
+                DGV.CommitEdit(DataGridViewDataErrorContexts.Commit)   ''~v066I~
+                swCommitting = False                                   ''~v066I~
+            End If                                                     ''~v066I~
+        Catch ex As Exception                                          ''~v066I~
+            Return False                                               ''~v066I~
+        End Try                                                        ''~v066I~
+        Return True                                                    ''~v066I~
+    End Function                                                       ''~v066I~
     Private Function saveFile(Pfnm As String) As Boolean               ''~v012R~
-        swInvalid = False                                              ''+v066I~
-        commitDGV()                                                    ''+v066I~
-        If swInvalid Then ' set chkvalidity() from cellchanged         ''+v066I~
-            Return False                                               ''+v066I~
-        End If                                                         ''+v066I~
+        swInvalid = False                                              ''~v066I~
+        commitDGV()                                                    ''~v066I~
+        If swInvalid Then ' set chkvalidity() from cellchanged         ''~v066I~
+            Return False                                               ''~v066I~
+        End If                                                         ''~v066I~
         Try                                                            ''~v012I~
             Dim str As String = getFileData()                             ''~v012I~
-            if str isnot Nothing                                       ''~v066I~
-            System.IO.File.WriteAllText(Pfnm, str, fileEncoding)       ''~v012R~
-            insertMRUList(Pfnm)                                        ''~v012I~
-            MessageBox.Show(Pfnm, Rstr.MSG_INFO_SAVED)                 ''~v012I~
-            end if                                                     ''~v066I~
+            If str IsNot Nothing Then                                       ''~v066I~
+                System.IO.File.WriteAllText(Pfnm, str, fileEncoding)       ''~v012R~
+                insertMRUList(Pfnm)                                        ''~v012I~
+                '           MessageBox.Show(Pfnm, Rstr.MSG_INFO_SAVED)                 ''~v012I~''~v078R~
+            End If                                                     ''~v066I~
         Catch ex As Exception                                          ''~v012I~
             Form1.WriteError(Pfnm, ex)                                 ''~v012I~
             Return False                                               ''~v012I~
@@ -578,7 +596,7 @@ Public Class Form11                                                    ''~v008R~
         Dim str As String                                              ''~v012I~
         Dim sb As New StringBuilder()                                  ''~v012I~
         If errctr > 0 Then                                             ''~v012I~
-'           Return False                                               ''~v012I~''~v066R~
+            '           Return False                                               ''~v012I~''~v066R~
             Return Nothing                                             ''~v066I~
         End If                                                         ''~v012I~
         If errctr < 0 Then     'null                                   ''~v012I~
@@ -593,15 +611,19 @@ Public Class Form11                                                    ''~v008R~
     End Function                                                       ''~v012I~
     '*************************************************************     ''~v013I~
     Private Sub cutRow()                                               ''~v013I~
+        commitDGV()                                                    ''~v077I~
         Dim cpos As Integer = getCurrentRowData(CPenable, CPkanji, CPkana) ''~v013R~
         If cpos >= 0 Then                                                     ''~v013I~
             CPstatus = CPSTATUS_CUT                                      ''~v013I~
             CPcutrow = cpos                                              ''~v013I~
+            SB.show(SBM.MSGID.CUT, CPkanji)                           ''~v078I~
         End If                                                         ''~v013I~
     End Sub                                                            ''~v013I~
     Private Sub copyRow()                                              ''~v013I~
+        commitDGV()                                                    ''~v077I~
         If getCurrentRowData(CPenable, CPkanji, CPkana) >= 0 Then             ''~v013R~
             CPstatus = CPSTATUS_COPY                                     ''~v013I~
+            SB.show(SBM.MSGID.COPY, CPkanji)                          ''~v078I~
         End If                                                         ''~v013I~
     End Sub                                                            ''~v013I~
     Private Sub pasteRow()                                             ''~v013I~
@@ -619,6 +641,10 @@ Public Class Form11                                                    ''~v008R~
                 cutrow = CPcutrow                                        ''~v013I~
             End If                                                     ''~v013I~
             DGV.Rows.RemoveAt(cutrow)                                  ''~v013I~
+            SB.show(SBM.MSGID.CUT_PASTE, CPkanji)                     ''~v078I~
+        	CPstatus = CPSTATUS_CUTDONE                                ''~v080I~
+        Else                                                           ''~v078I~
+            SB.show(SBM.MSGID.COPY_PASTE, CPkanji)                    ''~v078I~
         End If                                                         ''~v013I~
     End Sub                                                            ''~v013I~
     Private Function getCurrentRowData(ByRef Ppenable As Boolean, ByRef Ppkanji As String, ByRef Ppkana As String) As Integer ''~v013R~

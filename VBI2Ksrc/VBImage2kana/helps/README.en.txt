@@ -1,5 +1,10 @@
 (UTF8 encoding)
 
+V1.15 : Update                               2017/10/27
+
+. Place "Send" button to each lines on Symbol Input Dialog.
+. Bug of Cut & Paste on Words Dfinition Dialog.
+
 V1.14 : Update                               2017/09/27
 
 . Support Kanji file of encoding = UTF-8.
@@ -57,6 +62,7 @@ Kana is a collection of Japanese Letter excludes Kanji.
 WinBES99 is a text translation tool into Braille.
 Windows app "Windows Fax and Scan" can be used to create image file. 
 Application may crash depending quality of image file, in that case try re-scan the document.
+And displayiong some number of image files may cause memory shortage.
 
 Requirement：To extranct text from image file,
       This app requires "Microsoft Office Document Imaging"(MODI) installed.
@@ -70,6 +76,8 @@ also enable to scan documents and save to image file, and send extracted text st
 
 GitHub sakachin2/VBI2K contains MSVS2010Express project source
 
+Please send your sudgestion or bug reports to mail:sakachin2@yahoo.co.jp
+
 *************************************************************************************
 (Note)How to install MODI.
     See this site(https://support.microsoft.com/ja-jp/help/982760/install-modi-for-use-with-microsoft-office-2010).
@@ -80,7 +88,7 @@ GitHub sakachin2/VBI2K contains MSVS2010Express project source
           Install MODI ony to avoid other version of Office("Install Now" skips installing of MODI).
             By "Custom Install",set all(SharepointDesigner,Office Common,Office Tool) to "No install".
             Then set "Microsoft Office Document Imaging" of Office tool to "execute all from My Computer".
-       .rtf ファイルはWord Document.
+       .rtf file is  Word Document.
        SharePointDesigner2007 is supported until 2017/10/10.
        (It is saved in GitHub sakachin2/VBI2K)
        SP3+languagePack-Japanese(sharepointdesigner2007sp3-kb2526089-fullfile-ja-jp.exe) is also required to install.

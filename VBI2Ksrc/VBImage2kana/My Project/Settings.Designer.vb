@@ -557,6 +557,42 @@ Namespace My
                 Me("CFGF5_KeyFind") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property CFGF14_Symbol() As String
+            Get
+                Return CType(Me("CFGF14_Symbol"),String)
+            End Get
+            Set
+                Me("CFGF14_Symbol") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("477, 343")>  _
+        Public Property CFG_Form14ClientSize() As Global.System.Drawing.Size
+            Get
+                Return CType(Me("CFG_Form14ClientSize"),Global.System.Drawing.Size)
+            End Get
+            Set
+                Me("CFG_Form14ClientSize") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property CfgMRUSymbol() As String
+            Get
+                Return CType(Me("CfgMRUSymbol"),String)
+            End Get
+            Set
+                Me("CfgMRUSymbol") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

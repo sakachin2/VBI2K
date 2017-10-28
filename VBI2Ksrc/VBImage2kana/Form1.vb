@@ -1,5 +1,6 @@
-﻿'CID:''+v068R~:#72                             update#=  669;         ''+v068R~
+﻿'CID:''+v076R~:#72                             update#=  672;         ''+v076R~
 '************************************************************************************''~v002I~
+'v076 2017/10/08 Symbol Dialog by DataGridView                         ''~v076I~
 'v073 2017/09/27 (Bug)crash when words dialog update, close form3 then replied discard cancel''~v073I~
 'v072 2017/09/26 Display doc option at receive text                    ''~v072I~
 'v071 2017/09/26 (Bug) clush when send from SpecialCharDialog after form3 closed''~v071I~
@@ -98,7 +99,8 @@ Public Class Form1
     Private printRange As System.Drawing.Printing.PrintRange                                   ''~7429I~
     Private printPageFrom, printpageTo, printPage As Integer             ''~7429I~
     Public dlgOptions As FormOptions                                  ''~7430I~''~7501R~
-    Public dlgSpecialKey As Form6                                      ''~7515I~
+'   Public dlgSpecialKey As Form6                                      ''~7515I~''~v076R~
+    Public dlgSpecialKey As Form14                                     ''~v076I~
     Public dlgDictionary As Form9                                      ''~v008R~
     Public dlgFind1 As Form8                                            ''~7516I~''~7519R~
     Public dlgFind3 As Form8                                           ''~7519I~
@@ -125,7 +127,8 @@ Public Class Form1
         dlgOptions = New FormOptions()                                 ''~7430I~''~7506M~''~7613M~
         setLocale()                                                    ''~7613M~
         loadMRUList()                                                  ''~7522R~
-        dlgSpecialKey = New Form6()                                    ''~7515R~
+'       dlgSpecialKey = New Form6()                                    ''~7515R~''~v076R~
+        dlgSpecialKey = New Form14()                                   ''~v076I~
         dlgDictionary = New Form9()     'deprecated to foerm11         ''~v008R~
         fmtBES = New FormatBES()                                         ''~7421I~
         '        swViewKatakana = dlgOptions.swKatakana                            ''~7501I~
@@ -160,6 +163,7 @@ Public Class Form1
         showCustomCaret()                                              ''~v067I~
     End Sub                                                            ''~v067I~
     Private Sub Form1_Closing(sender As System.Object, e As System.ComponentModel.CancelEventArgs) Handles MyBase.Closing ''~7501I~
+		debugClose()                                                   ''~v076I~
         If Not chkDiscard(e, Me.Text) Then                                          ''~7508R~''~v011R~
             Exit Sub                                                   ''~v011I~
         End If                                                         ''~v011I~
@@ -804,7 +808,8 @@ Public Class Form1
     End Sub                                                            ''~7515I~
     Public Function showDlgSpecialKey(Pswform1 As Boolean, Pform As Form) As Boolean ''~7523I~
         If dlgSpecialKey.IsDisposed Then                                    ''~7523I~
-            dlgSpecialKey = New Form6()                                ''~7523I~
+'           dlgSpecialKey = New Form6()                                ''~7523I~''~v076R~
+            dlgSpecialKey = New Form14()                               ''~v076I~
             If Pswform1 Then                                                ''~7523I~
                 Dim frm = DirectCast(Pform, Form1)                       ''~7523I~
                 dlgSpecialKey.showForForm1(frm)                        ''~7523I~
@@ -818,7 +823,8 @@ Public Class Form1
     End Function                                                            ''~7523I~
     Public Function getSpecialStr(Pindex As Integer)                   ''~7525I~
         If dlgSpecialKey.IsDisposed Then                               ''~7525I~
-            dlgSpecialKey = New Form6()                                ''~7525I~
+'           dlgSpecialKey = New Form6()                                ''~7525I~''~v076R~
+            dlgSpecialKey = New Form14()                               ''~v076I~
         End If                                                         ''~7525I~
         Return dlgSpecialKey.getSpecialStr(Pindex)                     ''~7525I~
     End Function                                                       ''~7525I~
@@ -1002,7 +1008,7 @@ Public Class Form1
         showStatus(msg)     'imediately put msg                        ''~v052I~
     End Sub                                                            ''~v052I~
     Private Sub debugInit()                                            ''~v068I~
-#if DEBUG                                                              ''+v068I~
+#if DEBUG                                                              ''~v068I~
         Debug.Listeners.Remove("Default")                              ''~v068I~
         '       Dim lstener as TextWriterTraceListener(System.IO.File.createText("Debug.txt"))''~v068I~
         Dim stream As New StreamWriter("Debug.txt")                    ''~v068I~
@@ -1010,6 +1016,12 @@ Public Class Form1
         Dim writer As TextWriter = TextWriter.Synchronized(stream)   ''~v068I~
         Dim listener As New TextWriterTraceListener(writer)                 ''~v068I~
         Debug.Listeners.Add(listener)                                  ''~v068I~
-#end if                                                                ''+v068I~
+#end if                                                                ''~v068I~
     End Sub                                                            ''~v068I~
+    Private Sub debugClose()                                           ''~v076I~
+#if DEBUG                                                              ''~v076I~
+        Debug.Flush()                                                  ''~v076I~
+        Debug.Close()                                                  ''~v076I~
+#end if                                                                ''~v076I~
+    End Sub                                                            ''~v076I~
 End Class

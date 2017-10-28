@@ -1,5 +1,6 @@
-﻿'CID:''+v073R~:#72                          update#=  214;            ''+v073R~
+﻿'CID:''+v076R~:#72                          update#=  215;            ''+v076R~
 '************************************************************************************''~v026I~
+'v076 2017/10/08 Symbol Dialog by DataGridView                         ''+v076I~
 'v073 2017/09/26 (Bug)ScrollToCaret will move Selectio start at botom of visible area,it sometimes scroll to top.''~v073I~
 'v070 2017/09/26 F3 for find dialog is configurable                    ''~v070I~
 'v065 2017/09/24 Word dialog by Ctrl+char(except "1"-"0")              ''~v065I~
@@ -27,7 +28,7 @@ Public Class ClassUndoRedo                                             ''~7429R~
     Private menuUndo, menuRedo As ToolStripMenuItem                    ''~7501I~
     Private optFormat As Integer                                       ''~7501I~
     '   Private dlgOptions As FormOptions                                  ''~7506I~''~7525R~
-    Private dlgSpecialKey As Form6                                    ''~7515I~
+'   Private dlgSpecialKey As Form6                                    ''~7515I~''+v076R~
     Private fmtBES As FormatBES                                        ''~7506I~
     Private swKeyBS As Boolean                                         ''~7506I~
     Private btnType As Boolean '@@@@                                   ''~7513I~
@@ -47,7 +48,7 @@ Public Class ClassUndoRedo                                             ''~7429R~
         setRedoEnable(False)                                           ''~7501I~
         swSaved = False                                                  ''~7429I~
         '       dlgOptions = Form1.MainForm.dlgOptions                                  ''~7506I~''~7521R~''~7525R~
-        dlgSpecialKey = Form1.MainForm.dlgSpecialKey                            ''~7515I~''~7521R~
+'       dlgSpecialKey = Form1.MainForm.dlgSpecialKey                            ''~7515I~''~7521R~''+v076R~
         fmtBES = Form1.MainForm.fmtBES                                          ''~7506I~''~7521R~
     End Sub                                                            ''~7429I~
     Sub resetForm1()                                                   ''~7519I~
@@ -70,7 +71,7 @@ Public Class ClassUndoRedo                                             ''~7429R~
         setRedoEnable(False)                                           ''~7501I~
         swSaved = False                                                  ''~7501I~
         '       dlgOptions = Form1.MainForm.dlgOptions                                  ''~7513I~''~7521R~''~7525R~
-        dlgSpecialKey = Form1.MainForm.dlgSpecialKey                            ''~7515I~''~7521R~
+'       dlgSpecialKey = Form1.MainForm.dlgSpecialKey                            ''~7515I~''~7521R~''+v076R~
         fmtBES = Form1.MainForm.fmtBES                                          ''~7513I~''~7521R~
     End Sub                                                            ''~7501I~
     Public Sub setTBText(Ptext As String, PswUndo As Boolean)          ''~7429I~
