@@ -1,5 +1,7 @@
-﻿'CID:''+v078R~:#72                             update#=   91;         ''~v078R~
+﻿'CID:''+v103R~:#72                             update#=   93;         ''+v103R~
 '************************************************************************************''~v008I~
+'v103 2017/12/16 (BUG)did not closed file for Dialog(Dictionary,Word,Symbol) at format err''+v103I~
+'v102 2017/12/16 (BUG)Enable/Disable check  of Dislog(Dictionary,Word,Symbol)''~v102I~
 'v080 2017/10/10 (BUG)2nd paste after cut remove cut pos twice         ''~v080I~
 'v078 2017/10/09 dialog status bar                                     ''~v078I~
 'v077 2017/10/08 Commit required when cut/copy                         ''~v077I~
@@ -34,7 +36,7 @@ Public Class Form11                                                    ''~v008R~
     Private mruID = ClassMRU.ID_DICTIONARY                          ''~v012I~
     Private MRU As ClassMRU = Form1.MAinForm.MRU                         ''~v012I~
     Private saveFilename As String                                     ''~v012I~
-    Private iDGV As KDGV   'DataGridView wrapper class                 ''+v078I~
+    Private iDGV As KDGV   'DataGridView wrapper class                 ''~v078I~
     '***************************************************************************''~v008I~
     Private swUpdated As Boolean = False                               ''~v008I~
     Private swShown As Boolean = False                                 ''~v008I~
@@ -76,7 +78,7 @@ Public Class Form11                                                    ''~v008R~
         InitializeComponent()                                          ''~v008I~
         Form1.setupTitlebarIcon(Me)                                    ''~v008I~
         SB = New SBM(ToolStripStatusLabel1)                            ''~v078I~
-        iDGV = New KDGV(DataGridViewDictionary)                        ''+v078I~
+        iDGV = New KDGV(DataGridViewDictionary)                        ''~v078I~
         getCfg()                                                       ''~v008I~
     End Sub                                                            ''~v008I~
     Public Sub showDlg()                                               ''~v008I~
@@ -502,6 +504,7 @@ Public Class Form11                                                    ''~v008R~
                 line = sr.ReadLine()                                     ''~v012I~
                 Dim tmp2 As String() = line.Split(";"c)                  ''~v012I~
                 If Not formatChk(tmp2) Then  'err                           ''~v012I~
+            		sr.Close()                                         ''+v103I~
                     errLineFormat(linectr + 1, line)                      ''~v012I~
                     Return Nothing                                     ''~v012I~
                 End If                                                 ''~v012I~
@@ -524,8 +527,9 @@ Public Class Form11                                                    ''~v008R~
             Return False                                               ''~v012I~
         End If                                                         ''~v012I~
         Dim enableid = Pdata(0)                                          ''~v012I~
-        If enableid.CompareTo(ENABLEID_ON) OrElse enableid.CompareTo(ENABLEID_OFF) Then ''~v012I~
-        Else                                                           ''~v012I~
+'       If enableid.CompareTo(ENABLEID_ON) OrElse enableid.CompareTo(ENABLEID_OFF) Then ''~v012I~''~v102R~
+'       Else                                                           ''~v012I~''~v102R~
+        If enableid.CompareTo(ENABLEID_ON) <> 0 AndAlso enableid.CompareTo(ENABLEID_OFF) <> 0 Then''~v102I~
             Return False                                               ''~v012I~
         End If                                                         ''~v012I~
         If (Pdata(1).Trim()).CompareTo("") = 0 Then                           ''~v012I~

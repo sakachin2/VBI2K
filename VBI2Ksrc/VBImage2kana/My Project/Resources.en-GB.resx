@@ -402,4 +402,7 @@
   <data name="STR_FILTER_SYMBOL" xml:space="preserve">
     <value>SymbolFile (*.sym)|*.sym|All(*.*)|*.*</value>
   </data>
+  <data name="STR_MSG_ERR_KANACONV_FAILED" xml:space="preserve">
+    <value>Kana translation error(those are embedded by "Error()")</value>
+  </data>
 </root>

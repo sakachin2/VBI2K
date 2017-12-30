@@ -1,5 +1,10 @@
 (UTF8 encoding)
 
+V1.16 : Update                               2017/12/31
+
+. KanjiText->KanaText conversion hungs by combination of Chuten(・)
+. Show string enclosed by Error() when Kanji->Kana translation error.
+
 V1.15 : Update                               2017/10/27
 
 . Place "Send" button to each lines on Symbol Input Dialog.
@@ -76,7 +81,7 @@ also enable to scan documents and save to image file, and send extracted text st
 
 GitHub sakachin2/VBI2K contains MSVS2010Express project source
 
-Please send your sudgestion or bug reports to mail:sakachin2@yahoo.co.jp
+Please send your suggestion or bug reports to mail:sakachin2@yahoo.co.jp
 
 *************************************************************************************
 (Note)How to install MODI.

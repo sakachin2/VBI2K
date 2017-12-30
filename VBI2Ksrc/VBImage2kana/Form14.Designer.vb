@@ -39,11 +39,6 @@ Partial Class Form14
         Me.PasteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PanelDGV = New System.Windows.Forms.Panel()
         Me.DataGridViewSymbol = New System.Windows.Forms.DataGridView()
-        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
-        Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.PanelMenu = New System.Windows.Forms.Panel()
-        Me.PanelStatuSButton = New System.Windows.Forms.Panel()
-        Me.PanelMiddle = New System.Windows.Forms.Panel()
         Me.ColumnEnable = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.ColumnKey = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ColumnSend = New System.Windows.Forms.DataGridViewButtonColumn()
@@ -51,6 +46,11 @@ Partial Class Form14
         Me.ColumnComment = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.CommentE = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ColumnDel = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
+        Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.PanelMenu = New System.Windows.Forms.Panel()
+        Me.PanelStatuSButton = New System.Windows.Forms.Panel()
+        Me.PanelMiddle = New System.Windows.Forms.Panel()
         Me.PanelButtons.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.PanelDGV.SuspendLayout()
@@ -154,36 +154,6 @@ Partial Class Form14
         Me.DataGridViewSymbol.Name = "DataGridViewSymbol"
         Me.DataGridViewSymbol.RowTemplate.Height = 21
         '
-        'StatusStrip1
-        '
-        resources.ApplyResources(Me.StatusStrip1, "StatusStrip1")
-        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1})
-        Me.StatusStrip1.Name = "StatusStrip1"
-        '
-        'ToolStripStatusLabel1
-        '
-        Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
-        resources.ApplyResources(Me.ToolStripStatusLabel1, "ToolStripStatusLabel1")
-        '
-        'PanelMenu
-        '
-        Me.PanelMenu.Controls.Add(Me.MenuStrip1)
-        resources.ApplyResources(Me.PanelMenu, "PanelMenu")
-        Me.PanelMenu.Name = "PanelMenu"
-        '
-        'PanelStatuSButton
-        '
-        Me.PanelStatuSButton.Controls.Add(Me.StatusStrip1)
-        Me.PanelStatuSButton.Controls.Add(Me.PanelButtons)
-        resources.ApplyResources(Me.PanelStatuSButton, "PanelStatuSButton")
-        Me.PanelStatuSButton.Name = "PanelStatuSButton"
-        '
-        'PanelMiddle
-        '
-        Me.PanelMiddle.Controls.Add(Me.PanelDGV)
-        resources.ApplyResources(Me.PanelMiddle, "PanelMiddle")
-        Me.PanelMiddle.Name = "PanelMiddle"
-        '
         'ColumnEnable
         '
         resources.ApplyResources(Me.ColumnEnable, "ColumnEnable")
@@ -227,6 +197,36 @@ Partial Class Form14
         resources.ApplyResources(Me.ColumnDel, "ColumnDel")
         Me.ColumnDel.Name = "ColumnDel"
         Me.ColumnDel.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        '
+        'StatusStrip1
+        '
+        resources.ApplyResources(Me.StatusStrip1, "StatusStrip1")
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1})
+        Me.StatusStrip1.Name = "StatusStrip1"
+        '
+        'ToolStripStatusLabel1
+        '
+        Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
+        resources.ApplyResources(Me.ToolStripStatusLabel1, "ToolStripStatusLabel1")
+        '
+        'PanelMenu
+        '
+        Me.PanelMenu.Controls.Add(Me.MenuStrip1)
+        resources.ApplyResources(Me.PanelMenu, "PanelMenu")
+        Me.PanelMenu.Name = "PanelMenu"
+        '
+        'PanelStatuSButton
+        '
+        Me.PanelStatuSButton.Controls.Add(Me.StatusStrip1)
+        Me.PanelStatuSButton.Controls.Add(Me.PanelButtons)
+        resources.ApplyResources(Me.PanelStatuSButton, "PanelStatuSButton")
+        Me.PanelStatuSButton.Name = "PanelStatuSButton"
+        '
+        'PanelMiddle
+        '
+        Me.PanelMiddle.Controls.Add(Me.PanelDGV)
+        resources.ApplyResources(Me.PanelMiddle, "PanelMiddle")
+        Me.PanelMiddle.Name = "PanelMiddle"
         '
         'Form14
         '

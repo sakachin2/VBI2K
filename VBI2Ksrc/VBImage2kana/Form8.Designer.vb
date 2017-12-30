@@ -66,10 +66,10 @@ Partial Class Form8
         '
         'Panel1
         '
-        resources.ApplyResources(Me.Panel1, "Panel1")
         Me.Panel1.Controls.Add(Me.ButtonReplaceAll)
         Me.Panel1.Controls.Add(Me.ButtonReplace)
         Me.Panel1.Controls.Add(Me.ButtonFind)
+        resources.ApplyResources(Me.Panel1, "Panel1")
         Me.Panel1.Name = "Panel1"
         '
         'ButtonReplaceAll
@@ -92,14 +92,14 @@ Partial Class Form8
         '
         'ComboBoxSearchWord
         '
-        resources.ApplyResources(Me.ComboBoxSearchWord, "ComboBoxSearchWord")
         Me.ComboBoxSearchWord.FormattingEnabled = True
+        resources.ApplyResources(Me.ComboBoxSearchWord, "ComboBoxSearchWord")
         Me.ComboBoxSearchWord.Name = "ComboBoxSearchWord"
         '
         'ComboBoxRepWord
         '
-        resources.ApplyResources(Me.ComboBoxRepWord, "ComboBoxRepWord")
         Me.ComboBoxRepWord.FormattingEnabled = True
+        resources.ApplyResources(Me.ComboBoxRepWord, "ComboBoxRepWord")
         Me.ComboBoxRepWord.Name = "ComboBoxRepWord"
         '
         'Form8

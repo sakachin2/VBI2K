@@ -250,19 +250,18 @@ Namespace My.Resources
         '''  両画面を開いているときは、画面スィッチの度に
         '''  記号入力ダイアログキー(省略値:F6)を押してください
         '''
-        '''  行を選択して &quot;送る&quot; を押してください
-        '''  上から１０個までは Ctrl+1～Ctrl+0 キーでも入力できます
+        '''  &quot;転送&quot; を押すとその行の&quot;文字&quot;が読み取り画面またはかな変換画面の
+        '''  カーソル位置にセットされます
+        '''  キー(1桁数字 &quot;0&quot;～&quot;9&quot;) を設定すれば Ctrl+0～Ctrl+9 キーでも入力できます
         '''
-        '''  追加は現在の選択行の前に挿入されます
-        '''  規定に戻すボタンでは省略値に戻します
-        '''******************************************************************************
-        '''  特殊な点字文字列を設定したい場合は WinBES99 の設定ファイル、
-        '''  WIN-BES インストールフォルダー(例えば C:\Program Files\WIN-BES あるいは
-        '''  C:\Program Files (x86)\WIN-BES) の special.def の最後に追加します
+        '''  タイトル行の下のツールバーボタン オープン/保存/別名保存 は文書ごとに
+        '''  記号定義を取り換えて使用したい場合に使用します
+        '''  記号ファイルの形式は各行以下のようにします。改行コードは0x0d0aです
+        '''  拡張子の省略値は .sym です
+        '''  各行は n;キー;文字 の形式 (nは &apos;1&apos;:使用, &apos;0&apos;:不使用)
         '''
-        '''  既定の次の文字列は 
-        '''
-        '''    &quot;~ﾟ[&quot;   [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
+        '''  &quot;規定&quot;ボタンは省略値をマージします
+        '''*********************************************************************** [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
         '''</summary>
         Friend ReadOnly Property help_form14() As String
             Get
@@ -279,12 +278,12 @@ Namespace My.Resources
         '''  When both Form is opened, use &quot;Open Symbol dialog&quot; key(Default:F6)
         '''  to switch Form to be received.
         '''
-        '''  Push &quot;Send&quot; button after a line selected.
-        '''  Ctrl+1～Ctrl+0 sends a string from top 10.
+        '''  Push &quot;Send&quot; button to send &quot;String&quot; of the line
+        '''  to cursor position of the ExtractedText or KanaText form.
+        '''  Ctrl+0～Ctrl+9 sends a string of the line &quot;Key&quot; is set.
+        '''  &quot;Key&quot; value is single digit of &quot;0&quot;～&quot;9&quot;.
         '''
-        '''  &quot;Add&quot; inserts line before currently selected line.
-        '''  &quot;Default&quot; button restores default values.
-        '''*************************************************************************** [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
+        '''  Toolbar button Fie/Save/SaveAs are used to switch [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
         '''</summary>
         Friend ReadOnly Property help_form14E() As String
             Get
@@ -695,6 +694,42 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  複写 に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_COPY() As String
+            Get
+                Return ResourceManager.GetString("STR_COPY", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  複写-貼り付け に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_COPYPASTE() As String
+            Get
+                Return ResourceManager.GetString("STR_COPYPASTE", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  切り取り に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_CUT() As String
+            Get
+                Return ResourceManager.GetString("STR_CUT", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  切り取り-貼り付け に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_CUTPASTE() As String
+            Get
+                Return ResourceManager.GetString("STR_CUTPASTE", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  英文テキスト に類似しているローカライズされた文字列を検索します。
         '''</summary>
         Friend ReadOnly Property STR_ENGLISH_DOC() As String
@@ -758,11 +793,29 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  記号入力ダイアログで有効になっていません(Ctrl+{0}) に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_ERR_MSG_NOT_ENABLED_KEY_SYMBOL() As String
+            Get
+                Return ResourceManager.GetString("STR_ERR_MSG_NOT_ENABLED_KEY_SYMBOL", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  語句定義に登録されていません(Ctrl+{0}) に類似しているローカライズされた文字列を検索します。
         '''</summary>
         Friend ReadOnly Property STR_ERR_MSG_NOT_REGISTERED_KEY() As String
             Get
                 Return ResourceManager.GetString("STR_ERR_MSG_NOT_REGISTERED_KEY", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  記号入力ダイアログに登録されていません(Ctrl+{0}) に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_ERR_MSG_NOT_REGISTERED_KEY_SYMBOL() As String
+            Get
+                Return ResourceManager.GetString("STR_ERR_MSG_NOT_REGISTERED_KEY_SYMBOL", resourceCulture)
             End Get
         End Property
         
@@ -776,7 +829,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  語句ファイルの {0} 行目にエラーがあります に類似しているローカライズされた文字列を検索します。
+        '''  ファイルの {0} 行目にエラーがあります に類似しているローカライズされた文字列を検索します。
         '''</summary>
         Friend ReadOnly Property STR_ERR_MSG_WORDS_FILE_LINE_FORMAT() As String
             Get
@@ -785,7 +838,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  この語句定義はファイルからロードしたものでは有りません、名前を付けて保存をしてください に類似しているローカライズされた文字列を検索します。
+        '''  この定義はファイルからロードしたものでは有りません、名前を付けて保存をしてください に類似しているローカライズされた文字列を検索します。
         '''</summary>
         Friend ReadOnly Property STR_ERR_MSG_WORDS_FILE_NO_SAVE_FILE() As String
             Get
@@ -835,6 +888,15 @@ Namespace My.Resources
         Friend ReadOnly Property STR_FILTER_KANJITEXT() As String
             Get
                 Return ResourceManager.GetString("STR_FILTER_KANJITEXT", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  記号ファイル(*.sym)|*.sym|すべてのファイル(*.*)|*.* に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_FILTER_SYMBOL() As String
+            Get
+                Return ResourceManager.GetString("STR_FILTER_SYMBOL", resourceCulture)
             End Get
         End Property
         
@@ -956,6 +1018,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  ファイルから設定 に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_LOAD() As String
+            Get
+                Return ResourceManager.GetString("STR_LOAD", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  {0} : {1} --&gt; {2} : {3} に類似しているローカライズされた文字列を検索します。
         '''</summary>
         Friend ReadOnly Property STR_MSG_CHANGELETTERWRAP() As String
@@ -992,7 +1063,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  既定に戻しますか？ に類似しているローカライズされた文字列を検索します。
+        '''  既定を組み込みますか？ に類似しているローカライズされた文字列を検索します。
         '''</summary>
         Friend ReadOnly Property STR_MSG_CONFIRM_RESTORE_DEFAULT() As String
             Get
@@ -1087,6 +1158,15 @@ Namespace My.Resources
         Friend ReadOnly Property STR_MSG_ERR_KANA_CONV() As String
             Get
                 Return ResourceManager.GetString("STR_MSG_ERR_KANA_CONV", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  かな変換エラーがありました(&quot;Error&quot;で表示) に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_MSG_ERR_KANACONV_FAILED() As String
+            Get
+                Return ResourceManager.GetString("STR_MSG_ERR_KANACONV_FAILED", resourceCulture)
             End Get
         End Property
         
@@ -1393,6 +1473,33 @@ Namespace My.Resources
         Friend ReadOnly Property STR_NEWTEXT_FILE() As String
             Get
                 Return ResourceManager.GetString("STR_NEWTEXT_FILE", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  上書き保存 に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_SAVE() As String
+            Get
+                Return ResourceManager.GetString("STR_SAVE", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  別名保存 に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_SAVEAS() As String
+            Get
+                Return ResourceManager.GetString("STR_SAVEAS", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  転送 に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend ReadOnly Property STR_SEND() As String
+            Get
+                Return ResourceManager.GetString("STR_SEND", resourceCulture)
             End Get
         End Property
     End Module

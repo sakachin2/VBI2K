@@ -1,5 +1,7 @@
-﻿'CID:''+v079R~:#72                             update#=   74;         ''~v079R~
+﻿'CID:''+v103R~:#72                             update#=   76;         ''+v103R~
 '************************************************************************************''~v076I~
+'v103 2017/12/16 (BUG)did not closed file for Dialog(Dictionary,Word,Symbol) at format err''+v103I~
+'v102 2017/12/16 (BUG)Enable/Disable check  of Dislog(Dictionary,Word,Symbol)''~v102I~
 'v079 2017/10/10 class DataGridView                                    ''~v079I~
 'v076 2017/10/08 Symbol Dialog by DataGridView                         ''~v076I~
 '************************************************************************************''~v076I~
@@ -426,15 +428,15 @@ Public Class Form14                                                    ''~v076R~
         Dim rowctr As Integer = iDGV.getRowCount()                          ''~v076I~''~v079R~
         ctrtgt = rowctr                                                ''~v076R~
         ctrsrc = (listsrc.Length + LISTDATA_COLNO - 1) \ LISTDATA_COLNO        ''~v076I~
-        Dim newrow As Integer = DGV.NewRowIndex                        ''+v079I~
+        Dim newrow As Integer = DGV.NewRowIndex                        ''~v079I~
         For ii As Integer = 0 To ctrsrc - 1                            ''~v076I~
             possrc = ii * LISTDATA_COLNO                                   ''~v076I~
             Dim src = listsrc(possrc + LISTDATA_SYMBOL)                    ''~v076I~
             Dim swFound = False                                          ''~v076I~
             For jj As Integer = 0 To rowctr - 1                        ''~v076R~
-	            If jj = newrow Then                                    ''+v079I~
-    	            Continue For                                       ''+v079I~
-        	    End If                                                 ''+v079I~
+	            If jj = newrow Then                                    ''~v079I~
+    	            Continue For                                       ''~v079I~
+        	    End If                                                 ''~v079I~
                 Dim lst As ArrayList = getTheRowData(jj)                 ''~v079I~
                 Dim symbol As String = lst(CELLNO_SYMBOL)              ''~v079R~
                 If symbol IsNot Nothing AndAlso src.CompareTo(symbol) = 0 Then ''~v076R~
@@ -772,6 +774,7 @@ Public Class Form14                                                    ''~v076R~
                 line = sr.ReadLine()                                   ''~v076I~
                 Dim tmp2 As String() = line.Split(";"c)                ''~v076I~
                 If Not formatChk(tmp2) Then  'err                      ''~v076I~
+    		        sr.Close()                                         ''+v103I~
                     errLineFormat(linectr + 1, line)                   ''~v076I~
                     Return Nothing                                     ''~v076I~
                 End If                                                 ''~v076I~
@@ -805,8 +808,9 @@ Public Class Form14                                                    ''~v076R~
             Return False                                               ''~v076I~
         End If                                                         ''~v076I~
         Dim enableid = Pdata(0)                                        ''~v076I~
-        If enableid.CompareTo(ENABLEID_ON) OrElse enableid.CompareTo(ENABLEID_OFF) Then ''~v076I~
-        Else                                                           ''~v076I~
+'       If enableid.CompareTo(ENABLEID_ON) OrElse enableid.CompareTo(ENABLEID_OFF) Then ''~v076I~''~v102R~
+'       Else                                                           ''~v076I~''~v102R~
+        If enableid.CompareTo(ENABLEID_ON)<>0 AndAlso enableid.CompareTo(ENABLEID_OFF)<>0 Then''~v102I~
             Return False                                               ''~v076I~
         End If                                                         ''~v076I~
         If (Pdata(LISTDATA_CHARKEY).Trim()).Length > 1 Then            ''~v076R~

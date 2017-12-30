@@ -1,7 +1,8 @@
-﻿'CID:''+v052R~:#72                          update#=  258;            ''+v052R~
+﻿'CID:''+v132R~:#72                          update#=  259;            ''+v132R~
 '************************************************************************************''~v026I~
+'v132 2017/12/30 JPReverseConv fails for sords end with small letter "tsu"''+v132I~
 'v053 2017/09/21 crash by F4,S+F5 at Form1 by V1.02                    ''~v053I~
-'v052 2017/09/21 utilize status bar at bottom also on Form1            ''+v052I~
+'v052 2017/09/21 utilize status bar at bottom also on Form1            ''~v052I~
 'v037 2017/09/22 assign F4 as query of replacing char                  ''~v037I~
 '                Forecolor have to be InactiveCaptureText to get effective for switching Text by language''~v037I~
 'v036 2017/09/22 add for F5 ニ,ハ,ロ,ー,ト                             ''~v036I~
@@ -144,8 +145,10 @@ Public Class FormatBES                                                 ''~7421I~
     Public Shared STR_DAKUON_TGT As String = "がぎぐげござじずぜぞだぢづでどばびぶべぼヴヷヸヹヺ" ''~7428R~''~7430R~''~7525R~''~7607R~
     Public Shared STR_DAKUON_TGT_KATAKANA As String = "ガギグゲゴザジズゼゾダヂヅデドバビブベボヴヷヸヹヺ" ''~7525I~''~7607R~
     Private STR_COMPOSIT2 As String = "ゃゅょぁぃぅぇぉ"                   ''~7427I~''~7430R~
-    Private STR_SMALL_LETTER_HIRA As String = "ぁぃぅぇぉゃゅょっゎゕゖ" ''~7501R~''~7525R~
-    Private STR_SMALL_LETTER_KATA As String = "ァィゥェォャュョッヮヵヶ" ''~7501R~''~7525R~
+    '*  Private STR_SMALL_LETTER_HIRA As String = "ぁぃぅぇぉゃゅょっゎゕゖ" ''~7501R~''~7525R~''+v132R~
+    '*  Private STR_SMALL_LETTER_KATA As String = "ァィゥェォャュョッヮヵヶ" ''~7501R~''~7525R~''+v132R~
+    public shared STR_SMALL_LETTER_HIRA As String = "ぁぃぅぇぉゃゅょっゎゕゖ"''+v132I~
+    public shared STR_SMALL_LETTER_KATA As String = "ァィゥェォャュョッヮヵヶ"''+v132I~
     Private STR_SMALL_LETTER_HANKATA As String = "ｧｨｩｪｫｬｭｮｯ"           ''~7501I~
     Private STR_LARGE_LETTER_HIRA As String = "あいうえおやゆよつわかけ"   ''~7501I~''~7525R~
     Private STR_LARGE_LETTER_KATA As String = "アイウエオヤユヨツワカケ"  ''~7501I~''~7525R~
@@ -1143,8 +1146,8 @@ Public Class FormatBES                                                 ''~7421I~
         If changeLetterWrap(Pch, Ppcvch, PswForm1) Then                      ''~v026I~
             If Not PswForm1 Then 'form3                                     ''~v034I~
                 Form1.formText.showStatus(Pch, Ppcvch, typeSrc, typeTgt) 'Form3''~v034I~
-            else                                                       ''+v052I~
-                Form1.MainForm.showStatus(Pch, Ppcvch, typeSrc, typeTgt) 'Form3''+v052I~
+            else                                                       ''~v052I~
+                Form1.MainForm.showStatus(Pch, Ppcvch, typeSrc, typeTgt) 'Form3''~v052I~
             End If                                                     ''~v034I~
             Return True                                                ''~v026I~
         End If                                                         ''~v026I~

@@ -1,6 +1,7 @@
-﻿'CID:''+v076R~:#72                          update#=  215;            ''+v076R~
+﻿'CID:''+v130R~:#72                          update#=  216;            ''+v130R~
 '************************************************************************************''~v026I~
-'v076 2017/10/08 Symbol Dialog by DataGridView                         ''+v076I~
+'v130 2017/12/30 (BUG)when delete range by backspace,if cursor is on top of next line delete crlf only''+v130I~
+'v076 2017/10/08 Symbol Dialog by DataGridView                         ''~v076I~
 'v073 2017/09/26 (Bug)ScrollToCaret will move Selectio start at botom of visible area,it sometimes scroll to top.''~v073I~
 'v070 2017/09/26 F3 for find dialog is configurable                    ''~v070I~
 'v065 2017/09/24 Word dialog by Ctrl+char(except "1"-"0")              ''~v065I~
@@ -28,7 +29,7 @@ Public Class ClassUndoRedo                                             ''~7429R~
     Private menuUndo, menuRedo As ToolStripMenuItem                    ''~7501I~
     Private optFormat As Integer                                       ''~7501I~
     '   Private dlgOptions As FormOptions                                  ''~7506I~''~7525R~
-'   Private dlgSpecialKey As Form6                                    ''~7515I~''+v076R~
+'   Private dlgSpecialKey As Form6                                    ''~7515I~''~v076R~
     Private fmtBES As FormatBES                                        ''~7506I~
     Private swKeyBS As Boolean                                         ''~7506I~
     Private btnType As Boolean '@@@@                                   ''~7513I~
@@ -48,7 +49,7 @@ Public Class ClassUndoRedo                                             ''~7429R~
         setRedoEnable(False)                                           ''~7501I~
         swSaved = False                                                  ''~7429I~
         '       dlgOptions = Form1.MainForm.dlgOptions                                  ''~7506I~''~7521R~''~7525R~
-'       dlgSpecialKey = Form1.MainForm.dlgSpecialKey                            ''~7515I~''~7521R~''+v076R~
+'       dlgSpecialKey = Form1.MainForm.dlgSpecialKey                            ''~7515I~''~7521R~''~v076R~
         fmtBES = Form1.MainForm.fmtBES                                          ''~7506I~''~7521R~
     End Sub                                                            ''~7429I~
     Sub resetForm1()                                                   ''~7519I~
@@ -71,7 +72,7 @@ Public Class ClassUndoRedo                                             ''~7429R~
         setRedoEnable(False)                                           ''~7501I~
         swSaved = False                                                  ''~7501I~
         '       dlgOptions = Form1.MainForm.dlgOptions                                  ''~7513I~''~7521R~''~7525R~
-'       dlgSpecialKey = Form1.MainForm.dlgSpecialKey                            ''~7515I~''~7521R~''+v076R~
+'       dlgSpecialKey = Form1.MainForm.dlgSpecialKey                            ''~7515I~''~7521R~''~v076R~
         fmtBES = Form1.MainForm.fmtBES                                          ''~7513I~''~7521R~
     End Sub                                                            ''~7501I~
     Public Sub setTBText(Ptext As String, PswUndo As Boolean)          ''~7429I~
@@ -533,6 +534,8 @@ Public Class ClassUndoRedo                                             ''~7429R~
                 rc = True                                                ''~7506I~
             End If                                                     ''~7506M~
         Else                                                           ''~7525R~
+            If ch = FormatBES.CHAR_LF AndAlso Plen > 0 Then   '*0x0a   ''+v130I~
+            Else                                                       ''+v130I~
             If PkeyBS Then                                                  ''~7525I~
                 If ch = FormatBES.CHAR_LF Then   'del by backspace     ''~7525I~
                     TB.SelectionStart = pos - 1 'pos of CHAR_CR        ''~7525R~
@@ -543,6 +546,7 @@ Public Class ClassUndoRedo                                             ''~7429R~
                     rc = True                                          ''~7525R~
                 End If                                                 ''~7525R~
             End If                                                     ''~7525I~
+        End If                                                         ''+v130I~
         End If                                                         ''~7525I~
         Return rc                                                      ''~7506I~
     End Function                                                       ''~7506R~

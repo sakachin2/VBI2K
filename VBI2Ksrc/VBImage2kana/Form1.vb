@@ -1,5 +1,7 @@
-﻿'CID:''+v076R~:#72                             update#=  672;         ''+v076R~
+﻿'CID:''+v122R~:#72                             update#=  675;         ''~v132R~''~v122R~
 '************************************************************************************''~v002I~
+'v132 2017/12/30 JPReverseConv fails for sords end with small letter "tsu"''~v132I~
+'v122 2017/12/29 show version on form1 title                           ''~v122I~
 'v076 2017/10/08 Symbol Dialog by DataGridView                         ''~v076I~
 'v073 2017/09/27 (Bug)crash when words dialog update, close form3 then replied discard cancel''~v073I~
 'v072 2017/09/26 Display doc option at receive text                    ''~v072I~
@@ -20,6 +22,7 @@ Imports System.Diagnostics                                              ''~v068I
 Imports System.IO
 
 Public Class Form1
+    Private Const VERSION = "v1.1.6"                                   ''~v122I~''~v128R~''+v122R~
     'localize completed                                                    ''~7617R~
     ''~v067I~
     Private Declare Auto Function CreateCaret Lib "user32.dll" (hWnd As IntPtr, hBitmap As IntPtr, nWidth As Integer, nHeight As Integer) As Boolean ''~v067I~
@@ -136,7 +139,9 @@ Public Class Form1
         undoRedo = New ClassUndoRedo(ClassUndoRedo.OPT_KANATEXT, TBBES, ToolStripMenuItemUndo, ToolStripMenuItemRedo) ''~7513I~''~7521R~
         '        addContextMenuHandler()                                        ''~7509I~
         TBBES.Font = createFont()                                      ''~7515I~
-        initialTitle = Me.Text                                           ''~7519I~
+'*      initialTitle = Me.Text                                           ''~7519I~''~v122R~
+        initialTitle = Me.Text & ":" & VERSION                         ''~v122I~
+        Me.Text = initialTitle                                         ''~v122I~
         '       initialText = TBBES.Text                                         ''~7519I~''~7615R~
         TBBES.Text = initialText                                         ''~7615I~
         debugInit()                                                    ''~v068I~
@@ -1024,4 +1029,12 @@ Public Class Form1
         Debug.Close()                                                  ''~v076I~
 #end if                                                                ''~v076I~
     End Sub                                                            ''~v076I~
+    Public shared Sub showStatusForChild(PswForm1 as Boolean,Pmsg as String)''~v115I~''~v132I~
+        '** showStatus for Form1 or form3                              ''~v115I~''~v132I~
+        If PswForm1 Then                                               ''~v115I~''~v132I~
+            MainForm.showStatus(Pmsg)    '*Form1                       ''~v115I~''~v132I~
+        Else                                                           ''~v115I~''~v132I~
+            formText.showStatus(Pmsg)    '*Form3                       ''~v115I~''~v132I~
+        End If                                                         ''~v115I~''~v132I~
+    End Sub                                                            ''~v115I~''~v132I~
 End Class

@@ -484,4 +484,7 @@
   <data name="STR_FILTER_SYMBOL" xml:space="preserve">
     <value>記号ファイル(*.sym)|*.sym|すべてのファイル(*.*)|*.*</value>
   </data>
+  <data name="STR_MSG_ERR_KANACONV_FAILED" xml:space="preserve">
+    <value>かな変換エラーがありました("Error()"で囲み表示)</value>
+  </data>
 </root>

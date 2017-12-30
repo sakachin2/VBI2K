@@ -1,0 +1,5 @@
+V1.16 : Update                               2017/12/31
+
+. KanjiText->KanaText conversion hungs by combination of Chuten(E)
+. Show string enclosed by Error() when Kanji->Kana translation error.
+

@@ -1,5 +1,11 @@
-﻿''*CID:''+v062R~:#72                          update#=  229;          ''~v062R~
+﻿''*CID:''+v126R~:#72                          update#=  240;          ''~v126R~
 '************************************************************************************''~v001I~
+'v134 2017/12/30 EOLCont is done before convKana(remaining crlf need not set to sbConv)''~v134I~
+'v132 2017/12/30 JPReverseConv fails for sords end with small letter "tsu"''~v132I~
+'v129 2017/12/30 (BUG)When Chuten+{mamimumemo}(fuseji),next pos was not updated despite of return true==>Loop''~v129I~
+'                     But fuseji consideration not required for kanji text. it is tenji logic.''~v129I~
+'v127 2017/12/29 conv katakana+kanji+hiragana at once for the case yogore(to)ri''+v126I~
+'v126 2017/12/29 (Bug)char positioning err by BESstyle consideration for "..."''~v126I~
 'v062 2017/09/23 kanji repeated char "々" is not treated as kanji      ''~v062I~
 'v033 2017/09/21 insert space before katakana only when prev of katakana is josi or 2 sounds string;''~v033I~
 '                it is difficult,so no space insert berfore after katakana''~v033I~
@@ -37,16 +43,16 @@ Public Class ClassKanaText                                             ''~7522R~
     ''~7522I~
     Private Const FONTSIZE_INCREASE = 5                                        ''~7522I~''~7608R~
     Private Const FUSEJI_FOLLOWING = "まみむめもマミムメモﾏﾐﾑﾒﾓ"         ''~7608I~
-'   Private Const HIRAGANA_RI = "り"                                   ''~v009I~''+v062R~
-'   Private Const KATAKANA_RI = "リ"                                   ''~v009I~''+v062R~
-'   Private Const HIRAGANA_HE = "へ"                                   ''~v004I~''+v062R~
-    Private Const HIRAGANA_HE = "へ"c                                  ''+v062I~
-'   Private Const HIRAGANA_BE = "べ"                                   ''~v004I~''+v062R~
-    Private Const HIRAGANA_BE = "べ"c                                  ''+v062I~
-'   Private Const KATAKANA_HE = "ヘ"                                   ''~v004I~''+v062R~
-    Private Const KATAKANA_HE = "ヘ"c                                  ''+v062I~
-'   Private Const KATAKANA_BE = "ベ"                                   ''~v004I~''+v062R~
-    Private Const KATAKANA_BE = "ベ"c                                  ''+v062I~
+'   Private Const HIRAGANA_RI = "り"                                   ''~v009I~''~v062R~
+'   Private Const KATAKANA_RI = "リ"                                   ''~v009I~''~v062R~
+'   Private Const HIRAGANA_HE = "へ"                                   ''~v004I~''~v062R~
+    Private Const HIRAGANA_HE = "へ"c                                  ''~v062I~
+'   Private Const HIRAGANA_BE = "べ"                                   ''~v004I~''~v062R~
+    Private Const HIRAGANA_BE = "べ"c                                  ''~v062I~
+'   Private Const KATAKANA_HE = "ヘ"                                   ''~v004I~''~v062R~
+    Private Const KATAKANA_HE = "ヘ"c                                  ''~v062I~
+'   Private Const KATAKANA_BE = "ベ"                                   ''~v004I~''~v062R~
+    Private Const KATAKANA_BE = "ベ"c                                  ''~v062I~
 '   Private Const KATAKANA_CHOON = "ー"                                ''~v005I~''~v062R~
     Private Const KATAKANA_CHOON = "ー"c                               ''~v062I~
     '   Private Const DELMCHARS = " ,.　、。"                              ''~v023R~
@@ -90,6 +96,7 @@ Public Class ClassKanaText                                             ''~7522R~
     '   Private swChngByUndoRedo As Boolean                            ''~7522I~
     ''~7522I~
     Private swException As Boolean = False                               ''~v010I~
+    Private swConvError As Boolean = False                             ''~v132I~
     Sub setText(PstrText As String, PswImage As Integer, Pfnm As String) ''~7522I~
         swRead = False                                                   ''~7612I~
         '       If PswImage = 1 Then                                           ''~7522I~''~7615R~
@@ -107,6 +114,7 @@ Public Class ClassKanaText                                             ''~7522R~
         swSource = 1  'received                                        ''~7522I~
         swSaved = False                                                  ''~v015I~
         textFilename = Pfnm                                            ''~7522I~
+        swConvError = False                                            ''~v132I~
         '       swEnglishDoc = Form1.chkExt(Pfnm, Form1.FILTER_DEFAULT_ENGLISHTEXT) ''~7619R~''~v032R~
         If swEnglishDoc orelse DocOptions.swEnglishDoc Then                                                ''~7619I~''~v032R~
             strKana = convEnglish(PstrText)                            ''~7618I~
@@ -124,6 +132,9 @@ Public Class ClassKanaText                                             ''~7522R~
             Exit Sub                                                   ''~v010I~
         End If                                                         ''~v010I~
         showKanaText(strKana)                                          ''~7522I~
+        If swConvError Then                                            ''~v132I~
+            showStatusConvError()                                      ''~v132I~
+        End If                                                         ''~v132I~
     End Sub                                                            ''~7522I~
     ''~7522I~
     Public Sub readText(Pfnm As String)                                ''~7522I~
@@ -296,7 +307,7 @@ Public Class ClassKanaText                                             ''~7522R~
                 '               stdout(String.Format("ch={0} chtype={1}", chii, chcode), 1)''~7522I~''~7607R~
                 '           End If                                     ''~7522I~
                 '               Trace.swTrace = True                                                           ''~7911I~''~v029R~
-                '               Trace.W("conv2kana chii=" & chii & ",chcode=" & chcode & ",prevhira=" & swprevhiragana & ",prevkata=" & swprevkatakana)          '@@@@test''~7619I~''~7911R~''~v029R~
+                '               Trace.W("conv2kana chii=" & chii & ",chcode=" & chcode & ",prevhira=" & swprevhiragana & ",prevkata=" & swprevkatakana)         
                 Select Case chcode                                     ''~7522I~
                     Case 1 'kanji                                      ''~7522I~
                         If swprevkana Then 'after hiragana''~7525R~    ''~7607R~
@@ -491,7 +502,7 @@ Public Class ClassKanaText                                             ''~7522R~
                 '               stdout(String.Format("ch={0} chtype={1}", chii, chcode), 1)''~v010I~
                 '           End If                                     ''~v010I~
                 '               Trace.swTrace = True                                   ''~v010I~''~v029R~
-                '               Trace.W("conv2kanaM2 chii=" & chii & ",chcode=" & chcode & ",prevhira=" & swprevhiragana & ",prevkata=" & swprevkatakana)          '@@@@test''~v010R~''~v029R~
+                '               Trace.W("conv2kanaM2 chii=" & chii & ",chcode=" & chcode & ",prevhira=" & swprevhiragana & ",prevkata=" & swprevkatakana)          
                 If swKanjiSpace Then                                   ''~v019R~
                     sbConv = insertKanjiSpace(sbConv, chcode, prevchcode, swprevkanji, poskanji, ctrkanji) ''~v019R~
                 End If                                                 ''~v019R~
@@ -513,6 +524,7 @@ Public Class ClassKanaText                                             ''~7522R~
                     Case 2  'hiraganaOkurigana                         ''~v010I~
                         If swKatakanaDoc Then                            ''~v031I~
                         Else                                             ''~v031I~
+#If False Then                                                              ''~v127I~''+v126I~
                             '                       If swprevkatakana Then                              ''~v010R~''~v021R~
                             If katakanactr > 0 Then                               ''~v021I~
                                 '                           strConvM2(sb, sbConv, swkanji)                      ''~v010I~''~v021R~
@@ -524,6 +536,7 @@ Public Class ClassKanaText                                             ''~7522R~
 '                                   appendSpace(sb, 1)                     ''~v010I~''~v033R~
 '                               End If                                     ''~v010R~''~v033R~
 '                           End If                                         ''~v010I~''~v033R~
+#End If                                                                ''~v127I~''+v126I~
                         End If                                           ''~v031I~
                         '                       Trace.W("conv2kanaM2 hira appendto SbConv chii=" & chii)            ''~v010I~''~v029R~
                         sbConv.Append(chii)                            ''~v010I~
@@ -558,8 +571,10 @@ Public Class ClassKanaText                                             ''~7522R~
                         '                   Case CHARTYPE_DELM_ASCW  'delm char                ''~v010R~
                     Case Else                                          ''~v010M~
                         '                       strConvM2(sb, sbConv, swkanji)                          ''~v010I~''~v021R~
-                        Dim swSplit As Boolean = isSplitter(chii) 'string terminator''~v023I~
-                        If swSplit OrElse katakanactr Then                  ''~v023R~
+'*                      Dim swSplit As Boolean = isSplitter(chii) 'string terminator''~v023I~''~v134R~
+                        Dim swSplit As Boolean = isSplitterOrCRLF(chii) 'string terminator''~v134I~
+'*                      If swSplit OrElse katakanactr Then                  ''~v023R~''~v134R~
+                        If swSplit OrElse katakanactr<>0 Then          ''~v134I~
                             strConvM2(sb, sbConv, swkanji, katakanactr)     ''~v021I~
                             swkanji = False                                  ''~v010I~
                         End If                                           ''~v023I~
@@ -690,8 +705,8 @@ Public Class ClassKanaText                                             ''~7522R~
             If PswKanji Then 'detected kanji                           ''~v010I~
                 Dim kanjistr As String = PsbConv.ToString()              ''~v010I~
                 kanastr = strConv(Psb, kanjistr)                         ''~v010I~
-                '               Trace.W("strConvM2 kanji=" & kanjistr & ",kanastr=" & kanastr)          '@@@@test''~v010I~''~v029R~
-                Debug.WriteLine("strConvM2 kanji=" & kanjistr & ",kanastr=" & kanastr)          '@@@@test''~v033I~
+                '               Trace.W("strConvM2 kanji=" & kanjistr & ",kanastr=" & kanastr)         
+                Debug.WriteLine("strConvM2 kanji=" & kanjistr & ",kanastr=" & kanastr)          
                 '               If DocOptions.swBES99 Then                         ''~v014I~''~v016R~''~v030R~
                 '                   kanastr = applyBES99_U2Choon(kanastr)                ''~v014I~''~v016R~
                 '               End If                                                 ''~v014I~''~v016R~
@@ -739,7 +754,7 @@ Public Class ClassKanaText                                             ''~7522R~
         Dim kanastr, kanjistr As String                                          ''~7522I~''~7607R~
         kanjistr = chkRepeatKanji(Pstr)                                  ''~7607I~
         kanastr = JPReverseConv.Main(2, fel, kanjistr) 'conv               ''~7522I~''~7607R~
-        '       Trace.W("strConv Pstr=" & Pstr & ",kanastr=" & kanastr)          '@@@@test''~7911I~''~v029R~
+        '       Trace.W("strConv Pstr=" & Pstr & ",kanastr=" & kanastr)          
 #If False Then                                                         ''~7608I~
         If DocOptions.swBES99 Then                                ''~7525I~''~7604R~''~v030R~
 #If False Then                                                              ''~7607I~
@@ -759,8 +774,49 @@ Public Class ClassKanaText                                             ''~7522R~
 #End If                                                                ''~7607I~
         End If                                                         ''~7525I~
 #End If                                                                ''~7608I~
+'*#if false '*@@@@test                                                   ''~v132I~''~v134R~
+        If IsNothing(kanastr) Then                                     ''~v132I~
+            Dim tmp As String = errRetry(Pstr)                         ''~v132I~
+            If Not IsNothing(tmp) Then                                 ''~v132I~
+                Dim tmp2 As String = JPReverseConv.Main(2, fel, tmp) 'conv''~v132I~
+                If Not IsNothing(tmp2) Then                            ''~v132I~
+                    kanastr = tmp2 & Pstr.Substring(tmp.Length, Pstr.Length - tmp.Length)''~v132I~
+                End If                                                 ''~v132I~
+            End If                                                     ''~v132I~
+        End If                                                         ''~v132I~
+'*#end if   '*@@@@test                                                   ''~v132I~''~v134R~
+        If IsNothing(kanastr) Then                                     ''~v132I~
+            swConvError = True                                         ''~v132I~
+            kanastr = "Error(" & Pstr & ")"                            ''~v132I~
+        End If                                                         ''~v132I~
         Return kanastr                                                 ''~7522I~
     End Function                                                       ''~7522I~
+    '*********************************************************         ''~v132I~
+    Function errRetry(Pstr As String) As String                        ''~v132I~
+        If IsNothing(Pstr) Then                                        ''~v132I~
+            Return Nothing                                             ''~v132I~
+        End If                                                         ''~v132I~
+        If Pstr.Length = 0 Then                                        ''~v132I~
+            Return Nothing                                             ''~v132I~
+        End If                                                         ''~v132I~
+        Dim ch As Char                                                 ''~v132I~
+        Dim pos As Integer                                             ''~v132I~
+        For pos = Pstr.Length - 1 To 0 Step -1                         ''~v132I~
+            ch = Pstr.Chars(pos)                                       ''~v132I~
+            If ch <> FormatBES.CHAR_LF AndAlso ch <> FormatBES.CHAR_CR AndAlso ch <> FormatBES.SIGN_CRLF Then''~v132I~
+                Exit For                                               ''~v132I~
+            End If                                                     ''~v132I~
+        Next                                                           ''~v132I~
+        If pos <= 0 Then                                               ''~v132I~
+            Return Nothing                                             ''~v132I~
+        End If                                                         ''~v132I~
+        If FormatBES.STR_SMALL_LETTER_HIRA.IndexOf(ch) >= 0 OrElse FormatBES.STR_SMALL_LETTER_KATA.IndexOf(ch) >= 0 Then''~v132I~
+            Return Pstr.Substring(0, pos) '*retry	                   ''~v132I~
+        End If                                                         ''~v132I~
+                                                                       ''~v132I~
+        Return Nothing                                                 ''~v132I~
+    End Function                                                       ''~v132I~
+    '*********************************************************         ''~v132I~
     Function chkRepeatKanji(Pstr As String) As String                  ''~7607I~
 #If False Then                                                              ''~7608I~
         If Not DocOptions.swBES99 Then                             ''~7608I~''~v030R~
@@ -872,11 +928,15 @@ Public Class ClassKanaText                                             ''~7522R~
                 Psb.Append(FormatBES.CHAR_CHUTEN)                      ''~7608I~
                 Psb.Append(FormatBES.CHAR_CHUTEN)                      ''~7608I~
                 Psb.Append(FormatBES.CHAR_CHUTEN)                      ''~7608I~
-                Ppnextpos = Ppos + 3                                   ''~7608I~
+'*              Ppnextpos = Ppos + 3                                   ''~7608I~''~v126R~
+                Ppnextpos = Ppos + 2 '* ii+1 after exit(cunsume following 2)''~v126I~
                 '#if false                                                              ''~7608I~''~7610R~
+#If False Then                                                         ''~v129I~
             ElseIf isFuseji(Pcharray, Ppos) Then                             ''~7608I~
                 Psb.Append(FormatBES.CHAR_CHUTEN)                      ''~7608I~
+                Ppnextpos = Ppos  '* missing,caused loop               ''~v129I~
                 '#end if                                                                ''~7608I~''~7610R~
+#End If                                                                ''~v129I~
             Else                                                       ''~7608I~
                 Psb.Append(FormatBES.CHAR_CHUTEN)                          ''~7605I~''~7608R~
                 ctr = getSpaceCtrForKuten(Pcharray, Ppos, 1)               ''~7605I~''~7608R~
@@ -1296,7 +1356,7 @@ Public Class ClassKanaText                                             ''~7522R~
             prevchcode = chcode                                          ''~v008I~
             chcode = AscW(ch)                                          ''~v008I~
             chii = chkHiraKataChar(chii, chars, charctr, ii, prevchcode, chcode)  'chk hiragana He is katakana He?''~v008I~
-            '           Trace.W("suppressEOL chii=" & chii & ",chcode=" & chcode & ",prevhira=" & swprevhiragana & ",prevkata=" & swprevkatakana)          '@@@@test''~v008I~''~v029R~
+            '           Trace.W("suppressEOL chii=" & chii & ",chcode=" & chcode & ",prevhira=" & swprevhiragana & ",prevkata=" & swprevkatakana)          
             sb.Append(chii)                                            ''~v008I~
             ii += 1                                                    ''~v008I~
         Loop                                                           ''~v008I~
@@ -1317,9 +1377,23 @@ Public Class ClassKanaText                                             ''~7522R~
         '       Trace.W("splitter=" & SPLITCHARS)                              ''~v023I~''~v029R~
         Return rc                                                   ''~v023I~
     End Function                                                       ''~v023I~
+    '*************************************************************************''~v134I~
+    Private Function isSplitterOrCRLF(Pch As Char) As Boolean          ''~v134I~
+        If Pch = FormatBES.SIGN_CRLF OrElse Pch = FormatBES.CHAR_LF OrElse Pch = FormatBES.CHAR_CR Then''~v134I~
+            Return True                                                ''~v134I~
+        End If                                                         ''~v134I~
+        Return isSplitter(Pch)                                         ''~v134I~
+    End Function                                                       ''~v134I~
     '*************************************************************************''~v010I~
     Private Sub exceptionMsg(Pex As Exception, Pdesc As String)                   ''~v010I~
         '           MessageBox.Show(String.Format("かな/カナ変換に失敗 Source={0},stack={1}", ex.Source, ex.StackTrace.ToString()))''~v010I~
         MessageBox.Show(String.Format("{2}" & vbCrLf & "Source={0}" & vbCrLf & "stack={1}", Pex.Source, Pex.StackTrace.ToString(), Pex.Message), Pdesc) ''~v010R~
     End Sub                                                            ''~v010I~
+    '*************************************************************************''~v132I~
+    Private Sub showStatusConvError()                                  ''~v132I~
+        showStatus(Rstr.getStr("STR_MSG_ERR_KANACONV_FAILED"), False)  ''~v132R~
+    End Sub                                                            ''~v132I~
+    Private Sub showStatus(Pmsg As String, PswPending As Boolean)      ''~v132I~
+        Form1.showStatusForChild(True, Pmsg) 'true:show on Form1       ''~v132I~
+    End Sub                                                            ''~v132I~
 End Class

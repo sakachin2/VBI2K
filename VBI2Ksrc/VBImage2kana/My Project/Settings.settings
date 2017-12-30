@@ -114,7 +114,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="CFGF5_KeyWords" Type="System.String" Scope="User">
-      <Value Profile="(Default)">7</Value>
+      <Value Profile="(Default)">9</Value>
     </Setting>
     <Setting Name="CFG_Form11ClientSize" Type="System.Drawing.Size" Scope="User">
       <Value Profile="(Default)">474, 261</Value>
